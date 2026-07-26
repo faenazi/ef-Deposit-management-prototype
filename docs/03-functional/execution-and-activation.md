@@ -4,7 +4,7 @@
 
 Document the controlled transition from approved investment request to active deposit.
 
-## Stage 1 — Winning Bank Information
+## Stage 1 — Winning Bank Completion
 
 Performed by the Deposit Specialist after final investment approval.
 

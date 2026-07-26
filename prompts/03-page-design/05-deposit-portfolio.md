@@ -1,7 +1,7 @@
 # Prompt 05 — Deposit Portfolio
 
 ## Objective
-Implement the Arabic RTL Deposit Portfolio page as the authoritative view of active, maturing, matured, renewed, broken, and closed deposits.
+Implement the Arabic RTL Deposit Portfolio page as the authoritative view of active, maturing, matured, reinvested, broken, and closed deposits.
 
 ## Read First
 - `CLAUDE.md`
@@ -9,6 +9,9 @@ Implement the Arabic RTL Deposit Portfolio page as the authoritative view of act
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/05-deposit-portfolio.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/deposit-portfolio.md`
+- `docs/02-business/deposit-lifecycle.md` and `docs/02-business/statuses-and-transitions.md` (canonical deposit statuses)
+- `docs/02-business/business-rules.md` (maturity warning window and expected-return formula)
 
 ## Scope
 Implement only the portfolio route, its summary, filters, deposit register, maturity views, and deposit-detail navigation required by the specification.

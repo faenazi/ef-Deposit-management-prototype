@@ -88,11 +88,12 @@ Document and display the supported roles:
 
 - Specialist.
 - GM Treasury.
-- Executive Director.
+- Executive Director of Investment and Treasury Sector.
 - Investment Support.
 - Finance.
 - Accounting.
 - Admin.
+- Read-only User.
 
 Each role card or row should explain:
 
@@ -115,7 +116,7 @@ Specialist → GM Treasury → Execution.
 
 ### Requests above SAR 100 million
 
-Specialist → GM Treasury → Executive Director → Investment Support → Finance → Accounting → Activation.
+Specialist → GM Treasury → Executive Director of Investment and Treasury Sector → Investment Support → Finance → Accounting → Activation.
 
 The screen should use a clean workflow map with role labels and threshold context.
 

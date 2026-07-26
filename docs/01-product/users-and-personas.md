@@ -36,7 +36,7 @@ First approval authority for all submitted investment requests.
 - Approve and forward requests above SAR 100,000,000.
 - Return requests to the Deposit Specialist.
 
-## 3. Executive Head of Investment and Treasury
+## 3. Executive Director of Investment and Treasury Sector
 
 Executive approval authority for requests above SAR 100,000,000.
 

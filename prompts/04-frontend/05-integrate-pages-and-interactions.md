@@ -7,8 +7,10 @@
 1. `CLAUDE.md`
 2. جميع ملفات `prompts/03-page-design/`
 3. جميع ملفات `docs/08-design-specifications/`
-4. `docs/09-ai-governance/03-ai-review-checklist.md`
-5. راجع التنفيذ الحالي كاملًا داخل `/src` قبل التعديل.
+4. `docs/02-business/statuses-and-transitions.md` و`docs/02-business/business-rules.md`
+5. `docs/05-data/demo-scenarios.md` — يجب أن تعمل جميع السيناريوهات العشرة دون طرق مسدودة
+6. `docs/09-ai-governance/03-ai-review-checklist.md`
+7. راجع التنفيذ الحالي كاملًا داخل `/src` قبل التعديل.
 
 ## ترتيب التنفيذ الإلزامي
 نفّذ وادمج الصفحات بهذا الترتيب:

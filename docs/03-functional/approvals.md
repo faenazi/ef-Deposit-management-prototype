@@ -15,7 +15,7 @@ Provide a clear, auditable approval experience for Treasury leadership based on 
 
 1. Deposit Specialist submits.
 2. General Manager of Treasury reviews and decides.
-3. Executive Head of Investment and Treasury reviews and decides.
+3. Executive Director of Investment and Treasury Sector reviews and decides.
 
 ## Approval Workspace
 
@@ -44,7 +44,7 @@ Return and rejection require a reason. Approval comments may be optional in the 
 ## Return Behavior
 
 - General Manager of Treasury returns to the Deposit Specialist.
-- Executive Head returns through the Treasury approval path, preserving the hierarchy and full history.
+- The Executive Director of Investment and Treasury Sector returns through the Treasury approval path, preserving the hierarchy and full history.
 - Returned requests use `معاد للاستكمال` and identify the required corrections.
 
 ## Rules

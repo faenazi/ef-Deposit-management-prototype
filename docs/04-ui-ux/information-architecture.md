@@ -8,8 +8,8 @@ Define the product structure, page hierarchy, navigation relationships, and cont
 
 1. الصفحة الرئيسية
 2. مهامي
-3. طلبات الاستثمار
-4. محفظة الودائع
+3. محفظة الودائع
+4. طلبات الاستثمار
 5. التقارير والتحليلات
 6. الإعدادات
 
@@ -32,6 +32,15 @@ Define the product structure, page hierarchy, navigation relationships, and cont
 - Overdue tasks
 - Completed tasks
 
+### محفظة الودائع
+
+- Active deposits
+- Near maturity (derived view)
+- Matured
+- Closed
+- Broken before maturity
+- Reinvested
+
 ### طلبات الاستثمار
 
 - All requests
@@ -40,34 +49,28 @@ Define the product structure, page hierarchy, navigation relationships, and cont
 - Returned for completion
 - Approved
 - In execution
-- Completed
+- Converted to active deposit
 - Cancelled
 
 ### Investment Request Workspace
 
-- Overview
-- Request information
-- Liquidity
-- Bank communication
-- Bank offers
-- Evaluation and recommendation
-- Approvals
-- Winning bank
-- Investment support review
-- Finance review
-- Accounting execution
-- Deposit activation
-- Attachments
-- Activity log
+The canonical section list (Decision DEC-016):
 
-### محفظة الودائع
-
-- Active deposits
-- Near maturity
-- Matured
-- Closed
-- Broken before maturity
-- Reinvested
+1. Overview
+2. Request information
+3. Liquidity information and attachments
+4. Bank RFQ and communications
+5. Received bank offers
+6. Evaluation and recommendation
+7. Approval history
+8. Winning-bank and IBAN information
+9. Investment Support review
+10. Finance review
+11. Accounting execution and transfer evidence
+12. Deposit activation
+13. Attachments
+14. Notes
+15. Activity history
 
 ### التقارير والتحليلات
 
@@ -101,14 +104,19 @@ Define the product structure, page hierarchy, navigation relationships, and cont
 ```text
 /
 /tasks
-/requests
-/requests/:requestId
-/requests/:requestId/:section
 /deposits
 /deposits/:depositId
+/investment-requests
+/investment-requests/new
+/investment-requests/:requestId
+/investment-requests/:requestId/:section
 /reports
 /settings
+/access-denied
+/*
 ```
+
+The workspace must support section deep links through the explicit `:section` route. `/*` is the not-found route.
 
 ## Role-Aware Information Architecture
 

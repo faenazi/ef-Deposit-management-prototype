@@ -9,6 +9,9 @@ Implement the Arabic RTL Investment Requests page as the authoritative register 
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/03-investment-requests.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/investment-requests.md`
+- `docs/02-business/statuses-and-transitions.md` (canonical statuses and Arabic labels)
+- `docs/02-business/roles-and-permissions.md`
 
 ## Scope
 Implement only the Investment Requests list route, its filtering controls, and the create-request entry action.

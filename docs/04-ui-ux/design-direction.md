@@ -254,11 +254,10 @@ Primary target:
 
 - Desktop stakeholder demonstration.
 
-Secondary target:
+Secondary targets:
 
-- Tablet landscape and portrait where practical.
-
-Mobile phone optimization is not required for the initial prototype unless explicitly added later.
+- Tablet landscape and portrait, fully usable.
+- Mobile web, functional and readable down to 390px (Decision DEC-010). Desktop-level density must not be forced into narrow screens.
 
 ## Anti-Patterns
 

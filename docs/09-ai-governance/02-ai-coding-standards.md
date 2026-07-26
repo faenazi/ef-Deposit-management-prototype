@@ -8,21 +8,30 @@ These standards apply to the React, TypeScript, Vite, and Tailwind prototype und
 
 Use a feature-based frontend architecture. Business features must not be organized as one large shared components folder.
 
-Expected direction:
+Canonical structure (Decision DEC-014): `src/` is the application root and contains the nested Vite source directory:
 
 ```text
 src/
-├── app/
-├── assets/
-├── components/
-├── features/
-├── layouts/
-├── lib/
-├── mocks/
-├── routes/
-├── styles/
-└── types/
+├── package.json
+├── index.html
+├── vite.config.ts
+├── tsconfig*.json
+├── public/
+│   └── brand/
+└── src/
+    ├── app/
+    ├── styles/
+    ├── lib/
+    ├── domain/
+    ├── mock-data/
+    ├── services/
+    ├── hooks/
+    ├── components/
+    ├── layouts/
+    └── features/
 ```
+
+Use `domain/`, not a competing top-level `types/` folder, for business entities and rules. Use `mock-data/`, not `mocks/`, for fixtures and generators. Routing configuration lives under `app/`.
 
 Each feature may contain its own components, types, data, hooks, and utilities when they are feature-specific.
 
@@ -44,6 +53,7 @@ Each feature may contain its own components, types, data, hooks, and utilities w
 - Keep business display logic close to its feature.
 - Do not place all application state in one global store.
 - No backend, API, authentication, or server-state library is required for this prototype unless explicitly approved.
+- Prototype state is in-memory with deterministic seeded initial data (Decision DEC-019). Reloading resets to the initial dataset. Do not use localStorage, IndexedDB, a backend, or a database. Provide an explicit `إعادة ضبط البيانات التجريبية` action for administrators.
 
 ## 5. Styling
 

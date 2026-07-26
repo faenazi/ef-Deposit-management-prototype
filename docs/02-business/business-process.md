@@ -10,7 +10,7 @@ Manage the complete lifecycle of investing available liquidity in bank deposits 
 2. The request remains Draft while all preparation sections are completed.
 3. The specialist validates readiness and submits the request.
 4. General Manager of Treasury reviews every submitted request.
-5. Requests above SAR 100,000,000 require Executive Head of Investment and Treasury approval.
+5. Requests above SAR 100,000,000 require approval by the Executive Director of Investment and Treasury Sector.
 6. After investment approval, the Deposit Specialists group completes the winning bank and beneficiary details.
 7. Investment Support performs the completeness and control review.
 8. Finance performs financial readiness review.
@@ -45,7 +45,7 @@ Deposit Specialist → General Manager of Treasury → Winning Bank Completion.
 
 ### Amount above SAR 100,000,000
 
-Deposit Specialist → General Manager of Treasury → Executive Head of Investment and Treasury → Winning Bank Completion.
+Deposit Specialist → General Manager of Treasury → Executive Director of Investment and Treasury Sector → Winning Bank Completion.
 
 ## Execution Phase
 

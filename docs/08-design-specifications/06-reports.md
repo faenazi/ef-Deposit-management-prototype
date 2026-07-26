@@ -84,7 +84,7 @@ Show:
 - Number of deposits maturing.
 - Upcoming decision deadlines.
 - Deposits without maturity instructions.
-- Rollover decisions initiated.
+- Reinvestment decisions initiated.
 
 Preferred visualizations:
 
@@ -162,7 +162,6 @@ Show:
 - Deposits with unresolved exceptions.
 - Overdue approval tasks.
 - Missing accounting records.
-- Custodian mismatches.
 - Maturity decisions not completed by the required date.
 
 The report should support direct navigation to the affected record.

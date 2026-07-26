@@ -44,7 +44,7 @@ General Manager of Treasury.
 
 ### Owner
 
-Executive Head of Investment and Treasury.
+Executive Director of Investment and Treasury Sector.
 
 ### Allowed Actions
 

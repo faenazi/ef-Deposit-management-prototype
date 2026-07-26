@@ -38,12 +38,16 @@ Claude Code prompts must reference only the documents required for the current i
 ## 04 — UI/UX
 
 - `04-ui-ux/design-direction.md` — mandatory visual and experience direction.
-- `04-ui-ux/information-architecture.md` — navigation and content hierarchy.
+- `04-ui-ux/information-architecture.md` — navigation order, content hierarchy, and canonical routes.
 - `04-ui-ux/navigation.md` — main and contextual navigation behavior.
 - `04-ui-ux/page-patterns.md` — reusable enterprise page structures.
-- `04-ui-ux/responsive-behavior.md` — desktop and tablet behavior.
+- `04-ui-ux/responsive-behavior.md` — desktop, tablet, and mobile (390px) behavior.
 - `04-ui-ux/accessibility.md` — accessibility and interaction requirements.
 - `04-ui-ux/prototype-interactions.md` — simulated actions and state changes.
+- `04-ui-ux/transaction-workspace.md` — request workspace experience structure.
+- `04-ui-ux/design-system.md` — design-system foundations.
+- `04-ui-ux/components.md` — shared component requirements.
+- `04-ui-ux/design-review-checklist.md` — design review checklist.
 
 ## 05 — Data
 
@@ -58,6 +62,39 @@ Claude Code prompts must reference only the documents required for the current i
 - `06-quality/ux-review-checklist.md` — page-level experience review.
 - `06-quality/functional-review-checklist.md` — workflow and action review.
 - `06-quality/final-readiness-checklist.md` — stakeholder-demo readiness.
+
+## 07 — Brand Experience
+
+- `07-brand-experience/README.md` — folder guide.
+- `07-brand-experience/00-brand-source-of-truth.md` — official brand assets and usage rules.
+- `07-brand-experience/01-design-philosophy.md` through `11-product-design-dna.md` — design philosophy, brand application, color, typography, iconography, patterns, data visualization, motion, responsive strategy, compliance checklist, and product design DNA.
+
+## 08 — Design Specifications
+
+- `08-design-specifications/README.md` — folder guide.
+- `08-design-specifications/00-shared-layout-and-components.md` — shared shell and component specification.
+- `08-design-specifications/01-dashboard.md` through `07-settings.md` — one detailed design specification per page.
+
+## 09 — AI Governance
+
+- `09-ai-governance/README.md` — folder guide.
+- `09-ai-governance/01-ai-design-principles.md` — design principles for AI-generated work.
+- `09-ai-governance/02-ai-coding-standards.md` — canonical frontend structure and coding standards.
+- `09-ai-governance/03-ai-review-checklist.md` — AI output review checklist.
+- `09-ai-governance/04-ai-definition-of-done.md` — definition of done.
+
+## Canonical Sources
+
+When documents overlap, these files win:
+
+- Statuses and transitions: `02-business/statuses-and-transitions.md`.
+- Business rules, thresholds, and prototype defaults: `02-business/business-rules.md`.
+- Roles and permissions: `02-business/roles-and-permissions.md`.
+- Navigation order and routes: `04-ui-ux/information-architecture.md` (matching `CLAUDE.md` §10).
+- Workspace sections: the DEC-016 list in `04-ui-ux/information-architecture.md`.
+- Demo identities: `05-data/demo-users.md`.
+- Frontend structure: `09-ai-governance/02-ai-coding-standards.md`.
+- Decisions log: `EXECUTION-STATUS.md` section 6.
 
 ## Authoring Rules
 

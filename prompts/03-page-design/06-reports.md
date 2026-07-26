@@ -9,6 +9,9 @@ Implement the Arabic RTL Reports and Analytics page as a focused executive and t
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/06-reports.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/reports-and-analytics.md`
+- `docs/02-business/statuses-and-transitions.md`
+- `docs/05-data/mock-data-requirements.md`
 
 ## Scope
 Implement only the reports route, documented local filters, meaningful charts, summary tables, and prototype export representation if explicitly specified.

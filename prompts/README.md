@@ -1,6 +1,6 @@
 # Claude Code Execution Prompts
 
-This folder contains small, stage-based implementation prompts for Claude Code.
+This folder contains small, stage-based execution prompts for Claude Code.
 
 ## Execution Method
 
@@ -10,39 +10,54 @@ Example:
 
 ```text
 Execute the instructions in:
-prompts/00-foundation/01-initialize-frontend.md
+prompts/04-frontend/01-initialize-frontend-project.md
 ```
 
 After implementation, run a focused review:
 
 ```text
 Review the implementation against:
-prompts/00-foundation/01-initialize-frontend.md
+prompts/04-frontend/01-initialize-frontend-project.md
 
 Fix only missing requirements, regressions, TypeScript errors, and build errors.
 Do not expand the scope.
 ```
 
+## Folder Structure
+
+- `00-foundation/` — repository review, audit, and documentation alignment prompts.
+- `01-brand-director/` — brand interpretation and design-token planning (planning only).
+- `02-design-system/` — domain-model and mock-data planning reference (planning only).
+- `03-page-design/` — one implementation prompt per product page.
+- `04-frontend/` — frontend initialization, design system and shell, routing and permissions, domain and mock services, integration, and final quality review.
+
 ## Mandatory Sequence
 
-1. `00-foundation`
-2. `01-design-system`
-3. `02-data-foundation`
-4. `03-core-pages`
-5. `04-investment-request`
-6. `05-workflow`
-7. `06-portfolio-and-reports`
-8. `07-quality`
+The canonical execution order is the roadmap in `EXECUTION-STATUS.md`. Summary:
 
-Do not start feature pages before the design system and data foundation are stable.
+| Step | Prompt |
+|---|---|
+| 01 | `00-foundation/01-repository-audit-and-plan.md` |
+| 01.5 | `00-foundation/02-documentation-alignment-and-decisions.md` |
+| 02 | `01-brand-director/01-brand-and-design-system-foundation.md` (planning only) |
+| 03 | `02-design-system/01-domain-and-mock-data-foundation.md` (planning only) |
+| 04 | `04-frontend/01-initialize-frontend-project.md` |
+| 05 | `04-frontend/02-build-design-system-and-app-shell.md` |
+| 06 | `04-frontend/03-routing-role-context-and-permissions.md` |
+| 07 | `04-frontend/04-build-domain-model-mock-data-and-services.md` |
+| 08–14 | `03-page-design/01-dashboard.md` through `03-page-design/07-settings.md` |
+| 15 | `04-frontend/05-integrate-pages-and-interactions.md` |
+| 16 | `04-frontend/06-final-frontend-quality-review.md` |
+
+Do not start feature pages before the design system (Step 05), routing and permissions (Step 06), and data foundation (Step 07) are stable.
 
 ## Prompt Design Rules
 
 Each prompt must:
 
 - Require reading `CLAUDE.md` first.
-- Reference only the documents needed for the task.
-- Define a narrow implementation scope.
+- Reference the canonical documents needed for the task, including the relevant `docs/02-business/` and `docs/05-data/` files for implementation steps.
+- Define a narrow implementation scope with one clear responsibility.
 - State explicit non-goals.
 - Require inspection of existing code.
 - Require TypeScript and production build validation.

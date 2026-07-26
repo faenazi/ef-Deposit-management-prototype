@@ -39,12 +39,14 @@ Use a professional data grid with a concise summary bar.
 ## Predefined Views
 
 - مسوداتي
-- معادة للاستكمال
+- معاد للاستكمال
 - بانتظار الاعتماد
 - تحت التنفيذ
-- مكتملة
+- محولة إلى وديعة نشطة
 - مرفوضة أو ملغاة
 - طلبات تتجاوز 100 مليون ريال
+
+Predefined views are filters over the canonical statuses in `docs/02-business/statuses-and-transitions.md`; they must not introduce new persisted statuses.
 
 ## Actions
 

@@ -72,7 +72,7 @@ Demonstrate final Treasury approval for a request not exceeding SAR 100,000,000.
 ### Expected Result
 
 - Executive approval is skipped.
-- Status changes to Pending Winning Bank Information.
+- Status changes to Pending Winning Bank Completion.
 - Ownership returns to the Deposit Specialist.
 - Approval history stores the decision.
 
@@ -98,7 +98,7 @@ Demonstrate the additional approval route for a request above SAR 100,000,000.
 
 ### Expected Result
 
-- Status changes to Pending Winning Bank Information.
+- Status changes to Pending Winning Bank Completion.
 - Deposit Specialist receives a task.
 - Executive approval appears in the history.
 
@@ -209,7 +209,7 @@ Demonstrate the conversion of an approved investment request into one active dep
 ### Expected Result
 
 - Exactly one Deposit record is created.
-- The source request becomes Completed.
+- The source request becomes Converted to Active Deposit.
 - The deposit appears in the portfolio.
 - Dashboard and exposure metrics update.
 - Links between request and deposit work in both directions.
@@ -223,7 +223,7 @@ Demonstrate maturity visibility and creation of a reinvestment request.
 ### Starting State
 
 - Deposit: `DEP-2026-0012`.
-- Status: Near Maturity.
+- Status: Active, within the 14-day maturity warning window (Approaching Maturity is a derived display condition, not a persisted status).
 - Maturity occurs within 14 days.
 
 ### Demonstration Flow
@@ -260,7 +260,7 @@ Demonstrate an exceptional early-break case without confusing it with normal mat
 
 ### Expected Result
 
-- Status changes to Broken.
+- Status changes to Broken Early.
 - Break date and reason are stored.
 - Activity timeline records the exceptional action.
 - Portfolio totals update accordingly.

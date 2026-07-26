@@ -228,7 +228,7 @@ Sees draft completion, offer entry, evaluation, recommendation, and maturity pre
 
 Sees approval decisions, delayed high-value requests, and treasury oversight tasks.
 
-### Executive Director
+### Executive Director of Investment and Treasury Sector
 
 Sees only requests requiring executive approval and relevant escalations.
 

@@ -7,7 +7,10 @@
 1. `CLAUDE.md`
 2. `docs/09-ai-governance/02-ai-coding-standards.md`
 3. `docs/08-design-specifications/00-shared-layout-and-components.md`
-4. راجع App Shell والتوجيه الحالي تحت `/src`.
+4. `docs/02-business/roles-and-permissions.md`
+5. `docs/04-ui-ux/information-architecture.md`
+6. `docs/05-data/demo-users.md`
+7. راجع App Shell والتوجيه الحالي تحت `/src`.
 
 ## نطاق التنفيذ
 ### 1. Routing
@@ -16,13 +19,19 @@
 ```text
 /
 /tasks
-/investment-requests
-/investment-requests/:requestId
 /deposits
 /deposits/:depositId
+/investment-requests
+/investment-requests/new
+/investment-requests/:requestId
+/investment-requests/:requestId/:section
 /reports
 /settings
+/access-denied
+/*
 ```
+
+مسار `:section` هو رابط مباشر لأقسام مساحة عمل الطلب ويجب تعريفه صراحة (القرار DEC-015).
 
 - استخدم lazy loading للصفحات الكبيرة عند الحاجة.
 - أضف صفحة Not Found جميلة ومتوافقة مع الهوية.
@@ -33,12 +42,14 @@
 أنشئ مستخدمين تجريبيين واقعيين للأدوار التالية:
 - أخصائي ودائع.
 - مدير عام الخزينة.
-- الرئيس التنفيذي للاستثمار والخزينة.
+- المدير التنفيذي لقطاع الاستثمار والخزينة.
 - أخصائي دعم الاستثمار.
 - أخصائي المالية.
 - أخصائي المحاسبة.
 - مدير النظام.
-- مستخدم للقراءة فقط.
+- مستخدم للعرض فقط.
+
+استخدم الأسماء والأدوار المعتمدة في `docs/05-data/demo-users.md` دون اختراع أدوار جديدة.
 
 يجب أن يكون تبديل المستخدم من App Shell واضحًا ومناسبًا للعرض التجريبي.
 
