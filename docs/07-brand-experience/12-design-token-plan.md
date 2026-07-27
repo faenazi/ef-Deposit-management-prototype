@@ -1,6 +1,6 @@
 # Design Token Plan — Step 02 Brand and Design System Foundation
 
-Status: planning deliverable of Step 02 (Decision DEC-013 — planning and interpretation only).
+Status: planning deliverable of Step 02 (Decision DEC-013 — planning and interpretation only). **Reviewed and approved by the repository owner on 2026-07-27** (see `EXECUTION-STATUS.md`, Step 02 report). The owner decisions resolving C-01, C-02, and C-03 are recorded in §17 and in the decision log (DEC-021–DEC-023).
 Implementation target: Step 05 (`prompts/04-frontend/02-build-design-system-and-app-shell.md`), after initialization in Step 04.
 
 This document consolidates every design token, component foundation, layout rule, RTL rule, and brand-asset mapping that Step 05 needs, so that Step 05 can implement the design system without making new design decisions. It interprets — it does not replace — the authoritative brand documents `00`–`11` in this folder. When a value here conflicts with `00-brand-source-of-truth.md`, the source of truth wins.
@@ -150,6 +150,7 @@ Rules carried into the design system:
 
 - Minimum operational text 12px; tables 13–14px; body text never below 14px responsively.
 - Financial values: tabular numerals (`font-variant-numeric: tabular-nums`), currency kept with the value (`125,000,000 ر.س`), consistent thousand separators, KPI weight bold/xbold, compact form (`125 مليون ر.س`) only with full value available in tooltip/detail.
+- Digit system: financial values, rates, percentages, dates, identifiers, and tabular data use **Latin digits (0-9)** by default — owner-approved decision DEC-021 (resolves C-03, §17).
 - Never truncate amounts, rates, statuses, dates, or primary identifiers.
 - Table typography: header semibold 13–14px, body regular 13–14px, monetary values medium/semibold, metadata 12px.
 - Number formatting is centralized in one utility module (planned `src/src/lib/format.ts`) so separators, currency, percent precision (two decimals for offers/yields), and tenor labels stay identical product-wide.
@@ -373,23 +374,23 @@ Opacity, placement, scale, and responsive reduction follow `06-pattern-system.md
 
 ### Favicon plan
 
-The favicon uses the official `ef-logo-symbol-white.svg` **unmodified**, composed inside a small primary-blue (`#2C3A82`) rounded container so the white symbol remains visible on light browser chrome. This is composition around the approved asset, not modification of it. Executed in Step 04/05 after B-01.
+The favicon uses the official `ef-logo-symbol-white.svg` **unmodified**, composed inside a small primary-blue (`#2C3A82`) rounded container so the white symbol remains visible on light browser chrome. This is composition around the approved asset, not modification of it — owner-approved on 2026-07-27 (DEC-023, resolving C-02 in §17). Only the official supplied SVG asset may be used; the symbol must never be redrawn, traced, approximated, modified, or fabricated. Executed in Step 04/05 after B-01.
 
 ## 17. Recorded conflicts, decisions, and assumptions
 
-Per the Step 02 prompt, conflicts between brand documentation and the shared layout specification are recorded rather than silently resolved.
+Per the Step 02 prompt, conflicts between brand documentation and the shared layout specification were recorded rather than silently resolved. **The repository owner reviewed Step 02 and resolved all three conflicts on 2026-07-27.** C-01, C-02, and C-03 are now CLOSED; the approved resolutions below are binding for Step 05 implementation and are recorded in the decision log as DEC-021–DEC-023 (`EXECUTION-STATUS.md` §6).
 
-### C-01 — Sidebar surface direction (open design choice, recommendation recorded)
+### C-01 — Sidebar surface direction — RESOLVED (owner approved, DEC-022)
 
-`docs/08-design-specifications/00-shared-layout-and-components.md` §3 leaves the sidebar surface open ("light or deep navy institutional surface based on the final shell direction"), while `02-brand-application.md` describes the shell as "a clean light workspace" with dark surfaces reserved for compact prominent areas. **Planned resolution: light sidebar** — `--color-surface` background, `--color-surface-brand-soft` + primary-blue text/icon for the active item, warm-grey hover — using `ef-logo-horizontal-blue.svg`. A deep-navy sidebar is treated as a rejected default (it would conflict with "do not turn the operational application dark" and enlarge the dark-surface footprint). This is a visual (not business) decision; final confirmation happens at the Step 05 visual review gate already defined in the roadmap.
+`docs/08-design-specifications/00-shared-layout-and-components.md` §3 left the sidebar surface open ("light or deep navy institutional surface based on the final shell direction"), while `02-brand-application.md` describes the shell as "a clean light workspace" with dark surfaces reserved for compact prominent areas. **Approved resolution: the primary application sidebar uses the recommended light-surface design** — `--color-surface` background, `--color-surface-brand-soft` + primary-blue text/icon for the active item, warm-grey hover — using `ef-logo-horizontal-blue.svg`. A deep-navy sidebar is rejected (it would conflict with "do not turn the operational application dark" and enlarge the dark-surface footprint). The Step 05 visual review remains a quality gate for execution details, not for reopening this decision.
 
-### C-02 — Collapsed-sidebar logo on a light surface (asset gap, recommendation recorded)
+### C-02 — Collapsed-sidebar logo on a light surface — RESOLVED (owner approved, DEC-023)
 
-The only approved symbol asset is `ef-logo-symbol-white.svg`, which is invisible on the light sidebar chosen in C-01. Redrawing a blue symbol is prohibited (DEC-008). **Planned resolution:** in collapsed mode, render the white symbol inside a compact primary-blue rounded container (the same composition approach as the favicon) — the asset itself remains untouched. Alternative: the owner supplies an official blue symbol variant with the B-01 upload; if one arrives, it replaces the composed treatment.
+The only approved symbol asset is `ef-logo-symbol-white.svg`, which is invisible on the light sidebar chosen in C-01. Redrawing a blue symbol is prohibited (DEC-008). **Approved resolution: in collapsed sidebar mode and favicon contexts, the official white Environment Fund symbol may be placed inside an official primary-blue (`#2C3A82`) container** — the same composition approach as the favicon plan in §16. This composition must use **only the official supplied SVG asset**: the Environment Fund logo or symbol must never be redrawn, traced, approximated, modified, or fabricated. The asset itself remains byte-identical; only its surrounding container is composed. If the owner later supplies an official blue symbol variant with the B-01 upload, it may replace the composed treatment.
 
-### C-03 — Digit system for financial values (documentation conflict, needs owner confirmation)
+### C-03 — Digit system for financial values — RESOLVED (owner approved, DEC-021)
 
-`04-typography.md` §5 mandates "internationally readable digits unless product requirements specify Arabic-Indic digits" and all its examples use Latin digits (`125,000,000 ر.س`), but `07-data-visualization.md` §7 gives an Arabic-Indic example (`١٢٥٬٠٠٠٬٠٠٠ ر.س`). **Planned default: Latin digits (0-9)** product-wide, via `Intl.NumberFormat('ar-SA-u-nu-latn')`-style formatting in the central format utility — consistent with the typography document, tabular-numeral support, and financial scanability. The data-visualization example is treated as illustrative, not normative. Owner confirmation requested; switching later is a one-line change in the central formatter.
+`04-typography.md` §5 mandates "internationally readable digits unless product requirements specify Arabic-Indic digits" and all its examples use Latin digits (`125,000,000 ر.س`), but `07-data-visualization.md` §7 gives an Arabic-Indic example (`١٢٥٬٠٠٠٬٠٠٠ ر.س`). **Approved resolution: financial values, rates, percentages, dates, identifiers, and tabular data use Latin digits (0-9) by default**, product-wide, via `Intl.NumberFormat('ar-SA-u-nu-latn')`-style formatting in the central format utility — consistent with the typography document, tabular-numeral support, and financial scanability. The Arabic-Indic example in `07-data-visualization.md` §7 is illustrative, not normative. Any future switch is a one-line change in the central formatter and would require a new owner decision.
 
 ### Assumptions (recorded, low risk)
 
@@ -400,7 +401,7 @@ The only approved symbol asset is `ef-logo-symbol-white.svg`, which is invisible
 
 ### Blockers
 
-- **B-01 (OPEN)** — the seven official SVGs are missing; see §1. Gates the §16 copy list, brand-component visual completion, favicon, and palette re-verification. Does not gate Steps 02–04.
+- **B-01 (OPEN)** — the seven official SVGs are missing; see §1. B-01 remains OPEN until the seven official SVG assets are uploaded by the repository owner. Gates the §16 copy list, brand-component visual completion, favicon, and palette re-verification. Does not gate Steps 02–04. The Step 02 approval on 2026-07-27 explicitly keeps B-01 open.
 
 ## 18. Step 05 readiness
 
@@ -409,6 +410,6 @@ Step 05 can implement the design system and app shell from this document plus th
 1. tokens are created exactly as specified in §3–§13 in `src/src/styles/`;
 2. RTL rules in §14 are applied at the shell level;
 3. the component inventory in §15 is used as the build list;
-4. C-01/C-02 recommendations are implemented as planned unless the owner overrides them at review;
-5. C-03 default (Latin digits) is implemented in the central formatter pending owner confirmation;
+4. the approved C-01 resolution (light sidebar, DEC-022) and C-02 resolution (official white symbol composed inside an official primary-blue container, DEC-023) are implemented as recorded in §17;
+5. the approved C-03 resolution (Latin digits 0-9 by default, DEC-021) is implemented in the central formatter;
 6. brand-asset-dependent visuals degrade gracefully (reserved logo slot, no fabricated placeholder artwork) until B-01 is resolved.

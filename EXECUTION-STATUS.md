@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 02 BRAND PLANNING EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
+**Overall status:** STEP 02 BRAND PLANNING APPROVED — STEP 03 DOMAIN PLANNING IS THE ACTIVE STEP (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
 
-**Current phase:** Brand planning (Step 02) under review; awaiting brand assets (B-01)
+**Current phase:** Domain planning (Step 03, not started); awaiting brand assets (B-01)
 
-**Current active step:** Step 02 — Brand Planning (REVIEW REQUIRED)
+**Current active step:** Step 03 — Domain Planning (NOT STARTED)
 
 **Next prompt to execute:**
 
-None until Step 02 is reviewed and approved. After approval: `prompts/02-design-system/01-domain-and-mock-data-foundation.md` (Step 03 — planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
+`prompts/02-design-system/01-domain-and-mock-data-foundation.md` (Step 03 — Domain and Mock-Data Foundation Planning, planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
 
-**Last approved step:** Step 01.5 — Documentation Alignment and Decision Resolution (APPROVED)
+**Last approved step:** Step 02 — Brand Interpretation and Design-Token Planning (APPROVED)
 
 ## 4. Execution Roadmap
 
@@ -43,7 +43,7 @@ None until Step 02 is reviewed and approved. After approval: `prompts/02-design-
 |---|---|---|---|---|---|
 | 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
 | 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
-| 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 (planning-only per DEC-013). Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. B-01 still open. |
+| 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: domain-model and mock-data planning reference only. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
@@ -126,12 +126,15 @@ Record only decisions that affect later implementation.
 | DEC-018 | Implementation prompts (Steps 07–15) must read the relevant canonical files under `docs/01`–`docs/06` plus the matching `docs/08` specification, not the design-spec folder alone. | 2026-07-26 | Resolves B-04. |
 | DEC-019 | Prototype state is in-memory with deterministic seeded data. Reload resets. Explicit `إعادة ضبط البيانات التجريبية` action for administrators. No localStorage, IndexedDB, backend, or database. | 2026-07-26 | Defines persistence model. |
 | DEC-020 | Standard terminology and identifiers: `طلب استثمار`, `محفظة الودائع`, `مراجعة الإدارة المالية`, `تنفيذ التحويل المحاسبي`, value date = `تاريخ بدء الوديعة` / `valueDate`, `إعادة الاستثمار`, `IR-2026-####`, `DEP-2026-####`. | 2026-07-26 | Resolves terminology and identifier drift. |
+| DEC-021 | Financial values, rates, percentages, dates, identifiers, and tabular data use Latin digits (0-9) by default, implemented in the central format utility. | 2026-07-27 | Owner approval of Step 02; resolves C-03 in `docs/07-brand-experience/12-design-token-plan.md` §17. |
+| DEC-022 | The primary application sidebar uses the recommended light-surface design (`--color-surface` background, brand-soft active state, `ef-logo-horizontal-blue.svg`); a deep-navy sidebar is rejected. | 2026-07-27 | Owner approval of Step 02; resolves C-01 in `docs/07-brand-experience/12-design-token-plan.md` §17. |
+| DEC-023 | In collapsed sidebar mode and favicon contexts, the official white Environment Fund symbol may be placed inside an official primary-blue (`#2C3A82`) container. The composition must use only the official supplied SVG asset — the logo/symbol must never be redrawn, traced, approximated, modified, or fabricated. | 2026-07-27 | Owner approval of Step 02; resolves C-02 in `docs/07-brand-experience/12-design-token-plan.md` §17; complements DEC-008. |
 
 ## 7. Blockers
 
 Updated by Step 01.5 (2026-07-26).
 
-- **B-01 — OPEN — Official brand SVG assets are missing.** The canonical directories `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/` exist with READMEs listing the seven required official filenames, but none of the seven SVG files has been supplied. The brand rules forbid redrawing or recreating assets. This does not block Steps 02–04 (planning and initialization) but blocks brand-asset copying in Step 04 and final visual completion from Step 05 onward. **Resolution:** the owner commits the seven official SVG files listed in `assets/brand/README.md`.
+- **B-01 — OPEN — Official brand SVG assets are missing.** The canonical directories `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/` exist with READMEs listing the seven required official filenames, but none of the seven SVG files has been supplied. The brand rules forbid redrawing or recreating assets. This does not block Steps 02–04 (planning and initialization) but blocks brand-asset copying in Step 04 and final visual completion from Step 05 onward. The Step 02 approval (2026-07-27) explicitly keeps B-01 open until the seven official SVG assets are uploaded by the repository owner. **Resolution:** the owner commits the seven official SVG files listed in `assets/brand/README.md`.
 - **B-02 — RESOLVED (Step 01.5, DEC-008).** `docs/07-brand-experience/00-brand-source-of-truth.md` §10 now specifies `assets/brand/` (source) and `src/public/brand/` (runtime), matching `CLAUDE.md` §9 and all prompts.
 - **B-03 — RESOLVED (Step 01.5, DEC-013).** Step 02 and Step 03 prompts rewritten as planning-only; initialization, shell, routing, and domain implementation live solely in Steps 04–07.
 - **B-04 — RESOLVED (Step 01.5, DEC-018).** All seven page prompts and frontend Steps 06, 07, and 15 now reference the canonical `docs/02-business/`, `docs/03-functional/`, `docs/04-ui-ux/`, and `docs/05-data/` files by path.
@@ -271,9 +274,10 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 02 — Brand Interpretation and Design-Token Planning
 - Prompt executed: `prompts/01-brand-director/01-brand-and-design-system-foundation.md`
-- Status: REVIEW REQUIRED
-- Date: 2026-07-27
-- Commit or working branch: `claude/brand-design-system-planning-0onenc`
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and approved Step 02 on 2026-07-27, resolving C-01, C-02, and C-03 (recorded as DEC-021–DEC-023) and keeping B-01 open.
+- Date: 2026-07-27 (executed and approved)
+- Commit or working branch: `claude/brand-design-system-planning-0onenc` (execution); `claude/brand-design-token-approval-xowubi` (approval recording)
 
 #### Files Changed
 
@@ -316,13 +320,15 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 #### Decisions Required
 
-- Owner confirmation of C-03: default to Latin digits (0-9) for all financial values (recommended, per `04-typography.md`), or Arabic-Indic digits per the `07-data-visualization.md` example.
-- Owner may override C-01 (light sidebar recommended) and C-02 (white symbol composed on a primary-blue container in collapsed mode / favicon) at the Step 05 visual review; no action needed if the recommendations stand.
-- B-01: owner uploads the seven official SVG files to `assets/brand/`.
+- All Step 02 decision requests were resolved by the owner approval of 2026-07-27:
+  - C-03 → **resolved (DEC-021):** financial values, rates, percentages, dates, identifiers, and tabular data use Latin digits (0-9) by default.
+  - C-01 → **resolved (DEC-022):** the primary application sidebar uses the recommended light-surface design.
+  - C-02 → **resolved (DEC-023):** in collapsed sidebar mode and favicon contexts, the official white Environment Fund symbol may be placed inside an official primary-blue container, using only the official supplied SVG asset — never redrawn, traced, approximated, modified, or fabricated.
+- Only B-01 remains with the owner: upload the seven official SVG files to `assets/brand/`. B-01 remains OPEN until then.
 
 #### Recommended Next Step
 
-- Review and approve Step 02. After approval, execute Step 03 — Domain and Mock-Data Foundation Planning (`prompts/02-design-system/01-domain-and-mock-data-foundation.md`, planning-only per DEC-013). Step 03 is not blocked by B-01, but the owner should upload the brand assets in parallel so Step 04 can copy them.
+- Step 02 is approved. Execute Step 03 — Domain and Mock-Data Foundation Planning (`prompts/02-design-system/01-domain-and-mock-data-foundation.md`, planning-only per DEC-013). Step 03 is not blocked by B-01, but the owner should upload the brand assets in parallel so Step 04 can copy them.
 
 ## 9. Review Ownership
 
