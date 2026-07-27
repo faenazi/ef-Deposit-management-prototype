@@ -1,0 +1,21 @@
+/*
+ * Typography stack (00-brand-source-of-truth.md §8, 04-typography.md §1).
+ * Aktiv Grotesk binaries are NOT committed (licensing rule); until the
+ * Environment Fund confirms license terms the prototype renders with Tahoma.
+ * Tahoma ships regular/bold only, so medium/semibold are browser-synthesized —
+ * an accepted prototype limitation (token plan §6, assumption A-03).
+ */
+
+:root {
+  --font-family-base: 'Aktiv Grotesk', Tahoma, Arial, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-xbold: 800;
+}
+
+@theme inline {
+  --font-sans: var(--font-family-base);
+}

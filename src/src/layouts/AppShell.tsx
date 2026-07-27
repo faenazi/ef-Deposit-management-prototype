@@ -1,0 +1,84 @@
+import { useState } from 'react'
+import { Outlet, useLocation } from 'react-router'
+
+import { cn } from '@/lib/cn'
+import { Drawer } from '@/components/ui/Drawer'
+import { ToastProvider } from '@/components/ui/Toast'
+import { navigationItems } from '@/layouts/navigation'
+import { SidebarNav } from '@/layouts/SidebarNav'
+import { TopHeader } from '@/layouts/TopHeader'
+import { prototypeUsers, type PrototypeUser } from '@/app/prototype-users'
+
+/**
+ * RTL application shell (00-shared §2): right sidebar (264/80px, light surface
+ * per DEC-022), 72px top header, flexible main region. Tablet/mobile use an
+ * accessible navigation drawer that opens from the right (it replaces the
+ * right sidebar).
+ */
+export function AppShell() {
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  // Visual identity only in Step 05; Step 06 replaces this with the real
+  // role context driving tasks, permissions, and editable sections.
+  const [activeUser, setActiveUser] = useState<PrototypeUser>(prototypeUsers[0])
+  const { pathname } = useLocation()
+
+  const currentPageLabel =
+    navigationItems.find((item) =>
+      item.end ? pathname === item.path : pathname === item.path || pathname.startsWith(`${item.path}/`),
+    )?.label ??
+    (pathname === '/design-system' ? 'نظام التصميم — مراجعة مؤقتة' : 'صفحة غير موجودة')
+
+  return (
+    <ToastProvider>
+      <a
+        href="#main-content"
+        className="fixed top-2 right-2 z-[var(--z-tooltip)] -translate-y-20 rounded-sm bg-action-primary px-4 py-2 text-body font-semibold text-text-inverse transition-transform focus:translate-y-0"
+      >
+        تخطي إلى المحتوى الرئيسي
+      </a>
+
+      <div className="flex min-h-dvh">
+        {/* Desktop sidebar — first flex child renders on the right in RTL. */}
+        <aside
+          className={cn(
+            'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 border-e border-border-default lg:block',
+            'transition-[width] duration-[var(--motion-standard)]',
+          )}
+          style={{
+            width: collapsed
+              ? 'var(--layout-sidebar-collapsed)'
+              : 'var(--layout-sidebar-expanded)',
+          }}
+        >
+          <SidebarNav collapsed={collapsed} onToggleCollapsed={() => setCollapsed((value) => !value)} />
+        </aside>
+
+        <div className="flex min-w-0 grow flex-col">
+          <TopHeader
+            currentPageLabel={currentPageLabel}
+            activeUser={activeUser}
+            onUserChange={setActiveUser}
+            onOpenMobileNav={() => setMobileNavOpen(true)}
+          />
+          <main id="main-content" className="grow">
+            <Outlet />
+          </main>
+        </div>
+      </div>
+
+      {/* Tablet/mobile navigation drawer (opens from the sidebar's right edge). */}
+      <Drawer
+        open={mobileNavOpen}
+        onClose={() => setMobileNavOpen(false)}
+        title="التنقل"
+        side="right"
+        widthClassName="w-[300px] max-w-[85vw]"
+      >
+        <div className="-m-5">
+          <SidebarNav onNavigate={() => setMobileNavOpen(false)} />
+        </div>
+      </Drawer>
+    </ToastProvider>
+  )
+}

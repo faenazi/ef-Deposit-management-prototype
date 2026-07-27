@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 04 FRONTEND INITIALIZATION EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates the brand-asset runtime copy and final visual completion but did not block technical initialization)
+**Overall status:** STEP 05 DESIGN SYSTEM AND APP SHELL EXECUTED — AWAITING REVIEW. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`.
 
-**Current phase:** Frontend initialization (Step 04, review required); awaiting brand assets (B-01)
+**Current phase:** Design system and app shell (Step 05, review required)
 
-**Current active step:** Step 04 — Frontend Initialization (REVIEW REQUIRED)
+**Current active step:** Step 05 — Design System and App Shell (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-After Step 04 approval: `prompts/04-frontend/02-build-design-system-and-app-shell.md` (Step 05 — Design system and shell). The owner should add the seven official SVG assets (B-01) first: Step 05 visual completion depends on them.
+After Step 05 approval: `prompts/04-frontend/03-routing-role-context-and-permissions.md` (Step 06 — Routing and permissions). Do not start Step 06 before the Step 05 visual review is approved.
 
-**Last approved step:** Step 03 — Domain and Mock-Data Foundation Planning (APPROVED)
+**Last approved step:** Step 04 — Frontend Initialization (APPROVED 2026-07-27)
 
 ## 4. Execution Roadmap
 
@@ -45,8 +45,8 @@ After Step 04 approval: `prompts/04-frontend/02-build-design-system-and-app-shel
 | 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
-| 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. All frontend files are under `/src`. Technical initialization only; brand-asset runtime copy still gated by B-01. See Step 04 report below. |
-| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
+| 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
+| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 with the seven official brand assets in place. Requires visual review before continuing. See Step 05 report below. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
 | 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
@@ -134,7 +134,7 @@ Record only decisions that affect later implementation.
 
 Updated by Step 01.5 (2026-07-26).
 
-- **B-01 — OPEN — Official brand SVG assets are missing.** The canonical directories `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/` exist with READMEs listing the seven required official filenames, but none of the seven SVG files has been supplied. The brand rules forbid redrawing or recreating assets. This does not block Steps 02–04 (planning and initialization) but blocks brand-asset copying in Step 04 and final visual completion from Step 05 onward. The Step 02 approval (2026-07-27) explicitly keeps B-01 open until the seven official SVG assets are uploaded by the repository owner. **Resolution:** the owner commits the seven official SVG files listed in `assets/brand/README.md`.
+- **B-01 — RESOLVED (2026-07-27, Step 05 preparation).** The seven official Environment Fund SVG files were located as physical binary files inside the installed `ef-brand-identity` skill package (`assets/{logos,patterns,graphic-elements}/`), verified as genuine SVG artwork (file-type inspection and content inspection — real vector paths, not text placeholders), and copied **without any modification** (byte-identical, sha256-verified) into `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/{logos,patterns,graphic-elements}/` with the exact approved filenames. No font binaries were copied. No asset was redrawn, traced, approximated, or fabricated. The favicon was composed per DEC-023: the official white symbol embedded byte-identical (base64) inside an official primary-blue container (`src/public/favicon.svg`).
 - **B-02 — RESOLVED (Step 01.5, DEC-008).** `docs/07-brand-experience/00-brand-source-of-truth.md` §10 now specifies `assets/brand/` (source) and `src/public/brand/` (runtime), matching `CLAUDE.md` §9 and all prompts.
 - **B-03 — RESOLVED (Step 01.5, DEC-013).** Step 02 and Step 03 prompts rewritten as planning-only; initialization, shell, routing, and domain implementation live solely in Steps 04–07.
 - **B-04 — RESOLVED (Step 01.5, DEC-018).** All seven page prompts and frontend Steps 06, 07, and 15 now reference the canonical `docs/02-business/`, `docs/03-functional/`, `docs/04-ui-ux/`, and `docs/05-data/` files by path.
@@ -397,7 +397,8 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 04 — Frontend Initialization
 - Prompt executed: `prompts/04-frontend/01-initialize-frontend-project.md`
-- Status: REVIEW REQUIRED
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and approved Step 04 on 2026-07-27.
 - Date: 2026-07-27
 - Commit or working branch: `claude/step-04-frontend-initialization-ge7e81` (created from the latest `main`); commit SHA, PR URL, and merge details recorded in the Git Delivery Record below.
 
@@ -449,6 +450,70 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 - Commit SHA: `a4d9e4434d7cd52d699872c64032e8c421b6d2bd` (Step 04 implementation commit).
 - PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/7 (non-draft, targeting `main`).
 - Merge status and merge SHA: squash merge is performed automatically after PR diff review when repository rules permit; the resulting merge SHA is recorded in the pull request thread (it cannot be written back to this file without a direct commit to `main`, which §19 forbids).
+
+### Step 05 — Design System and App Shell
+
+#### Step Summary
+
+- Step number and title: Step 05 — Design System and App Shell (including B-01 resolution)
+- Prompt executed: `prompts/04-frontend/02-build-design-system-and-app-shell.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/ef-brand-assets-verify-bp48pv` (created from the latest `main`); commit SHA, PR URL, and merge details in the Git Delivery Record below.
+
+#### B-01 Resolution (performed before Step 05 execution)
+
+- Located the seven official SVG files as physical binary files inside the installed `ef-brand-identity` skill package — not textual references: all seven exist with real vector content (verified via file-type and content inspection).
+- Copied them **without modifying their contents** (sha256 checksums identical across source and both destinations) to `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/{logos,patterns,graphic-elements}/`, preserving the exact approved filenames.
+- Verified all fourteen copies are valid SVG files, not text placeholders.
+- No font binaries were copied (the skill package's Aktiv Grotesk OTFs were explicitly excluded per the licensing rule).
+- B-01 marked RESOLVED in section 7.
+
+#### Files Changed
+
+- Created (brand assets, byte-identical copies): `assets/brand/logos/{ef-logo-primary-horizontal-ksa-blue,ef-logo-horizontal-blue,ef-logo-horizontal-white,ef-logo-symbol-white}.svg`, `assets/brand/patterns/{ef-pattern-primary,ef-pattern-secondary}.svg`, `assets/brand/graphic-elements/ef-graphic-radial-master.svg`, and the same seven under `src/public/brand/`; `src/public/favicon.svg` (DEC-023 composition: official symbol embedded byte-identical in a primary-blue container).
+- Created (styles): `src/src/styles/tokens.css` (layers 1–2: brand colors, semantic colors, status tokens, type scale, radius, shadows, breakpoints, easing, layout, z-index, icon sizes, chart palette), `src/src/styles/fonts.css`, `src/src/styles/motion.css`.
+- Created (lib): `src/src/lib/cn.ts`, `src/src/lib/format.ts` (central formatter — Latin digits per DEC-021; currency, compact currency, percent, Gregorian Arabic dates, tenor).
+- Created (UI primitives, `src/src/components/ui/`): `Icon`, `Button`, `IconButton`, `Spinner`, `Badge` (+`CountIndicator`), `Card` (+`SectionHeading`), `FormField` (+`FormErrorSummary`), `form-field-context`, `Input` (+`Textarea`, `Select`, `AmountInput`), `Checkbox` (+`Radio`), `Tabs`, `Dialog`, `Drawer`, `Toast` (+`toast-context`), `EmptyState`, `ErrorState`, `Skeleton` (+`TableSkeleton`), `Table` primitives, `FilterBar` (+`SearchField`, `FilterChip`), `AttachmentItem`, `Timeline` (+`TimelineItem`), `Progress` (`CompletionIndicator`), `FinancialValue`, `FinancialKpi`, `StickyActionBar`.
+- Created (brand components): `src/src/components/brand/BrandLogo.tsx` (variants incl. DEC-023 symbol-tile), `src/src/components/brand/BrandPattern.tsx` (controlled variants only).
+- Created (layouts): `src/src/layouts/{AppShell,SidebarNav,TopHeader,PageContainer,PageHeader}.tsx`, `src/src/layouts/navigation.ts` (DEC-009 order, DEC-015 routes, iconography §7 icons).
+- Created (app): `src/src/app/prototype-users.ts` (demo identities from `demo-users.md` for the visual role switcher; wired to the real role context in Step 06), `src/src/app/pages/{HomePage,PlaceholderPage,NotFoundPage,DesignSystemPreviewPage}.tsx`.
+- Updated: `src/src/app/App.tsx` (router: `/`, `/tasks`, `/deposits`, `/investment-requests`, `/reports`, `/settings`, temporary `/design-system`, `*`), `src/src/styles/globals.css` (imports, base styles, global focus-visible ring, `.ef-financial`), `src/index.html` (favicon), `EXECUTION-STATUS.md`.
+- Deleted: `src/src/app/SetupVerificationScreen.tsx` (temporary Step 04 screen, replaced by the real shell), `.gitkeep` files of now-populated folders.
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict) — passed, 0 errors.
+- Lint: `npm run lint` (`eslint .`) — passed, 0 errors.
+- Production build: `npm run build` — passed.
+- `npm audit`: 0 vulnerabilities.
+- Manual checks (production build rendered in Chromium): `dir="rtl" lang="ar"` at every route; zero horizontal overflow at 1440×900, 1024×768, 768×1024, and 390×844; zero console errors/warnings; official logo renders in the expanded shell (horizontal blue) and collapsed shell (DEC-023 symbol-tile); mobile navigation drawer opens from the right with focus management; dialog opens centered with backdrop and Escape support; keyboard focus ring visible; favicon serves correctly.
+
+#### Completed Scope
+
+- Design tokens implemented exactly per `12-design-token-plan.md` §3–§13 in `src/src/styles/` (three-layer architecture; Tailwind v4 wired to the CSS custom properties via `@theme inline` so the `:root` contract remains the single source; default Tailwind palette disabled to prohibit arbitrary palette classes).
+- Shared component foundations built per the token plan §15 build list and the Step 05 prompt inventory, with hover/focus/disabled/loading states, keyboard operation, and accessible names for icon-only controls.
+- RTL app shell: right sidebar 264/80px on the approved light surface (DEC-022), 72px calm header (product location, prototype role switcher, demo notifications affordance, user identity), flexible content region, collapsible sidebar with DEC-023 symbol-tile, tablet/mobile accessible navigation drawer, skip link.
+- Approved decisions implemented: DEC-021 (Latin digits in the central formatter), DEC-022 (light sidebar), DEC-023 (symbol-in-blue-container composition for collapsed mode and favicon).
+- Clean temporary placeholder routes for all six navigation items plus a not-found page; a temporary `/design-system` review page (outside the main navigation) showcases the components with realistic Arabic treasury content for the owner's visual review.
+
+#### Known Issues or Deviations
+
+- Aktiv Grotesk binaries remain uncommitted (licensing rule); rendering falls back to Tahoma with synthesized medium/semibold weights (assumption A-03).
+- A keyboard-accessible `Tooltip`/`Popover` component was deferred: no current consumer needs it (collapsed navigation uses `title` + `aria-label`); it will be added with its first real consumer to avoid speculative components.
+- Chart wrappers (`ChartContainer`, `ChartLegend`, etc.) are deferred to the reports/dashboard steps with the chart-library selection; the chart palette tokens are in place.
+- The `/design-system` route and the placeholder pages are explicitly temporary and will be removed/replaced as the real pages are built (Steps 08–14).
+- The pattern SVGs are large (~400 KB each, embedded raster data in the official artwork). They are served as-is per the no-modification rule; `BrandPattern` lazy-loads them and hides them on mobile. If size becomes a concern, lossless optimization would require a new owner decision.
+
+#### Decisions Required
+
+- Owner visual review of Step 05 (shell, tokens, components — `/design-system` and the six routes at desktop/tablet/mobile widths). No open business decisions; B-01 is resolved.
+
+#### Git Delivery Record
+
+- Branch: `claude/ef-brand-assets-verify-bp48pv` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 
 ## 9. Review Ownership
 
