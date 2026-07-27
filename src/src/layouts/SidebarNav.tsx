@@ -5,6 +5,7 @@ import { cn } from '@/lib/cn'
 import { BrandLogo } from '@/components/brand/BrandLogo'
 import { BrandPattern } from '@/components/brand/BrandPattern'
 import { Icon } from '@/components/ui/Icon'
+import { useUser } from '@/app/user-context'
 import { navigationItems } from '@/layouts/navigation'
 
 interface SidebarNavProps {
@@ -24,6 +25,11 @@ interface SidebarNavProps {
  * (06-pattern-system.md §7, navy-surface opacity range).
  */
 export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }: SidebarNavProps) {
+  // Navigation reflects the current role's permissions (same central
+  // route-access map as the route guard, so hidden ≠ merely hidden).
+  const { canAccessPath } = useUser()
+  const visibleItems = navigationItems.filter((item) => canAccessPath(item.path))
+
   return (
     <div className="flex h-full flex-col bg-sidebar-surface">
       <div
@@ -41,7 +47,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
 
       <nav aria-label="التنقل الرئيسي" className="overflow-y-auto p-3">
         <ul className="space-y-1">
-          {navigationItems.map((item) => (
+          {visibleItems.map((item) => (
             <li key={item.path}>
               <NavLink
                 to={item.path}

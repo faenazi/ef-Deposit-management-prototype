@@ -7,7 +7,11 @@ import { ToastProvider } from '@/components/ui/Toast'
 import { navigationItems } from '@/layouts/navigation'
 import { SidebarNav } from '@/layouts/SidebarNav'
 import { TopHeader } from '@/layouts/TopHeader'
-import { prototypeUsers, type PrototypeUser } from '@/app/prototype-users'
+
+const contextLabels: Record<string, string> = {
+  '/access-denied': 'الوصول غير مصرح به',
+  '/design-system': 'نظام التصميم — مراجعة مؤقتة',
+}
 
 /**
  * RTL application shell (00-shared §2): right sidebar (264/80px, dark
@@ -18,16 +22,14 @@ import { prototypeUsers, type PrototypeUser } from '@/app/prototype-users'
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  // Visual identity only in Step 05; Step 06 replaces this with the real
-  // role context driving tasks, permissions, and editable sections.
-  const [activeUser, setActiveUser] = useState<PrototypeUser>(prototypeUsers[0])
   const { pathname } = useLocation()
 
   const currentPageLabel =
     navigationItems.find((item) =>
       item.end ? pathname === item.path : pathname === item.path || pathname.startsWith(`${item.path}/`),
     )?.label ??
-    (pathname === '/design-system' ? 'نظام التصميم — مراجعة مؤقتة' : 'صفحة غير موجودة')
+    contextLabels[pathname] ??
+    'صفحة غير موجودة'
 
   return (
     <ToastProvider>
@@ -60,8 +62,6 @@ export function AppShell() {
         <div className="flex min-w-0 grow flex-col">
           <TopHeader
             currentPageLabel={currentPageLabel}
-            activeUser={activeUser}
-            onUserChange={setActiveUser}
             onOpenMobileNav={() => setMobileNavOpen(true)}
           />
           <main id="main-content" className="grow">

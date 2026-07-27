@@ -1,27 +1,22 @@
 import { Bell, Menu } from 'lucide-react'
 
 import { cn } from '@/lib/cn'
+import { Badge } from '@/components/ui/Badge'
 import { Icon } from '@/components/ui/Icon'
-import { prototypeUsers, type PrototypeUser } from '@/app/prototype-users'
+import { UserSwitcher } from '@/layouts/UserSwitcher'
 
 interface TopHeaderProps {
   /** Current location label shown as product context. */
   currentPageLabel: string
-  activeUser: PrototypeUser
-  onUserChange: (user: PrototypeUser) => void
   onOpenMobileNav: () => void
 }
 
 /**
- * Calm global header: product location, prototype role switcher (wired to the
- * real role context in Step 06), demo notifications affordance, user identity.
+ * Calm global header: product location, demo-mode label, notifications
+ * affordance, and the prototype user switcher (which also carries the
+ * current identity).
  */
-export function TopHeader({
-  currentPageLabel,
-  activeUser,
-  onUserChange,
-  onOpenMobileNav,
-}: TopHeaderProps) {
+export function TopHeader({ currentPageLabel, onOpenMobileNav }: TopHeaderProps) {
   return (
     <header
       className={cn(
@@ -44,27 +39,11 @@ export function TopHeader({
       </div>
 
       <div className="ms-auto flex items-center gap-2 md:gap-3">
-        <label className="hidden items-center gap-2 md:flex">
-          <span className="text-small text-text-secondary">المستخدم التجريبي</span>
-          <select
-            aria-label="تبديل المستخدم التجريبي"
-            value={activeUser.id}
-            onChange={(event) => {
-              const user = prototypeUsers.find((candidate) => candidate.id === event.target.value)
-              if (user) onUserChange(user)
-            }}
-            className={cn(
-              'h-9 max-w-52 cursor-pointer rounded-sm border border-border-strong bg-surface px-2 text-body',
-              'text-text-primary hover:border-text-muted',
-            )}
-          >
-            {prototypeUsers.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.name} — {user.jobTitle}
-              </option>
-            ))}
-          </select>
-        </label>
+        {/* The demo-mode label is always visible on md+; on smaller screens it
+            appears inside the switcher panel (demo-users.md). */}
+        <Badge variant="primary" className="hidden md:inline-flex">
+          وضع العرض التجريبي
+        </Badge>
 
         <button
           type="button"
@@ -80,17 +59,8 @@ export function TopHeader({
           />
         </button>
 
-        <div className="flex items-center gap-2 border-s border-border-default ps-3">
-          <span
-            aria-hidden="true"
-            className="flex size-9 items-center justify-center rounded-full bg-surface-brand-soft text-body font-semibold text-action-primary"
-          >
-            {activeUser.name.charAt(0)}
-          </span>
-          <div className="hidden min-w-0 lg:block">
-            <p className="truncate text-body font-semibold text-text-primary">{activeUser.name}</p>
-            <p className="truncate text-small text-text-secondary">{activeUser.jobTitle}</p>
-          </div>
+        <div className="border-s border-border-default ps-2 md:ps-3">
+          <UserSwitcher />
         </div>
       </div>
     </header>
