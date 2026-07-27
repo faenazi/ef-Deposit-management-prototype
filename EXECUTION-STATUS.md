@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 08 DASHBOARD IMPLEMENTATION COMPLETE AND DELIVERED. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed and approved on 2026-07-27. Step 08 (dashboard) was executed on 2026-07-27 and is awaiting owner review.
+**Overall status:** STEP 08 DASHBOARD IMPLEMENTATION COMPLETE AND MERGED. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed and approved on 2026-07-27. Step 08 (dashboard) was executed and merged on 2026-07-27.
 
-**Current phase:** Dashboard (Step 08, review required)
+**Current phase:** Ready for Step 09
 
-**Current active step:** Step 08 — Dashboard (REVIEW REQUIRED)
+**Current active step:** None — Step 08 complete. Step 09 awaits execution per roadmap.
 
 **Next prompt to execute:**
 
-After Step 08 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
+`prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
-**Last approved step:** Step 07 — Domain Model and Mock Services (APPROVED 2026-07-27)
+**Last approved step:** Step 08 — Dashboard (APPROVED AND MERGED 2026-07-27)
 
 ## 4. Execution Roadmap
 
@@ -49,7 +49,7 @@ After Step 08 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My 
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | COMPLETED | APPROVED | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Approved by the repository owner 2026-07-27, including the DEC-024 refinement. See Step 05 report and refinement report below. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. Role switching and access rules work and were browser-verified per role. See Step 06 report below. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | COMPLETED | APPROVED | Executed 2026-07-27. Deterministic seed (55 requests, 25 deposits, 164 offers, 50 tasks) verified by a 15-check integrity checker and a determinism assertion. See Step 07 report below. |
-| 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Dashboard loads role-aware KPIs, task lists, portfolio analytics, and activity timelines from mock services. See Step 08 report below. |
+| 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | COMPLETED | APPROVED | Executed and merged 2026-07-27. Dashboard loads role-aware KPIs, task lists, portfolio analytics, and activity timelines from mock services. See Step 08 report below. |
 | 09 | My Tasks | `prompts/03-page-design/02-my-tasks.md` | NOT STARTED | Pending | Review task actions and urgency. |
 | 10 | Investment Requests | `prompts/03-page-design/03-investment-requests.md` | NOT STARTED | Pending | Review filters, statuses, and draft handling. |
 | 11 | Transaction Workspace | `prompts/03-page-design/04-transaction-workspace.md` | NOT STARTED | Pending | Highest-priority business and UX review. |
@@ -727,7 +727,8 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 
 - Step number and title: Step 08 — Dashboard
 - Prompt executed: `prompts/03-page-design/01-dashboard.md`
-- Status: REVIEW REQUIRED
+- Status: COMPLETED
+- Review result: APPROVED — merged to main on 2026-07-27
 - Date: 2026-07-27
 - Commit or working branch: `claude/dashboard-implementation-hw34kj` (created from the latest `main`); details in the Git Delivery Record below.
 
@@ -780,9 +781,11 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 
 - Branch: `claude/dashboard-implementation-hw34kj` (from latest `main`; no direct commits to `main`).
 - Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
-- Commit SHA: `75bb71a` (Step 08 implementation commit).
-- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/12 (draft, targeting `main`).
-- Merge status and merge SHA: awaiting owner review before squash merge.
+- Commit SHA: `75bb71a` (Step 08 implementation commit); `b0c948c` (EXECUTION-STATUS.md update).
+- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/12 (merged).
+- Merge method: squash merge.
+- Merge SHA: `9e0b8b6a3267820fdde25b17b2ed875c276b0b2e`
+- Merge status: MERGED to main on 2026-07-27.
 
 ## 9. Review Ownership
 
