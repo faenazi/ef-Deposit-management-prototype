@@ -25,24 +25,24 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** DOCUMENTATION ALIGNED — READY FOR FRONTEND IMPLEMENTATION (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
+**Overall status:** DOCUMENTATION ALIGNED AND APPROVED — READY FOR FRONTEND IMPLEMENTATION (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
 
-**Current phase:** Documentation alignment complete; awaiting review and brand assets
+**Current phase:** Brand planning (Step 02); awaiting brand assets (B-01)
 
-**Current active step:** Step 01.5 — Documentation Alignment and Decision Resolution (REVIEW REQUIRED)
+**Current active step:** Step 02 — Brand Planning (NOT STARTED)
 
 **Next prompt to execute:**
 
-After Step 01.5 review approval: `prompts/01-brand-director/01-brand-and-design-system-foundation.md` (Step 02 — now planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
+`prompts/01-brand-director/01-brand-and-design-system-foundation.md` (Step 02 — planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
 
-**Last approved step:** Step 01 — Repository Audit and Plan (APPROVED WITH CONDITIONS)
+**Last approved step:** Step 01.5 — Documentation Alignment and Decision Resolution (APPROVED)
 
 ## 4. Execution Roadmap
 
 | Step | Phase | Prompt | Status | Review Result | Notes |
 |---|---|---|---|---|---|
 | 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
-| 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | REVIEW REQUIRED | Pending | Documentation Alignment and Decision Resolution. Completed 2026-07-26. See Step 01.5 report below. |
+| 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: brand interpretation and design-token planning only. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: domain-model and mock-data planning reference only. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
@@ -218,7 +218,8 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 01.5 — Documentation Alignment and Decision Resolution
 - Prompt executed: `prompts/00-foundation/02-documentation-alignment-and-decisions.md`
-- Status: REVIEW REQUIRED
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and approved the documentation alignment on 2026-07-27.
 - Date: 2026-07-26
 - Commit or working branch: `claude/docs-alignment-readiness-tq3jcc`
 
@@ -262,7 +263,7 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 #### Recommended Next Step
 
-- Owner reviews and approves Step 01.5, commits the seven official SVG assets (B-01), then executes Step 02 (`prompts/01-brand-director/01-brand-and-design-system-foundation.md`, planning-only).
+- Step 01.5 is approved. Execute Step 02 — Brand Planning (`prompts/01-brand-director/01-brand-and-design-system-foundation.md`, planning-only). The owner commits the seven official SVG assets (B-01) in parallel; B-01 remains open until they are uploaded.
 
 ## 9. Review Ownership
 
