@@ -102,7 +102,7 @@ The component may use a compact timeline, ordered list, or calendar-like strip. 
 - principal;
 - maturity date;
 - days remaining;
-- rollover or maturity action status.
+- reinvestment or maturity action status.
 
 Urgency must use label and date, not color alone.
 
@@ -182,7 +182,7 @@ Priority order:
 4. maturities;
 5. recent high-value activity.
 
-### Executive Director
+### Executive Director of Investment and Treasury Sector
 
 Priority order:
 

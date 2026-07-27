@@ -166,7 +166,7 @@ Any failed critical item blocks completion.
 - [ ] Form fields are associated with labels and errors.
 - [ ] Charts provide textual summaries.
 - [ ] Motion is subtle and respects reduced-motion preferences.
-- [ ] Touch targets are suitable for landscape tablet use.
+- [ ] Touch targets are suitable for landscape tablet and mobile use.
 
 ## Responsive Review
 
@@ -176,6 +176,7 @@ Review at minimum on:
 - [ ] Standard desktop.
 - [ ] Laptop.
 - [ ] Landscape tablet.
+- [ ] Mobile width 390px.
 
 For each size:
 

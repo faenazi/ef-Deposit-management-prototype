@@ -101,7 +101,7 @@ When requirements pass:
 
 - [ ] A request of SAR 100,000,000 or less routes to General Manager of Treasury approval.
 - [ ] A request above SAR 100,000,000 routes first to General Manager of Treasury.
-- [ ] After General Manager approval, above-threshold requests route to the Executive Director.
+- [ ] After General Manager approval, above-threshold requests route to the Executive Director of Investment and Treasury Sector.
 - [ ] The threshold is read from centralized configuration.
 - [ ] Changing the configured threshold changes routing without editing UI components.
 - [ ] The submitted amount is the amount used for routing.
@@ -124,7 +124,7 @@ For each approval step:
 ## Return Paths
 
 - [ ] General Manager return routes to the deposit specialist.
-- [ ] Executive Director return routes through General Manager of Treasury as documented.
+- [ ] Executive Director of Investment and Treasury Sector return routes through General Manager of Treasury as documented.
 - [ ] Investment Support return routes to the deposit-specialist group.
 - [ ] Finance return routes to Investment Support.
 - [ ] Accounting return routes to Finance.

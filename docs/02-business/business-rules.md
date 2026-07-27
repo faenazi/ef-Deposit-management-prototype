@@ -25,7 +25,7 @@ Submission is blocked until mandatory readiness conditions pass, including:
 - Currency and tenor are selected.
 - Liquidity information is complete.
 - Required liquidity evidence is attached.
-- At least the configured minimum number of banks has been contacted or an exception is documented.
+- At least the configured minimum number of banks has been contacted (prototype default: 3 — see Prototype Business Defaults) or an exception is documented.
 - At least one valid bank offer exists.
 - Evaluation and recommendation are complete.
 - A recommended offer is identified.
@@ -35,7 +35,7 @@ Submission is blocked until mandatory readiness conditions pass, including:
 ## Approval Threshold
 
 1. Requests up to and including SAR 100,000,000 require General Manager of Treasury approval.
-2. Requests above SAR 100,000,000 require General Manager of Treasury approval followed by Executive Head of Investment and Treasury approval.
+2. Requests above SAR 100,000,000 require General Manager of Treasury approval followed by approval by the Executive Director of Investment and Treasury Sector.
 3. The threshold must be stored in centralized configuration, not hardcoded in UI components.
 4. The amount used for routing is the submitted request amount.
 5. If the amount changes after a return, approval routing must be recalculated on resubmission.
@@ -99,9 +99,28 @@ A documented business justification is required for the recommended offer.
 1. Activation records actual amount, rate, start date, and maturity date.
 2. Differences between approved and actual terms must be highlighted.
 3. Active deposits appear in the portfolio immediately after activation.
-4. Maturity alerts are generated using a configurable warning window.
+4. Maturity alerts are generated using a configurable warning window (prototype default: 14 calendar days — see Prototype Business Defaults).
 5. Closure, reinvestment, and early break require supporting evidence and activity history.
 6. Expected and realized returns must remain distinguishable.
+
+## Prototype Business Defaults
+
+These approved defaults (Decision DEC-017) are the canonical values for the prototype and must be centralized as business-rule constants:
+
+1. Minimum banks contacted before submission: `3`.
+2. Expected return formula for fixed deposits: `principal × annualRate × tenorDays ÷ 360`, using a 360-day banking basis.
+3. Deposit maturity warning window: `14 calendar days` before maturity. `Approaching Maturity` is derived from dates, never persisted as a status.
+4. Approval and task target times:
+   - General Manager of Treasury: 2 business days.
+   - Executive Director of Investment and Treasury Sector: 2 business days.
+   - Investment Support: 1 business day.
+   - Finance: 1 business day.
+   - Accounting: 1 business day.
+   - Deposit activation confirmation: 1 business day.
+5. The SAR 100,000,000 routing threshold is evaluated from the amount submitted for approval.
+6. If the amount changes after a return and before resubmission, routing is recalculated.
+7. A returned request resumes at the stage that returned it after the required correction path is completed; the return and resubmission remain visible in history.
+8. Every return requires a reason.
 
 ## Audit and Data Integrity Rules
 

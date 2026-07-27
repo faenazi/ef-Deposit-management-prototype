@@ -44,6 +44,7 @@ Review the prototype on:
 - [ ] Standard desktop.
 - [ ] Laptop.
 - [ ] Landscape tablet.
+- [ ] Mobile width 390px.
 
 For each size:
 
@@ -70,7 +71,8 @@ For each size:
 
 - [ ] Deposit Specialist user is ready.
 - [ ] General Manager of Treasury user is ready.
-- [ ] Executive Director user is ready.
+- [ ] Executive Director of Investment and Treasury Sector user is ready.
+- [ ] Read-only User is ready.
 - [ ] Investment Support user is ready.
 - [ ] Finance user is ready.
 - [ ] Accounting user is ready.
@@ -95,7 +97,7 @@ For each size:
 
 ### 3. Approve an SAR 180 Million Request
 
-- [ ] General Manager approval routes to Executive Director.
+- [ ] General Manager approval routes to the Executive Director of Investment and Treasury Sector.
 - [ ] Executive approval advances the workflow.
 
 ### 4. Return an Incomplete Request

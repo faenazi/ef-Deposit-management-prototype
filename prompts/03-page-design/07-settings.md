@@ -9,6 +9,9 @@ Implement the Arabic RTL Settings page for prototype administration while protec
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/07-settings.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/settings.md`
+- `docs/05-data/demo-users.md` and `docs/05-data/demo-scenarios.md` (scenario controls and reset behavior)
+- `docs/02-business/roles-and-permissions.md`
 
 ## Scope
 Implement only the documented settings route and its local prototype controls.

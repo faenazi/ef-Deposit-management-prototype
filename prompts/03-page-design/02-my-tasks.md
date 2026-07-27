@@ -9,6 +9,9 @@ Implement `مهامي` as the user's focused operational work queue, not as a ge
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/02-my-tasks.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/my-tasks.md`
+- `docs/02-business/statuses-and-transitions.md` and `docs/02-business/roles-and-permissions.md`
+- `docs/02-business/business-rules.md` (task target times)
 
 ## Scope
 Implement only the My Tasks route and shared components strictly required by it.

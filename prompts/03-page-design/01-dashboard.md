@@ -9,6 +9,9 @@ Implement the Arabic RTL dashboard for the Investment Deposit Management prototy
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/01-dashboard.md`
 - `docs/09-ai-governance/`
+- `docs/03-functional/dashboard.md`
+- `docs/02-business/statuses-and-transitions.md` and `docs/02-business/roles-and-permissions.md`
+- `docs/05-data/demo-users.md`
 
 ## Scope
 Implement only the dashboard route and the shared components strictly required by it.

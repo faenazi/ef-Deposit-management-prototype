@@ -41,8 +41,8 @@ Dimensions may be adjusted slightly during implementation, but visual proportion
 1. Environment Fund logo.
 2. Dashboard.
 3. My Tasks.
-4. Investment Requests.
-5. Deposit Portfolio.
+4. Deposit Portfolio.
+5. Investment Requests.
 6. Reports.
 7. Settings.
 8. Collapse control near the bottom.

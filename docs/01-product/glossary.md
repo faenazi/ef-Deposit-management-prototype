@@ -30,7 +30,11 @@ The approved offer selected after evaluation and recommendation.
 
 ## Expected Return
 
-The estimated financial return calculated from the amount, annual rate, and tenor using the configured prototype calculation convention.
+The estimated financial return calculated from the amount, annual rate, and tenor. The canonical prototype formula is `principal × annualRate × tenorDays ÷ 360` on a 360-day banking basis (see `docs/02-business/business-rules.md`).
+
+## Value Date
+
+The deposit start date on which invested funds begin earning return. User-facing Arabic label: `تاريخ بدء الوديعة`. Code identifier: `valueDate`.
 
 ## Tenor
 

@@ -155,9 +155,8 @@ A deposit may require attention because of:
 
 - Maturity approaching.
 - Missing maturity instruction.
-- Custodian mismatch.
 - Accounting exception.
-- Pending rollover decision.
+- Pending reinvestment decision.
 - Broken deposit process.
 
 Show a compact labeled indicator with a tooltip or expandable reason.
@@ -171,7 +170,7 @@ Selecting a row opens either:
 - A full deposit detail page for complex lifecycle management, or
 - A wide side drawer for quick review.
 
-The prototype should support a full detail view when the user needs to manage maturity, rollover, accounting, or custodian information.
+The prototype should support a full detail view when the user needs to manage maturity, reinvestment, or accounting information.
 
 ## 13. Deposit detail composition
 
@@ -197,11 +196,10 @@ The detail view includes:
 
 ### Lifecycle sections
 
-- Placement and transfer.
-- Accounting.
-- Custodian confirmation.
+- Placement and transfer summary from the originating request.
+- Accounting references.
 - Maturity instruction.
-- Rollover or closure.
+- Reinvestment or closure.
 - Attachments.
 - Activity history.
 
@@ -239,11 +237,11 @@ For deposits approaching maturity, show:
 Potential actions:
 
 - Redeem at maturity.
-- Create rollover request.
+- Create reinvestment request.
 - Confirm maturity proceeds.
 - Record exception.
 
-The interface must not automatically treat rollover as a simple status update. A rollover should link to the appropriate request or controlled decision flow.
+The interface must not automatically treat reinvestment as a simple status update. A reinvestment creates a new investment request linked to the source deposit through the documented decision flow.
 
 ## 16. Empty states
 

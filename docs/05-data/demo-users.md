@@ -43,14 +43,14 @@ The user switcher is a prototype-only capability and must visibly state that it 
   - Return requests to the Deposit Specialist.
   - Review portfolio and maturity exposure.
 
-### Investment and Treasury Executive
+### Executive Director of Investment and Treasury Sector
 
 - ID: `USR-EXE-001`
 - Name: تغريد الحربي
 - English Name: Taghreed Alharbi
-- Role: Investment and Treasury Executive
+- Role: Executive Director of Investment and Treasury Sector
 - Department: قطاع الاستثمار والخزينة
-- Job title: الرئيس التنفيذي لقطاع الاستثمار والخزينة
+- Job title: المدير التنفيذي لقطاع الاستثمار والخزينة
 - Email: `taghreed.alharbi@example.test`
 - Default landing page: Dashboard
 - Key capabilities:
@@ -122,6 +122,20 @@ The user switcher is a prototype-only capability and must visibly state that it 
   - View all records for testing.
   - Must not perform business approval decisions on behalf of business roles.
 
+### Read-only User
+
+- ID: `USR-RO-001`
+- Name: هند المطيري
+- English Name: Hind Almutairi
+- Role: Read-only User / مستخدم للعرض فقط
+- Department: الإدارة العامة للمراجعة الداخلية
+- Job title: مراجع داخلي
+- Email: `hind.almutairi@example.test`
+- Default landing page: Dashboard
+- Key capabilities:
+  - View authorized dashboards, requests, deposits, and reports.
+  - Cannot create, edit, upload, approve, reject, return, execute, activate, cancel, or delete.
+
 ## Supporting Users
 
 Add at least 15 supporting users to make assignment, ownership, activity logs, and team filters realistic.
@@ -143,7 +157,7 @@ The prototype user switcher must:
 
 - Display Arabic name, job title, department, and role.
 - Group users by business role.
-- Mark the seven primary demo users.
+- Mark the eight primary demo users.
 - Change permissions, tasks, dashboard, and available actions.
 - Preserve the selected user in local prototype state.
 - Offer a one-click return to the default Deposit Specialist.

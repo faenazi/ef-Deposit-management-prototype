@@ -51,7 +51,7 @@
 - Modify the specialist's underlying preparation data directly.
 - Execute Finance or Accounting actions.
 
-## Executive Head of Investment and Treasury
+## Executive Director of Investment and Treasury Sector
 
 ### Can View
 

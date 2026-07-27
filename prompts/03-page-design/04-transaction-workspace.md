@@ -9,6 +9,10 @@ Implement the investment-request transaction workspace as the central financial 
 - `docs/08-design-specifications/00-shared-layout-and-components.md`
 - `docs/08-design-specifications/04-transaction-workspace.md`
 - `docs/09-ai-governance/`
+- `docs/02-business/investment-request-lifecycle.md`, `docs/02-business/statuses-and-transitions.md`, `docs/02-business/business-rules.md`, and `docs/02-business/roles-and-permissions.md`
+- `docs/03-functional/investment-request-file.md`, `docs/03-functional/bank-rfq.md`, `docs/03-functional/bank-offers.md`, `docs/03-functional/evaluation-and-recommendation.md`, `docs/03-functional/approvals.md`, and `docs/03-functional/execution-and-activation.md`
+- `docs/04-ui-ux/transaction-workspace.md` and `docs/04-ui-ux/information-architecture.md`
+- `docs/05-data/demo-scenarios.md`
 
 ## Scope
 Implement the request detail/workspace route, its sections, role-based editability, local workflow actions, and supporting dialogs/drawers required for the documented prototype flow.
@@ -32,7 +36,7 @@ This is not one long form and not a restrictive wizard. It is a transaction work
 
 ## Workflow Requirements
 - Up to and including SAR 100 million: Specialist → GM Treasury.
-- Above SAR 100 million: Specialist → GM Treasury → Executive Director.
+- Above SAR 100 million: Specialist → GM Treasury → Executive Director of Investment and Treasury Sector.
 - After approval: Deposit Specialists → Investment Support → Finance → Accounting → Deposit Specialist activation.
 - Every return requires a reason and remains visible in history.
 - Returned submitted requests use `معاد للاستكمال`.

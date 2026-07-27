@@ -105,12 +105,22 @@ The official brand palette defines identity colors. The product may add semantic
 
 ## 10. Required implementation assets
 
-Before visual implementation is considered complete, the repository must contain approved web-ready SVG files under:
+Brand assets use two canonical locations (Decision DEC-008):
+
+1. Official source/reference assets, owner-supplied:
 
 ```text
-src/assets/brand/logos/
-src/assets/brand/patterns/
-src/assets/brand/graphic-elements/
+assets/brand/logos/
+assets/brand/patterns/
+assets/brand/graphic-elements/
 ```
+
+2. Optimized runtime copies used by the React application:
+
+```text
+src/public/brand/
+```
+
+Runtime code must reference only `/brand/...` files from `src/public/brand/` and must never import from the repository-root `assets/brand/` folder. Before visual implementation is considered complete, the repository must contain the approved web-ready SVG files in both locations.
 
 Font binaries are intentionally excluded unless explicitly authorized.

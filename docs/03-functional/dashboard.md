@@ -25,7 +25,7 @@ The dashboard must not be a generic collection of equal-sized cards. It must pre
 - Portfolio concentration by bank.
 - Deposits approaching maturity.
 
-### Executive Head of Investment and Treasury
+### Executive Director of Investment and Treasury Sector
 - High-value requests awaiting approval.
 - Total high-value exposure.
 - Portfolio allocation and concentration.

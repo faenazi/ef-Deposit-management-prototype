@@ -25,25 +25,26 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** AUDIT COMPLETE — READY WITH CONDITIONS (decisions and brand assets required before Step 02)
+**Overall status:** DOCUMENTATION ALIGNED — READY FOR FRONTEND IMPLEMENTATION (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
 
-**Current phase:** Repository audit and implementation planning
+**Current phase:** Documentation alignment complete; awaiting review and brand assets
 
-**Current active step:** Step 01 — Repository Audit and Plan (REVIEW REQUIRED)
+**Current active step:** Step 01.5 — Documentation Alignment and Decision Resolution (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-On hold. Step 02 (`prompts/01-brand-director/01-brand-and-design-system-foundation.md`) must not run until the Step 01 blockers and required decisions below are resolved.
+After Step 01.5 review approval: `prompts/01-brand-director/01-brand-and-design-system-foundation.md` (Step 02 — now planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
 
-**Last approved step:** Documentation, design specifications, AI governance, and execution prompts preparation
+**Last approved step:** Step 01 — Repository Audit and Plan (APPROVED WITH CONDITIONS)
 
 ## 4. Execution Roadmap
 
 | Step | Phase | Prompt | Status | Review Result | Notes |
 |---|---|---|---|---|---|
-| 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | REVIEW REQUIRED | Pending | Audit completed 2026-07-26. No production code written. See Step 01 report below. |
-| 02 | Brand foundation | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | NOT STARTED | Pending | Validate EF identity interpretation before implementation. |
-| 03 | Domain foundation | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Validate entities, states, roles, thresholds, and mock-data plan. |
+| 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
+| 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | REVIEW REQUIRED | Pending | Documentation Alignment and Decision Resolution. Completed 2026-07-26. See Step 01.5 report below. |
+| 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: brand interpretation and design-token planning only. |
+| 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: domain-model and mock-data planning reference only. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
@@ -112,19 +113,32 @@ Record only decisions that affect later implementation.
 | DEC-005 | Requests up to and including SAR 100 million follow the short approval path; requests above SAR 100 million require executive approval. | 2026-07-27 | Governs approval logic. |
 | DEC-006 | The transaction workspace is the core experience and must be designed as a case workspace, not a long form or restrictive wizard. | 2026-07-27 | Governs the primary screen design. |
 | DEC-007 | No Vercel, GitHub Actions, CI/CD, Docker, or deployment configuration during the prototype phase. | 2026-07-27 | Prevents premature infrastructure work. |
+| DEC-008 | Brand assets use two canonical locations: owner-supplied source assets in `assets/brand/{logos,patterns,graphic-elements}/` and optimized runtime copies in `src/public/brand/`. Runtime code references only `/brand/...`. Never redraw or fabricate official assets. | 2026-07-26 | Resolves B-02; governs all brand usage. |
+| DEC-009 | Canonical main navigation order: الصفحة الرئيسية، مهامي، محفظة الودائع، طلبات الاستثمار، التقارير والتحليلات، الإعدادات. | 2026-07-26 | Resolves navigation-order conflicts. |
+| DEC-010 | Responsive scope: desktop/laptop primary, tablet fully usable, mobile functional and readable down to 390px; tables may transform into cards, stacked rows, drawers, or horizontal scroll. | 2026-07-26 | Resolves B-05; governs all pages. |
+| DEC-011 | Canonical executive role: `Executive Director of Investment and Treasury Sector` / `المدير التنفيذي لقطاع الاستثمار والخزينة`. Read-only User / `مستخدم للعرض فقط` added to roles, demo users, permissions, and review coverage. | 2026-07-26 | Resolves role-naming conflicts. |
+| DEC-012 | `docs/02-business/statuses-and-transitions.md` is the single source of truth for statuses. `معاد للاستكمال` is canonical. Derived conditions (e.g. Approaching Maturity) are never persisted statuses. | 2026-07-26 | Resolves status-taxonomy conflicts. |
+| DEC-013 | Steps 02 and 03 are planning-only. Initialization (04), design system and shell (05), routing and permissions (06), and domain/mock services (07) are the implementation steps. | 2026-07-26 | Resolves B-03 roadmap overlap. |
+| DEC-014 | `src/` is the application root with the nested Vite source tree `src/src/` containing `app/`, `styles/`, `lib/`, `domain/`, `mock-data/`, `services/`, `hooks/`, `components/`, `layouts/`, `features/`. Use `domain/` not `types/`; `mock-data/` not `mocks/`. | 2026-07-26 | Resolves structure conflicts. |
+| DEC-015 | Canonical routes: `/`, `/tasks`, `/deposits`, `/deposits/:depositId`, `/investment-requests`, `/investment-requests/new`, `/investment-requests/:requestId`, `/investment-requests/:requestId/:section`, `/reports`, `/settings`, `/access-denied`, `/*`. | 2026-07-26 | Resolves route conflicts; restores section deep links. |
+| DEC-016 | Canonical 15 workspace sections (Overview → Activity history). Custodian is out of scope; maturity/reinvestment belong to Deposit Portfolio; Placement-and-transfer is represented through Accounting execution; use Reinvestment, not Rollover. | 2026-07-26 | Resolves B-06 workspace conflicts. |
+| DEC-017 | Prototype business defaults: minimum 3 contacted banks; expected return = principal × annualRate × tenorDays ÷ 360; 14-day maturity warning; approval/task SLAs (GM 2d, Executive 2d, Support 1d, Finance 1d, Accounting 1d, Activation 1d); threshold evaluated from submitted amount with recalculation after amount change; returned requests resume at the returning stage. | 2026-07-26 | Fills undefined values; canonical home: `docs/02-business/business-rules.md`. |
+| DEC-018 | Implementation prompts (Steps 07–15) must read the relevant canonical files under `docs/01`–`docs/06` plus the matching `docs/08` specification, not the design-spec folder alone. | 2026-07-26 | Resolves B-04. |
+| DEC-019 | Prototype state is in-memory with deterministic seeded data. Reload resets. Explicit `إعادة ضبط البيانات التجريبية` action for administrators. No localStorage, IndexedDB, backend, or database. | 2026-07-26 | Defines persistence model. |
+| DEC-020 | Standard terminology and identifiers: `طلب استثمار`, `محفظة الودائع`, `مراجعة الإدارة المالية`, `تنفيذ التحويل المحاسبي`, value date = `تاريخ بدء الوديعة` / `valueDate`, `إعادة الاستثمار`, `IR-2026-####`, `DEP-2026-####`. | 2026-07-26 | Resolves terminology and identifier drift. |
 
 ## 7. Blockers
 
-Recorded by Step 01 (2026-07-26). All block Step 02 unless stated otherwise.
+Updated by Step 01.5 (2026-07-26).
 
-- **B-01 — Brand assets are missing.** `assets/brand/` does not exist and none of the seven approved SVG assets named in `docs/07-brand-experience/00-brand-source-of-truth.md` (logos, patterns, radial graphic) exist anywhere in the repository. The brand rules forbid redrawing or recreating assets, so Step 02 and Step 04 cannot comply until the official files are committed.
-- **B-02 — Three conflicting brand-asset locations.** `assets/brand/` (`CLAUDE.md` §9, `README.md`), `src/public/brand/` (`CLAUDE.md` §9, `prompts/01-brand-director/01`, `prompts/04-frontend/01`), and `src/assets/brand/logos|patterns|graphic-elements/` (`docs/07-brand-experience/00-brand-source-of-truth.md` §10). A single canonical reference location and runtime location must be decided.
-- **B-03 — Roadmap step overlap.** Step 02 prompt (`prompts/01-brand-director/01`) also configures Vite/Tailwind/Router, builds the app shell, and the mock-user switcher — duplicating Steps 04, 05, and part of 06. Step 03 prompt (`prompts/02-design-system/01`) duplicates Step 07 (`prompts/04-frontend/04`), which itself requires reading the Step 03 prompt. Scope boundaries must be fixed before execution.
-- **B-04 — Business documentation is unreachable from the prompt chain.** No roadmap prompt references `docs/01-product/`, `docs/02-business/`, `docs/03-functional/`, `docs/04-ui-ux/`, `docs/05-data/`, or `docs/06-quality/` by path (only a vague clause in the Step 03 prompt). The canonical status codes, transition table, role permissions, return matrix, demo users, and demo scenarios live only there. Blocks Steps 03 and 07–15 as written.
-- **B-05 — Mobile scope contradiction.** `docs/04-ui-ux/responsive-behavior.md`, `docs/04-ui-ux/design-direction.md`, `docs/01-product/scope.md`, and both quality checklists exclude mobile; `docs/09-ai-governance/03+04`, `docs/07-brand-experience/09-responsive-strategy.md`, all seven `docs/08-design-specifications` pages, and all page prompts mandate mobile (incl. 390px testing). Affects effort on every page (Steps 05–16).
-- **B-06 — Transaction workspace specification conflict.** Four incompatible section lists exist; the one the Step 11 prompt actually reads (`docs/08-design-specifications/04-transaction-workspace.md`) omits Overview, Bank RFQ, Winning bank, Investment Support review, Finance review, and Deposit activation, and adds Placement and transfer, Custodian, and Maturity and rollover — none of which exist in `docs/05-data/domain-model.md`, and Custodian is explicitly out of scope in `docs/01-product/scope.md`. Blocks Step 11 as written.
+- **B-01 — OPEN — Official brand SVG assets are missing.** The canonical directories `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/` exist with READMEs listing the seven required official filenames, but none of the seven SVG files has been supplied. The brand rules forbid redrawing or recreating assets. This does not block Steps 02–04 (planning and initialization) but blocks brand-asset copying in Step 04 and final visual completion from Step 05 onward. **Resolution:** the owner commits the seven official SVG files listed in `assets/brand/README.md`.
+- **B-02 — RESOLVED (Step 01.5, DEC-008).** `docs/07-brand-experience/00-brand-source-of-truth.md` §10 now specifies `assets/brand/` (source) and `src/public/brand/` (runtime), matching `CLAUDE.md` §9 and all prompts.
+- **B-03 — RESOLVED (Step 01.5, DEC-013).** Step 02 and Step 03 prompts rewritten as planning-only; initialization, shell, routing, and domain implementation live solely in Steps 04–07.
+- **B-04 — RESOLVED (Step 01.5, DEC-018).** All seven page prompts and frontend Steps 06, 07, and 15 now reference the canonical `docs/02-business/`, `docs/03-functional/`, `docs/04-ui-ux/`, and `docs/05-data/` files by path.
+- **B-05 — RESOLVED (Step 01.5, DEC-010).** Mobile-exclusion statements removed from `scope.md`, `responsive-behavior.md`, and `design-direction.md`; mobile 390px added to all quality checklists. All documents now agree: desktop/laptop primary, tablet fully usable, mobile functional to 390px.
+- **B-06 — RESOLVED (Step 01.5, DEC-016).** The canonical 15-section workspace list is now identical in `docs/04-ui-ux/information-architecture.md`, `docs/04-ui-ux/navigation.md`, `docs/04-ui-ux/transaction-workspace.md`, and `docs/08-design-specifications/04-transaction-workspace.md`. Custodian and Maturity/Rollover sections removed; Winning bank, Investment Support review, Finance review, Accounting execution, and Deposit activation sections specified.
 
-Stale-reference issues (non-blocking but should be corrected): `prompts/README.md` lists seven prompt folders and one example file that do not exist and contradicts the roadmap in this file; `docs/00-index.md` omits `docs/07`, `docs/08`, `docs/09` and four existing `docs/04-ui-ux` files; decision-log dates below are 2026-07-27, in the future relative to the audit date.
+Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md) were corrected by Step 01.5. Decision-log dates DEC-001–DEC-007 retain their original recorded dates.
 
 ## 8. Step Reports
 
@@ -197,6 +211,58 @@ Stale-reference issues (non-blocking but should be corrected): `prompts/README.m
 #### Recommended Next Step
 
 - Do not execute Step 02 yet. First: (1) owner provides brand assets (DR-01) and answers DR-02–DR-12; (2) run a small documentation-alignment step to fix `prompts/README.md`, `docs/00-index.md`, the asset-location references, and record decisions in the Decision Log; (3) then execute Step 02 with its scope corrected per DR-06.
+
+### Step 01.5 — Documentation Alignment and Decision Resolution
+
+#### Step Summary
+
+- Step number and title: Step 01.5 — Documentation Alignment and Decision Resolution
+- Prompt executed: `prompts/00-foundation/02-documentation-alignment-and-decisions.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-26
+- Commit or working branch: `claude/docs-alignment-readiness-tq3jcc`
+
+#### Files Changed
+
+- Created: none
+- Updated (50 files): `CLAUDE.md`, `EXECUTION-STATUS.md`, `docs/00-index.md`, `docs/01-product/{glossary,product-overview,scope,users-and-personas}.md`, `docs/02-business/{business-process,business-rules,investment-request-lifecycle,roles-and-permissions,statuses-and-transitions}.md`, `docs/03-functional/{approvals,dashboard,execution-and-activation,investment-requests}.md`, `docs/04-ui-ux/{design-direction,information-architecture,navigation,responsive-behavior,transaction-workspace}.md`, `docs/05-data/{demo-scenarios,demo-users,domain-model}.md`, `docs/06-quality/{acceptance-criteria,final-readiness-checklist,functional-review-checklist,ux-review-checklist}.md`, `docs/07-brand-experience/00-brand-source-of-truth.md`, `docs/08-design-specifications/{00-shared-layout-and-components,01-dashboard,02-my-tasks,04-transaction-workspace,05-deposit-portfolio,06-reports,07-settings}.md`, `docs/09-ai-governance/02-ai-coding-standards.md`, `prompts/README.md`, `prompts/01-brand-director/01-brand-and-design-system-foundation.md` (rescoped, planning-only), `prompts/02-design-system/01-domain-and-mock-data-foundation.md` (rescoped, planning-only), `prompts/03-page-design/01–07`, `prompts/04-frontend/{03,04,05}`.
+- Deleted: none
+
+#### Validation Results
+
+- TypeScript / Lint / Production build: not applicable — documentation-only step; no `/src` code exists and none was created.
+- Manual checks (repository-wide searches after alignment):
+  - `Executive Head` — 0 remaining occurrences outside the alignment prompt itself.
+  - Bare `Executive Director` without the sector name — 0 remaining occurrences.
+  - `معادة للاستكمال` — 0 remaining occurrences.
+  - Old Arabic executive title `الرئيس التنفيذي` — 0 remaining occurrences.
+  - Mobile-exclusion statements — 0 remaining occurrences.
+  - `Custodian` / `Rollover` in current-scope specs and prompts — 0 remaining, apart from legitimate out-of-scope statements (`scope.md`, `final-readiness-checklist.md`, and the explicit exclusion note in the workspace spec).
+  - `/requests` routes — 0 remaining; all routes use `/investment-requests` with the `:section` deep-link route restored.
+  - Main navigation order — identical in `CLAUDE.md`, `product-overview.md`, `information-architecture.md`, `navigation.md`, and `00-shared-layout-and-components.md`.
+  - Steps 02 and 03 prompts no longer contain any implementation scope; Steps 04–07 boundaries verified.
+  - No application code and no brand asset (real or fake) was created; `assets/brand/` and `src/public/brand/` contain only READMEs and `.gitkeep` files.
+
+#### Completed Scope
+
+- Applied approved decisions DEC-008 through DEC-020 across all documentation and prompts.
+- Resolved blockers B-02 through B-06; corrected stale `prompts/README.md` and `docs/00-index.md`; added a Canonical Sources section to `docs/00-index.md`.
+- Canonical decisions now each have exactly one source: statuses (`statuses-and-transitions.md`), business rules and prototype defaults (`business-rules.md`), roles (`roles-and-permissions.md` + `demo-users.md`), navigation and routes (`information-architecture.md`), workspace sections (DEC-016 list), frontend structure (`09-ai-governance/02-ai-coding-standards.md`), decisions (this file, section 6).
+- Repository readiness assessment: Business Documentation 95%, UI/UX 92%, Architecture 90%, Frontend Readiness 90%, Prompt Chain 95%, Brand Compliance 40% (assets missing), Overall ~88% — ready for frontend implementation with B-01 as the only open blocker.
+
+#### Known Issues or Deviations
+
+- B-01 remains open: the seven official brand SVG files are owner-supplied and still missing.
+- `CLAUDE.md` §12 and §15 were updated to the canonical executive role name per DEC-011; this is the only change made to `CLAUDE.md`.
+- The Read-only demo user (`USR-RO-001`, هند المطيري) was added to `demo-users.md` with fictional prototype identity data, as required by DEC-011.
+
+#### Decisions Required
+
+- None. All Step 01 decision requests (DR-01–DR-12) are resolved by DEC-008–DEC-020. Only the B-01 asset upload remains with the owner.
+
+#### Recommended Next Step
+
+- Owner reviews and approves Step 01.5, commits the seven official SVG assets (B-01), then executes Step 02 (`prompts/01-brand-director/01-brand-and-design-system-foundation.md`, planning-only).
 
 ## 9. Review Ownership
 

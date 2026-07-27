@@ -9,7 +9,14 @@ The prototype is optimized for:
 - Laptops
 - Landscape tablets
 
-Mobile phone optimization is not part of the current prototype scope.
+Responsive scope (Decision DEC-010):
+
+- Desktop and laptop are the primary design targets.
+- Tablet must be fully usable.
+- Mobile must remain functional and readable down to 390px.
+- Mobile does not require feature reduction, but desktop-level density must not be forced into narrow screens.
+
+See `docs/07-brand-experience/09-responsive-strategy.md` for detailed breakpoint and component behavior.
 
 ## Breakpoint Principles
 
@@ -44,6 +51,13 @@ Recommended behavior:
 - Tables allow controlled horizontal scrolling
 - Sticky action bar remains accessible
 - Contextual navigation may become horizontally scrollable or use a section selector
+
+### Mobile (down to 390px)
+
+- Drawer navigation
+- Single-column task-focused layouts
+- Complex financial tables may transform into cards, stacked rows, drawers, or controlled horizontal scroll where justified
+- Primary actions remain reachable without covering content
 
 ## Component Behavior
 

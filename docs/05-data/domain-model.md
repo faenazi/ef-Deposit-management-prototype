@@ -43,11 +43,12 @@ Approved prototype roles:
 
 - `deposit-specialist`
 - `treasury-general-manager`
-- `investment-treasury-executive`
+- `investment-treasury-executive` — display name: Executive Director of Investment and Treasury Sector / المدير التنفيذي لقطاع الاستثمار والخزينة
 - `investment-support`
 - `finance-reviewer`
 - `accounting-executor`
 - `system-admin`
+- `read-only-user` — display name: Read-only User / مستخدم للعرض فقط
 
 ### Bank
 

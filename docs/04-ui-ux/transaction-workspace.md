@@ -31,20 +31,25 @@ Shows the complete process while clearly distinguishing:
 
 ### 3. Contextual Navigation
 
-Sections:
+Sections (canonical list — Decision DEC-016; see `docs/04-ui-ux/information-architecture.md`):
 
 - نظرة عامة
 - معلومات الطلب
-- السيولة
-- التواصل مع البنوك
-- عروض البنوك
+- معلومات السيولة ومرفقاتها
+- طلبات عروض الأسعار والتواصل مع البنوك
+- عروض البنوك المستلمة
 - التقييم والتوصية
-- الاعتمادات
-- التنفيذ والتفعيل
+- سجل الاعتمادات
+- بيانات البنك الفائز والآيبان
+- مراجعة دعم الاستثمار
+- مراجعة الإدارة المالية
+- تنفيذ التحويل المحاسبي وإثباته
+- تفعيل الوديعة
 - المرفقات
+- الملاحظات
 - سجل النشاط
 
-Each item may display completion, validation, or read-only state.
+Sections appear or remain hidden according to workflow stage and active role. Each item may display completion, validation, or read-only state.
 
 ### 4. Main Work Area
 

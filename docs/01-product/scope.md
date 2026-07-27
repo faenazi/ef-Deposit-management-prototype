@@ -24,6 +24,7 @@ This prototype validates the end-to-end business process, user experience, roles
 - Reports and analytics using mock data.
 - Role switching and realistic end-to-end demo scenarios.
 - Local-only prototype state and deterministic mock data.
+- Responsive behavior: desktop and laptop are primary, tablet fully usable, and mobile web functional and readable down to 390px.
 
 ## Out of Scope
 
@@ -36,7 +37,7 @@ This prototype validates the end-to-end business process, user experience, roles
 - Real accounting posting.
 - Production-grade security controls.
 - Vercel, cloud deployment, Docker, CI/CD, or GitHub Actions.
-- Mobile-native applications.
+- Mobile-native applications (responsive mobile web is in scope).
 
 ## Prototype Boundaries
 

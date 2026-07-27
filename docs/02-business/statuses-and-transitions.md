@@ -10,7 +10,7 @@
 ### Approval
 
 - `PENDING_TREASURY_GM_APPROVAL` — بانتظار اعتماد مدير عام الخزينة
-- `PENDING_EXECUTIVE_APPROVAL` — بانتظار اعتماد رئيس قطاع الاستثمار والخزينة التنفيذي
+- `PENDING_EXECUTIVE_APPROVAL` — بانتظار اعتماد المدير التنفيذي لقطاع الاستثمار والخزينة
 
 ### Execution
 
@@ -44,10 +44,10 @@ These states do not change the overall request status:
 | Pending Treasury GM Approval | Approve, amount > SAR 100M | Pending Executive Approval | Treasury GM |
 | Pending Treasury GM Approval | Return | Returned for Completion | Treasury GM |
 | Pending Treasury GM Approval | Reject | Rejected | Treasury GM |
-| Pending Executive Approval | Approve | Pending Winning Bank Completion | Executive Head |
-| Pending Executive Approval | Return | Treasury approval path | Executive Head |
-| Pending Executive Approval | Reject | Rejected | Executive Head |
-| Returned for Completion | Resubmit | Appropriate previous review stage | Assigned responsible role |
+| Pending Executive Approval | Approve | Pending Winning Bank Completion | Executive Director of Investment and Treasury Sector |
+| Pending Executive Approval | Return | Treasury approval path | Executive Director of Investment and Treasury Sector |
+| Pending Executive Approval | Reject | Rejected | Executive Director of Investment and Treasury Sector |
+| Returned for Completion | Resubmit | The stage that returned the request | Assigned responsible role |
 | Pending Winning Bank Completion | Submit | Pending Investment Support Review | Deposit Specialist |
 | Pending Investment Support Review | Approve | Pending Finance Review | Investment Support |
 | Pending Investment Support Review | Return | Returned to Deposit Specialists group | Investment Support |
@@ -74,5 +74,6 @@ These states do not change the overall request status:
 - Every return, rejection, and cancellation requires a reason.
 - Invalid transitions must be blocked centrally.
 - A user cannot act on a task assigned to another role.
-- The threshold decision uses the approved request amount at submission.
+- The threshold decision uses the amount submitted for approval. If the amount changes after a return and before resubmission, routing is recalculated (see `business-rules.md`).
+- A resubmitted returned request resumes at the stage that returned it; the return and resubmission remain visible in history.
 - History entries must record previous status, new status, actor, role, timestamp, action, and comment.

@@ -68,14 +68,15 @@ Destructive or irreversible actions must never appear as equal visual peers to t
 
 Display the approval path below the context header or at the top of the main workspace.
 
-Stages:
+Stages (aligned with `docs/02-business/statuses-and-transitions.md`):
 
 - Draft preparation.
-- Treasury review.
-- Executive approval when applicable.
-- Investment Support review when applicable.
-- Finance execution.
-- Accounting completion.
+- Treasury GM review.
+- Executive approval when the amount exceeds SAR 100,000,000.
+- Winning bank completion.
+- Investment Support review.
+- Finance review.
+- Accounting execution.
 - Deposit activation.
 
 Each stage shows:
@@ -92,19 +93,25 @@ Color must not be the only state indicator. Use icons, labels, and line treatmen
 
 ## 6. Workspace section navigation
 
-Use a sticky in-page navigation or clearly grouped tabs for:
+Use a sticky in-page navigation or clearly grouped tabs for the canonical sections (Decision DEC-016):
 
-1. Request information.
-2. Liquidity information.
-3. Bank offers.
-4. Evaluation and recommendation.
-5. Approvals.
-6. Placement and transfer.
-7. Accounting.
-8. Custodian.
-9. Maturity and rollover.
-10. Attachments.
-11. Notes and activity.
+1. Overview.
+2. Request information.
+3. Liquidity information and attachments.
+4. Bank RFQ and communications.
+5. Received bank offers.
+6. Evaluation and recommendation.
+7. Approval history.
+8. Winning-bank and IBAN information.
+9. Investment Support review.
+10. Finance review.
+11. Accounting execution and transfer evidence.
+12. Deposit activation.
+13. Attachments.
+14. Notes.
+15. Activity history.
+
+Custodian data and maturity/reinvestment management are out of scope for this workspace. Maturity and reinvestment belong to the active deposit lifecycle in the Deposit Portfolio.
 
 The navigation must indicate:
 
@@ -115,7 +122,19 @@ The navigation must indicate:
 
 Avoid horizontal tabs that overflow or become unreadable in Arabic. A vertical local navigation is preferred on wide screens.
 
-## 7. Request information section
+## 7. Overview section
+
+Provide a concise case summary for any authorized role:
+
+- Key request figures: amount, tenor, currency, recommended bank when available.
+- Current status, stage, and responsible owner.
+- Readiness or completion summary with missing-requirement highlights during preparation.
+- Next required action.
+- Recent significant activity.
+
+The overview must orient the reader in seconds without duplicating full section content.
+
+## 8. Request information section
 
 Include:
 
@@ -142,7 +161,7 @@ Show:
 
 Do not prevent saving a draft because required submission fields are incomplete.
 
-## 8. Liquidity information section
+## 9. Liquidity information and attachments section
 
 Purpose: provide the financial context supporting the placement decision.
 
@@ -175,7 +194,18 @@ Allow:
 - Replace and remove in draft mode.
 - Download and view in read-only mode.
 
-## 9. Bank offers section
+## 10. Bank RFQ and communications section
+
+Track each contacted bank as an independent RFQ record (see `docs/03-functional/bank-rfq.md`):
+
+- Bank.
+- RFQ status: Not Sent, Sent, Received, Declined, or No Response.
+- Send date, response deadline, channel, and contact.
+- Related correspondence attachments.
+
+Declined and No Response banks remain visible in the request history. Show progress against the minimum-contacted-banks rule (prototype default: 3) with a documented-exception affordance.
+
+## 11. Received bank offers section
 
 This section must make comparison easy and visually precise.
 
@@ -210,7 +240,7 @@ Offer entry may use:
 
 The drawer is preferred when conditions or attachments require more context.
 
-## 10. Evaluation and recommendation section
+## 12. Evaluation and recommendation section
 
 This section must clearly separate factual comparison from professional judgment.
 
@@ -230,7 +260,7 @@ The recommendation summary should appear in a composed executive panel with clea
 
 Avoid oversized celebratory cards or green success panels.
 
-## 11. Approval section
+## 13. Approval history section
 
 Display a chronological approval record.
 
@@ -255,67 +285,73 @@ For the active approver, show a focused action panel containing:
 
 Do not force the approver to scroll through the entire request before seeing the decision panel, but provide direct links to supporting sections.
 
-## 12. Placement and transfer section
+## 14. Winning-bank and IBAN section
 
-Include:
+Completed by a Deposit Specialist after final investment approval. Include:
 
-- Selected bank.
+- Selected winning bank matching the approved recommendation.
 - Final amount.
 - Final negotiated rate.
-- Value date.
+- Value date (`تاريخ بدء الوديعة`).
 - Maturity date.
-- Bank account or beneficiary reference.
-- Transfer reference.
-- Execution confirmation.
-- Supporting transfer document.
-- Execution notes.
-
-The section must visibly distinguish proposed terms from final executed terms.
-
-## 13. Accounting section
-
-Include:
-
-- Accounting status.
-- Journal or transaction reference.
-- Posting date.
-- Accountant.
-- Accounting attachment.
-- Reconciliation status.
+- Beneficiary name and bank account or IBAN.
+- Mandatory IBAN or bank account evidence attachment.
 - Notes.
 
-Use read-only presentation for completed accounting information unless the Accounting role is active in the stage.
+The section must visibly distinguish proposed terms from final agreed terms. A documented controlled change is required when the winning offer differs from the approved recommendation.
 
-## 14. Custodian section
-
-Include:
-
-- Custodian name.
-- Custodian reference.
-- Confirmation date.
-- Confirmation status.
-- Matching status against placement terms.
-- Exceptions.
-- Confirmation attachment.
-
-Any mismatch in amount, rate, value date, or maturity date must be visible as a structured exception, not buried in notes.
-
-## 15. Maturity and rollover section
+## 15. Investment Support review section
 
 Include:
 
-- Maturity date.
-- Days remaining.
-- Principal.
-- Expected return.
-- Maturity instruction.
-- Rollover decision.
-- Related new request when applicable.
-- Completion status.
+- Review checklist state.
+- Reviewer, decision, date, and comments.
+- Return action to the Deposit Specialists group with mandatory reason.
+- Review evidence attachments.
 
-The design must support maturity warnings without turning the entire screen red or orange.
+## 16. Finance review section
 
-## 16. Supporting side panel
+Show Finance only the information required for financial approval:
+
+- Approved amount.
+- Beneficiary and bank account information.
+- Winning offer summary.
+- Investment Support outcome.
+- Finance checklist, decision, comments, and evidence.
+- Return action to Investment Support with mandatory reason.
+
+## 17. Accounting execution and transfer evidence section
+
+Include:
+
+- Execution status.
+- Journal or transaction reference.
+- Payment or transfer reference.
+- Posting date.
+- Accountant.
+- Mandatory transfer evidence attachment.
+- Return action to Finance with mandatory reason.
+- Notes.
+
+Use read-only presentation for completed accounting information unless the Accounting role is active in the stage. Any variance between transfer amount and approved amount must be visible as a structured exception, not buried in notes.
+
+## 18. Deposit activation section
+
+Completed by a Deposit Specialist after accounting execution is confirmed. Include:
+
+- Bank deposit reference and certificate or confirmation evidence.
+- Actual amount, rate, value date, and maturity date.
+- Differences between approved and actual terms, highlighted.
+- Activation confirmation action converting the request into an active deposit.
+
+Maturity and reinvestment management happen in the Deposit Portfolio after activation, not in this workspace.
+
+## 19. Attachments and notes sections
+
+- Attachments: a consolidated, categorized register of all files across sections with uploader, date, and section context.
+- Notes: contextual notes with author, role, and timestamp; notes never replace mandatory return reasons.
+
+## 20. Supporting side panel
 
 The supporting panel may contain:
 
@@ -329,7 +365,7 @@ The supporting panel may contain:
 
 The panel must stay concise. It is not a duplicate of the main content.
 
-## 17. Activity and audit trail
+## 21. Activity and audit trail
 
 Use a chronological timeline showing:
 
@@ -345,7 +381,7 @@ Use a chronological timeline showing:
 
 Do not flood the user with every keystroke or autosave event.
 
-## 18. Read-only and edit states
+## 22. Read-only and edit states
 
 The same workspace must support:
 
@@ -357,7 +393,7 @@ The same workspace must support:
 
 Editable fields must be visually clear without making read-only content appear disabled or low contrast.
 
-## 19. Validation and blocking issues
+## 23. Validation and blocking issues
 
 Validation must occur at two levels:
 
@@ -374,7 +410,7 @@ Show a submission readiness summary listing:
 
 Provide direct navigation to each issue.
 
-## 20. Responsive behavior
+## 24. Responsive behavior
 
 ### Tablet
 
@@ -391,7 +427,7 @@ Mobile is primarily for review, approval, and focused updates.
 - Keep the active decision action accessible.
 - Avoid exposing a full long-form desktop editing experience without adaptation.
 
-## 21. Loading, empty, and error states
+## 25. Loading, empty, and error states
 
 Every section must define:
 
@@ -403,7 +439,7 @@ Every section must define:
 - Permission restriction.
 - Version conflict or stale data warning.
 
-## 22. Visual quality requirements
+## 26. Visual quality requirements
 
 The workspace is accepted only when:
 

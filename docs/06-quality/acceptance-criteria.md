@@ -165,7 +165,7 @@ Changing the active user must produce a meaningful application change, not only 
 - Typography, spacing, radii, borders, shadows, and icons follow the design system.
 - Status colors are controlled and accessible.
 - Pages share a coherent visual language.
-- Information hierarchy remains clear on desktop, laptop, and landscape tablet.
+- Information hierarchy remains clear on desktop, laptop, landscape tablet, and mobile down to 390px.
 - There is no unnecessary visual clutter, decorative gradient overload, or excessive card repetition.
 
 ## Technical Acceptance

@@ -220,7 +220,7 @@ For requests above SAR 100,000,000:
 
 1. Deposit Specialist prepares and submits the request.
 2. General Manager of Treasury reviews the request.
-3. Executive Head of Investment and Treasury reviews the request.
+3. Executive Director of Investment and Treasury Sector reviews the request.
 
 After investment approval:
 
@@ -276,7 +276,7 @@ At minimum:
 
 - Deposit Specialist.
 - General Manager of Treasury.
-- Executive Head of Investment and Treasury.
+- Executive Director of Investment and Treasury Sector.
 - Investment Support Specialist.
 - Finance Specialist.
 - Accounting Specialist.
