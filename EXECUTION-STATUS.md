@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 05 DESIGN SYSTEM AND APP SHELL EXECUTED — AWAITING REVIEW. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`. The owner-requested dark-sidebar visual refinement (DEC-024, superseding DEC-022) was executed on 2026-07-27; Step 05 remains under visual review.
+**Overall status:** STEP 05 COMPLETED AND APPROVED — STEP 06 IN PROGRESS. The repository owner reviewed and formally approved Step 05 on 2026-07-27, including the dark institutional sidebar refinement implemented under DEC-024. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`.
 
-**Current phase:** Design system and app shell (Step 05, review required)
+**Current phase:** Routing, user context, and prototype permissions (Step 06)
 
-**Current active step:** Step 05 — Design System and App Shell (REVIEW REQUIRED)
+**Current active step:** Step 06 — Routing and Permissions (IN PROGRESS)
 
 **Next prompt to execute:**
 
-After Step 05 approval: `prompts/04-frontend/03-routing-role-context-and-permissions.md` (Step 06 — Routing and permissions). Do not start Step 06 before the Step 05 visual review is approved.
+Currently executing: `prompts/04-frontend/03-routing-role-context-and-permissions.md` (Step 06 — Routing, User Context, and Prototype Permissions).
 
-**Last approved step:** Step 04 — Frontend Initialization (APPROVED 2026-07-27)
+**Last approved step:** Step 05 — Design System and App Shell (APPROVED 2026-07-27, including the DEC-024 dark-sidebar refinement)
 
 ## 4. Execution Roadmap
 
@@ -46,8 +46,8 @@ After Step 05 approval: `prompts/04-frontend/03-routing-role-context-and-permiss
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
-| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Requires visual review before continuing. See Step 05 report and refinement report below. |
-| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
+| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | COMPLETED | APPROVED | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Approved by the repository owner 2026-07-27, including the DEC-024 refinement. See Step 05 report and refinement report below. |
+| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | IN PROGRESS | Pending | Role switching and access rules must work. Execution started 2026-07-27. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
 | 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
 | 09 | My Tasks | `prompts/03-page-design/02-my-tasks.md` | NOT STARTED | Pending | Review task actions and urgency. |
@@ -458,7 +458,8 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 05 — Design System and App Shell (including B-01 resolution)
 - Prompt executed: `prompts/04-frontend/02-build-design-system-and-app-shell.md`
-- Status: REVIEW REQUIRED
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and formally approved Step 05 on 2026-07-27, including the dark institutional sidebar refinement implemented under DEC-024 (see the refinement report below).
 - Date: 2026-07-27
 - Commit or working branch: `claude/ef-brand-assets-verify-bp48pv` (created from the latest `main`); commit SHA, PR URL, and merge details in the Git Delivery Record below.
 
@@ -508,7 +509,7 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 #### Decisions Required
 
-- Owner visual review of Step 05 (shell, tokens, components — `/design-system` and the six routes at desktop/tablet/mobile widths). No open business decisions; B-01 is resolved.
+- None remaining. The owner visual review of Step 05 (shell, tokens, components) was completed and approved on 2026-07-27. No open business decisions; B-01 is resolved.
 
 #### Git Delivery Record
 
@@ -522,7 +523,7 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 05 visual refinement — dark institutional sidebar (owner-requested during the Step 05 visual review; not a new roadmap step)
 - Prompt executed: owner refinement request (supersedes the DEC-022 sidebar direction with DEC-024)
-- Status: REVIEW REQUIRED (Step 05 remains under visual review; Step 06 not started)
+- Status: COMPLETED — approved by the repository owner on 2026-07-27 as part of the Step 05 approval; DEC-024 is the active sidebar decision.
 - Date: 2026-07-27
 - Commit or working branch: `claude/step-05-dark-sidebar-refinement-f38jfp` (created from the latest `main`); commit SHA, PR URL, and merge details in the Git Delivery Record below.
 
@@ -556,7 +557,7 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 #### Decisions Required
 
-- Owner visual review of the refined Step 05 shell. DEC-024 is recorded as the owner's direction from this refinement request; DEC-022 is retained in the log as superseded.
+- None remaining. The refined Step 05 shell was approved by the owner on 2026-07-27. DEC-024 is the active sidebar decision; DEC-022 is retained in the log as superseded.
 
 #### Git Delivery Record
 
