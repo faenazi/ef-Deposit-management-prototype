@@ -28,6 +28,7 @@ When a conflict exists, the higher authority wins.
 - `09-responsive-strategy.md` — responsive design behavior.
 - `10-brand-compliance-checklist.md` — review gate for every screen.
 - `11-product-design-dna.md` — product-specific design principles.
+- `12-design-token-plan.md` — Step 02 planning deliverable: consolidated design-token, component-foundation, RTL, and brand-asset-mapping plan for Step 05 implementation.
 
 ## Non-negotiable outcome
 

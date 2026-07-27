@@ -68,6 +68,7 @@ Claude Code prompts must reference only the documents required for the current i
 - `07-brand-experience/README.md` — folder guide.
 - `07-brand-experience/00-brand-source-of-truth.md` — official brand assets and usage rules.
 - `07-brand-experience/01-design-philosophy.md` through `11-product-design-dna.md` — design philosophy, brand application, color, typography, iconography, patterns, data visualization, motion, responsive strategy, compliance checklist, and product design DNA.
+- `07-brand-experience/12-design-token-plan.md` — Step 02 planning deliverable: implementation-ready design-token and brand-asset plan for Step 05.
 
 ## 08 — Design Specifications
 
