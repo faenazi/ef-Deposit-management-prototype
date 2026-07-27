@@ -24,6 +24,30 @@ export interface RoleDefinition {
   nameEn: string
 }
 
+/** Dashboard content profiles per role (domain-model.md — Role). */
+export const dashboardProfiles = [
+  'specialist',
+  'treasury-management',
+  'executive',
+  'operational-review',
+  'administration',
+  'read-only',
+] as const
+
+export type DashboardProfile = (typeof dashboardProfiles)[number]
+
+/**
+ * Full Role entity (domain-model.md — Role): identity plus its permission
+ * set and dashboard profile. Permission values come from
+ * `domain/permissions.ts`; the seeded records live in `mock-data/roles.ts`.
+ */
+export interface Role extends RoleDefinition {
+  readonly id: RoleCode
+  readonly description: string
+  readonly permissions: readonly string[]
+  readonly dashboardProfile: DashboardProfile
+}
+
 export const roles: Record<RoleCode, RoleDefinition> = {
   'deposit-specialist': {
     code: 'deposit-specialist',
