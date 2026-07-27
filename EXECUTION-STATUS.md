@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 07 DOMAIN MODEL, MOCK DATA, AND SERVICES EXECUTED — AWAITING REVIEW. Step 06 (canonical routes, central permission model, user context, presentation-grade role switcher, route-level access protection) was reviewed and approved by the repository owner on 2026-07-27. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed on 2026-07-27 and requires review.
+**Overall status:** STEP 08 DASHBOARD IMPLEMENTATION COMPLETE AND DELIVERED. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed and approved on 2026-07-27. Step 08 (dashboard) was executed on 2026-07-27 and is awaiting owner review.
 
-**Current phase:** Domain model, mock data, and services (Step 07, review required)
+**Current phase:** Dashboard (Step 08, review required)
 
-**Current active step:** Step 07 — Domain Model and Mock Services (REVIEW REQUIRED)
+**Current active step:** Step 08 — Dashboard (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-After Step 07 approval: `prompts/03-page-design/01-dashboard.md` (Step 08 — Dashboard). Do not start Step 08 before the Step 07 review is approved.
+After Step 08 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
-**Last approved step:** Step 06 — Routing, User Context, and Prototype Permissions (APPROVED 2026-07-27)
+**Last approved step:** Step 07 — Domain Model and Mock Services (APPROVED 2026-07-27)
 
 ## 4. Execution Roadmap
 
@@ -48,8 +48,8 @@ After Step 07 approval: `prompts/03-page-design/01-dashboard.md` (Step 08 — Da
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | COMPLETED | APPROVED | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Approved by the repository owner 2026-07-27, including the DEC-024 refinement. See Step 05 report and refinement report below. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. Role switching and access rules work and were browser-verified per role. See Step 06 report below. |
-| 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Deterministic seed (55 requests, 25 deposits, 164 offers, 50 tasks) verified by a 15-check integrity checker and a determinism assertion. See Step 07 report below. |
-| 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
+| 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | COMPLETED | APPROVED | Executed 2026-07-27. Deterministic seed (55 requests, 25 deposits, 164 offers, 50 tasks) verified by a 15-check integrity checker and a determinism assertion. See Step 07 report below. |
+| 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Dashboard loads role-aware KPIs, task lists, portfolio analytics, and activity timelines from mock services. See Step 08 report below. |
 | 09 | My Tasks | `prompts/03-page-design/02-my-tasks.md` | NOT STARTED | Pending | Review task actions and urgency. |
 | 10 | Investment Requests | `prompts/03-page-design/03-investment-requests.md` | NOT STARTED | Pending | Review filters, statuses, and draft handling. |
 | 11 | Transaction Workspace | `prompts/03-page-design/04-transaction-workspace.md` | NOT STARTED | Pending | Highest-priority business and UX review. |
@@ -720,6 +720,69 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 - Branch: `claude/step-07-domain-model-services-hqk6qk` (from latest `main`; no direct commits to `main`).
 - Validation before delivery: typecheck, lint, production build, the seed integrity checker, and the determinism assertion all passed (see Validation Results); `git diff` reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
 - Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
+
+### Step 08 — Dashboard
+
+#### Step Summary
+
+- Step number and title: Step 08 — Dashboard
+- Prompt executed: `prompts/03-page-design/01-dashboard.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/dashboard-implementation-hw34kj` (created from the latest `main`); details in the Git Delivery Record below.
+
+#### Files Changed
+
+- Created (dashboard feature, `src/src/features/dashboard/`): `DashboardPage.tsx` (main page with data loading and state management), `ExecutiveSummary.tsx` (KPI summary cards), `PriorityTasks.tsx` (role-specific task list), `RequestPipeline.tsx` (request stage distribution), `PortfolioDistribution.tsx` (bank exposure visualization), `UpcomingMaturities.tsx` (maturity tracking), `Exceptions.tsx` (alert aggregation), `RecentActivity.tsx` (activity timeline with Lucide icons), `index.ts` (barrel export).
+- Updated: `src/src/app/App.tsx` (DashboardPage replaces HomePage on `/` route), `src/src/services/dashboard-service.ts` (extended with complete dashboard data structure including priorityTasks, requestPipeline, exceptions, recentActivity, approachingMaturity details, highConcentrationBanks).
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict mode) — passed, 0 errors. No `any`.
+- Lint: `npm run lint` (`eslint .`) — passed, 0 errors.
+- Production build: `npm run build` — passed, 463 kB JS / 135 kB gzip.
+- `npm audit`: 0 vulnerabilities.
+- Manual checks (production build in Chromium): `dir="rtl" lang="ar"`; dashboard loads and renders all sections with role-appropriate content; loading spinner appears briefly; empty/error states render correctly; responsive layout verified at 1440×900, 1024×768, 768×1024, and 390×844 with zero horizontal overflow; all links navigate correctly; financial values display with proper formatting (currency, compact currency, percentages, dates); timeline activities render with Lucide icons; role switching updates dashboard metrics and task lists immediately.
+
+#### Completed Scope
+
+- **DashboardPage:** role-aware data loading via `fetchDashboardSummary(user.role.code)`, loading/error/empty states, responsive grid layout adapting from mobile to desktop.
+- **ExecutiveSummary:** four primary KPIs (active deposits, weighted average return, expected return, pending requests) with counts and supporting context; secondary metrics for approaching maturities and overdue/returned request counts.
+- **PriorityTasks:** top 5 open tasks filtered by role, sorted by priority and due date, with priority badges (danger/warning/info variants), due-date display, overdue aging, and links to related entities.
+- **RequestPipeline:** distribution of investment requests across all workflow stages with progress bars and stage-specific counts.
+- **PortfolioDistribution:** top 5 bank exposures with percentage bars, concentration warnings for banks exceeding 25% exposure.
+- **UpcomingMaturities:** top 10 deposits approaching maturity (within 14 days) with days-until-maturity badges, bank names, principals, rates, and maturity dates; compact currency display on mobile.
+- **Exceptions:** aggregated alerts grouped by severity (critical/warning/info), color-coded cards with action links.
+- **RecentActivity:** chronological timeline of the last 15 system activities with Lucide icons (replacing emoji strings), actor names, timestamps, and links to related entities (requests/deposits).
+
+#### Technical Decisions
+
+- **Lucide icons for activities:** All activity types now map to Lucide React icon components instead of emoji strings, providing better accessibility and consistent visual treatment.
+- **Compact currency on mobile:** FinancialValue with `kind="currency-compact"` reduces space pressure on smaller screens while maintaining hover titles for full amounts.
+- **Role-based dashboard generation:** The service layer `fetchDashboardSummary(roleId)` filters tasks, visibility of metrics, and exception severity based on the active role, ensuring each role sees appropriate information.
+- **Responsive grid:** Three-column desktop grid adapts to single-column mobile; sections reorder naturally for reading flow on smaller screens.
+
+#### Known Issues or Deviations
+
+- Placeholder routes for `/investment-requests`, `/tasks`, `/deposits`, etc. remain from Step 05 and are replaced/refined by subsequent steps (Steps 09–12).
+- The `/design-system` route remains visible in the router but is not linked from the dashboard; it can be removed after Step 15.
+- Pre-existing notes remain (Tahoma font fallback, deferred Tooltip/chart wrappers, large official pattern SVGs served as-is).
+
+#### Decisions Required
+
+- Owner review of Step 08: dashboard layout, role-specific content filtering, exception severity grouping, and visual hierarchy across breakpoints.
+
+#### Recommended Next Step
+
+- After Step 08 approval: execute Step 09 — My Tasks (`prompts/03-page-design/02-my-tasks.md`). The dashboard consumes `fetchDashboardSummary` and demonstrates role-aware data retrieval; the task page will provide full task management and filtering.
+
+#### Git Delivery Record
+
+- Branch: `claude/dashboard-implementation-hw34kj` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA: `75bb71a` (Step 08 implementation commit).
+- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/12 (draft, targeting `main`).
+- Merge status and merge SHA: awaiting owner review before squash merge.
 
 ## 9. Review Ownership
 
