@@ -1,0 +1,117 @@
+/*
+ * Motion primitives (08-motion-system.md, token plan §10).
+ * Feature code must not define its own durations or easing curves —
+ * consume these variables and primitive classes only.
+ */
+
+:root {
+  --motion-instant: 80ms;
+  --motion-fast: 120ms;
+  --motion-standard: 180ms;
+  --motion-emphasis: 240ms;
+  --motion-slow: 320ms;
+}
+
+@keyframes ef-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ef-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes ef-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Drawers slide from the physical left (RTL: supplements right-anchored content). */
+@keyframes ef-drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Navigation drawer slides from the physical right (it replaces the right sidebar). */
+@keyframes ef-drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ef-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ef-motion-fade-in {
+  animation: ef-fade-in var(--motion-standard) var(--ease-enter);
+}
+
+.ef-motion-skeleton {
+  animation: ef-skeleton-pulse 1.6s var(--ease-standard) infinite;
+}
+
+.ef-motion-spin {
+  animation: ef-spin 0.8s linear infinite;
+}
+
+.ef-motion-drawer-left {
+  animation: ef-drawer-in-left var(--motion-emphasis) var(--ease-enter);
+}
+
+.ef-motion-drawer-right {
+  animation: ef-drawer-in-right var(--motion-emphasis) var(--ease-enter);
+}
+
+.ef-motion-dialog {
+  animation: ef-dialog-in var(--motion-emphasis) var(--ease-enter);
+}
+
+/* Reduced motion: remove nonessential transforms, shorten fades (motion system §12). */
+@media (prefers-reduced-motion: reduce) {
+  .ef-motion-drawer-left,
+  .ef-motion-drawer-right,
+  .ef-motion-dialog {
+    animation: ef-fade-in var(--motion-fast) var(--ease-enter);
+  }
+
+  .ef-motion-fade-in {
+    animation-duration: var(--motion-instant);
+  }
+
+  .ef-motion-skeleton {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+  }
+}
