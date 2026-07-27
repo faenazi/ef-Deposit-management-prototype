@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 05 COMPLETED AND APPROVED — STEP 06 IN PROGRESS. The repository owner reviewed and formally approved Step 05 on 2026-07-27, including the dark institutional sidebar refinement implemented under DEC-024. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`.
+**Overall status:** STEP 06 ROUTING AND PERMISSIONS EXECUTED — AWAITING REVIEW. Step 05 was completed and approved by the repository owner on 2026-07-27, including the dark institutional sidebar refinement implemented under DEC-024. Step 06 (canonical routes, central permission model, user context, presentation-grade role switcher, route-level access protection) was executed on 2026-07-27 and requires review.
 
-**Current phase:** Routing, user context, and prototype permissions (Step 06)
+**Current phase:** Routing, user context, and prototype permissions (Step 06, review required)
 
-**Current active step:** Step 06 — Routing and Permissions (IN PROGRESS)
+**Current active step:** Step 06 — Routing and Permissions (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-Currently executing: `prompts/04-frontend/03-routing-role-context-and-permissions.md` (Step 06 — Routing, User Context, and Prototype Permissions).
+After Step 06 approval: `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` (Step 07 — Domain model, mock data, and services). Do not start Step 07 before the Step 06 review is approved.
 
 **Last approved step:** Step 05 — Design System and App Shell (APPROVED 2026-07-27, including the DEC-024 dark-sidebar refinement)
 
@@ -47,7 +47,7 @@ Currently executing: `prompts/04-frontend/03-routing-role-context-and-permission
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | COMPLETED | APPROVED | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Approved by the repository owner 2026-07-27, including the DEC-024 refinement. See Step 05 report and refinement report below. |
-| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | IN PROGRESS | Pending | Role switching and access rules must work. Execution started 2026-07-27. |
+| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Role switching and access rules work and were browser-verified per role. See Step 06 report below. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
 | 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
 | 09 | My Tasks | `prompts/03-page-design/02-my-tasks.md` | NOT STARTED | Pending | Review task actions and urgency. |
@@ -564,6 +564,69 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 - Branch: `claude/step-05-dark-sidebar-refinement-f38jfp` (from latest `main`; no direct commits to `main`).
 - Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
 - Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
+
+### Step 06 — Routing, User Context, and Prototype Permissions
+
+#### Step Summary
+
+- Step number and title: Step 06 — Routing, User Context, and Prototype Permissions
+- Prompt executed: `prompts/04-frontend/03-routing-role-context-and-permissions.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/step-06-routing-role-context-permissions-1mnesg` (created from the latest `main`); details in the Git Delivery Record below.
+
+#### Files Changed
+
+- Created (domain): `src/src/domain/roles.ts` (the eight canonical role codes from `domain-model.md` with Arabic/English display names — single source of role identity), `src/src/domain/permissions.ts` (typed `Permission` union, role→permission matrix derived strictly from `roles-and-permissions.md`, `roleHasPermission`).
+- Created (mock data): `src/src/mock-data/demo-users.ts` (the eight primary demo users from `demo-users.md` with canonical IDs `USR-DS-001`…`USR-RO-001`, Arabic names, job titles, departments, `.test` emails, role codes, default landing pages).
+- Created (app): `src/src/app/route-access.ts` (canonical DEC-015 route table mapped to required permissions; `requiredPermissionForPath`, `canAccessRoute`, `accessDeniedPath` — consumed by both the route guard and the sidebar so hidden links are never left reachable), `src/src/app/user-context.ts` (`UserContext`, `useUser()`), `src/src/app/UserProvider.tsx` (in-memory current user per DEC-019 with `can()`, `canAccessPath()`, `switchUser()`, `resetToDefaultUser()`), `src/src/app/RouteAccessBoundary.tsx` (route-level guard redirecting unauthorized entry to the branded access-denied page with the attempted path), `src/src/app/pages/AccessDeniedPage.tsx`, `src/src/app/pages/DepositDetailsPlaceholderPage.tsx`, `src/src/app/pages/RequestWorkspacePlaceholderPage.tsx`.
+- Created (layouts): `src/src/layouts/UserSwitcher.tsx` (presentation-grade switcher: identity trigger in the header; panel with Arabic name, job title, department, and role per user; visible «وضع العرض التجريبي» label; one-click return to the default Deposit Specialist; Escape/outside-click handling; navigates to the new role's default landing page when the current page is not permitted).
+- Updated: `src/src/app/App.tsx` (full DEC-015 route table under `RouteAccessBoundary`, `UserProvider` mount, `RouterProvider` imported from `react-router/dom` to enable flushSync navigations), `src/src/layouts/TopHeader.tsx` (switcher integration, demo-mode badge, identity block merged into the switcher trigger), `src/src/layouts/SidebarNav.tsx` (navigation filtered by the active role's permissions), `src/src/layouts/AppShell.tsx` (page-context labels for the new routes; user state moved to the context), `EXECUTION-STATUS.md` (Step 05 approval recording and this report).
+- Deleted: `src/src/app/prototype-users.ts` (Step 05 visual-only user list, superseded by `domain/roles.ts` + `mock-data/demo-users.ts`; its user IDs are corrected to the canonical `demo-users.md` IDs), `.gitkeep` files of the now-populated `domain/` and `mock-data/` folders.
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict) — passed, 0 errors.
+- Lint: `npm run lint` (`eslint .`) — passed, 0 errors.
+- Production build: `npm run build` — passed.
+- Tests: no test script exists.
+- `npm audit`: 0 vulnerabilities.
+- Manual checks (production build in Chromium, scripted — 23/23 passed, zero console errors or warnings): `dir="rtl" lang="ar"`; Deposit Specialist sidebar hides التقارير والإعدادات; direct entry to `/settings` and `/reports` as specialist redirects to `/access-denied` (role name and attempted path shown); switching to مدير النظام immediately reveals التقارير والإعدادات and opens `/settings` without refresh; switching to the read-only user while on `/settings` moves to that role's landing page and hides مهامي; read-only navigation to `/tasks` is denied; one-click reset returns to the specialist on a valid page; `/investment-requests/:requestId`, the `:section` deep link, and `/deposits/:depositId` render; specialist may open `/investment-requests/new` while مدير عام الخزينة is denied and retains `/reports`; unknown paths render the branded not-found page; no horizontal overflow at 1440×900, 1024×768, 768×1024, or 390×844 (including with the switcher panel open); the mobile drawer navigation is permission-filtered.
+
+#### Completed Scope
+
+- Routes (DEC-015, all reachable): `/`, `/tasks`, `/deposits`, `/deposits/:depositId`, `/investment-requests`, `/investment-requests/new`, `/investment-requests/:requestId`, `/investment-requests/:requestId/:section`, `/reports`, `/settings`, `/access-denied`, `/*`, plus the temporary Step 05 `/design-system` review route.
+- Roles (codes per `domain-model.md`, names per DEC-011): `deposit-specialist`, `treasury-general-manager`, `investment-treasury-executive`, `investment-support`, `finance-reviewer`, `accounting-executor`, `system-admin`, `read-only-user`.
+- Permission structure: 17 typed permissions (`dashboard.view`, `tasks.view`, `requests.view/create/edit-draft/submit/approve-treasury/approve-executive/enter-winning-bank/review-investment-support/review-finance/execute-accounting/confirm-activation`, `deposits.view`, `reports.view`, `settings.view/manage`) in one central matrix; no role or permission string is repeated outside `domain/` and the route-access map, and no permission check lives inside JSX conditions. Stage-aware refinement (permission × transaction status) layers on in later steps without rewriting this model.
+- Route-level protection is real, not cosmetic: the same central map drives both sidebar visibility and the guard, and unauthorized direct URL entry lands on the branded access-denied page.
+- Role switching applies without refresh to navigation, page access, header identity, and the access-denied context; reload resets to the default specialist (DEC-019 — intentional, no localStorage).
+
+#### Known Issues or Deviations
+
+- Documented-requirement gaps intentionally not invented (recorded per the prompt's reporting rule):
+  - `reports.view` was granted only to roles whose documentation mentions portfolio/executive reporting or unrestricted viewing (GM, Executive, System Administrator, Read-only). The Deposit Specialist, Investment Support, Finance, and Accounting "Can View" lists in `roles-and-permissions.md` do not mention reports, so those roles do not receive it; the same logic gives `deposits.view` to the specialist, GM, Executive, Administrator, and Read-only user only, and `tasks.view` to all workflow roles plus the Administrator but not the Read-only user (whose capabilities exclude assignable actions). Adjustable in one line per role if the owner directs otherwise.
+  - `/settings` is restricted to the System Administrator per `docs/03-functional/settings.md` ("System Administrator can access all settings"); the user switcher itself lives in the header and remains available to every role.
+  - Workspace section slugs for `/investment-requests/:requestId/:section` are not yet validated against the DEC-016 list — the slug vocabulary is defined with the workspace in Step 11; the placeholder accepts any slug and shows it.
+  - All eight demo users are primary, so the switcher marks the group as «المستخدمون الأساسيون للعرض» rather than badging each row; per-user primary marking becomes meaningful when the ~15 supporting users arrive in Step 07 (the `isPrimary` field already exists).
+  - The always-visible demo-mode label appears in the header from the `md` breakpoint; below it, the label appears inside the opened switcher panel to keep the 390px header uncrowded.
+- Lazy loading was not added: every page is currently a lightweight placeholder, so route-level code splitting would add complexity without benefit; it can be introduced when the heavy business pages arrive.
+- Pre-existing Step 05 notes remain (Tahoma fallback, deferred Tooltip/chart wrappers, large official pattern SVGs served as-is).
+
+#### Decisions Required
+
+- Owner review of Step 06: role switching, per-role navigation, access-denied behavior, and the permission-matrix readings listed above under deviations.
+
+#### Recommended Next Step
+
+- After Step 06 approval: execute Step 07 — Domain model, mock data, and services (`prompts/04-frontend/04-build-domain-model-mock-data-and-services.md`).
+
+#### Git Delivery Record
+
+- Branch: `claude/step-06-routing-role-context-permissions-1mnesg` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA: `021d0b354739129c2e148a387e83e262d546f6b2` (Step 06 implementation commit; this report is delivered in a follow-up commit on the same branch).
+- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/10 (non-draft, targeting `main`).
+- Merge status and merge SHA: squash merge is performed automatically after PR diff review when repository rules permit; the resulting merge SHA is recorded in the pull request thread (it cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 
 ## 9. Review Ownership
 
