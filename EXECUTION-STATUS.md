@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** DOCUMENTATION ALIGNED AND APPROVED — READY FOR FRONTEND IMPLEMENTATION (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
+**Overall status:** STEP 02 BRAND PLANNING EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
 
-**Current phase:** Brand planning (Step 02); awaiting brand assets (B-01)
+**Current phase:** Brand planning (Step 02) under review; awaiting brand assets (B-01)
 
-**Current active step:** Step 02 — Brand Planning (NOT STARTED)
+**Current active step:** Step 02 — Brand Planning (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-`prompts/01-brand-director/01-brand-and-design-system-foundation.md` (Step 02 — planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
+None until Step 02 is reviewed and approved. After approval: `prompts/02-design-system/01-domain-and-mock-data-foundation.md` (Step 03 — planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
 
 **Last approved step:** Step 01.5 — Documentation Alignment and Decision Resolution (APPROVED)
 
@@ -43,7 +43,7 @@ Do not mark any step as completed unless:
 |---|---|---|---|---|---|
 | 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
 | 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
-| 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: brand interpretation and design-token planning only. |
+| 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 (planning-only per DEC-013). Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. B-01 still open. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: domain-model and mock-data planning reference only. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
@@ -264,6 +264,65 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 #### Recommended Next Step
 
 - Step 01.5 is approved. Execute Step 02 — Brand Planning (`prompts/01-brand-director/01-brand-and-design-system-foundation.md`, planning-only). The owner commits the seven official SVG assets (B-01) in parallel; B-01 remains open until they are uploaded.
+
+### Step 02 — Brand and Design System Foundation Planning
+
+#### Step Summary
+
+- Step number and title: Step 02 — Brand Interpretation and Design-Token Planning
+- Prompt executed: `prompts/01-brand-director/01-brand-and-design-system-foundation.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/brand-design-system-planning-0onenc`
+
+#### Files Changed
+
+- Created: `docs/07-brand-experience/12-design-token-plan.md` (the Step 02 planning deliverable).
+- Updated: `docs/07-brand-experience/README.md` (document list), `docs/00-index.md` (section 07 index), `EXECUTION-STATUS.md` (this file).
+- Deleted: none.
+
+#### Files Reviewed
+
+- `CLAUDE.md`, `EXECUTION-STATUS.md`, `docs/00-index.md`
+- All 5 files under `docs/09-ai-governance/`
+- All 13 pre-existing files under `docs/07-brand-experience/`
+- `docs/08-design-specifications/00-shared-layout-and-components.md`
+- `prompts/01-brand-director/01-brand-and-design-system-foundation.md`
+- Asset inspection: `assets/brand/{logos,patterns,graphic-elements}/` and `src/public/brand/` (directories and READMEs only — no SVG assets present).
+
+#### Validation Results
+
+- TypeScript: not applicable — planning-only step; no `/src` code exists and none was created or modified.
+- Lint: not applicable.
+- Production build: not applicable.
+- Manual checks: verified `assets/brand/` contains none of the seven required official SVGs (B-01 confirmed open); verified no file under `src/` was created or modified (only pre-existing `src/public/brand/` READMEs remain); verified all token values in the plan match `00-brand-source-of-truth.md` and `03-color-system.md`; verified no brand asset was fabricated, redrawn, or approximated.
+
+#### Completed Scope
+
+- Produced `docs/07-brand-experience/12-design-token-plan.md`, containing:
+  - three-layer token architecture (brand → semantic → component) with planned file locations per DEC-014;
+  - complete token inventory: brand colors, semantic surfaces/text/actions/status colors, workflow-status badge recipes keyed to the canonical status source (DEC-012), typography scale and financial-number rules, spacing, radius, shadows, motion, iconography, chart palette, layout widths, breakpoints, and z-index;
+  - RTL implementation rules (logical properties, right sidebar, left-entering drawers, icon mirroring, bidi-safe financial strings);
+  - the full component-foundation build list for Step 05 (shell, primitives, financial/workflow components, controlled brand components);
+  - the exact runtime asset copy list `assets/brand/*` → `src/public/brand/*` with `/brand/...` reference paths (DEC-008), usage mapping per asset, and the favicon composition plan;
+  - recorded conflicts C-01 (sidebar surface direction), C-02 (no light-surface symbol asset), C-03 (Latin vs Arabic-Indic digits) with recommendations, plus assumptions A-01–A-04.
+- Asset validation against real artwork is explicitly deferred: it cannot be performed until B-01 is resolved.
+
+#### Known Issues or Deviations
+
+- **B-01 remains OPEN.** None of the seven official Environment Fund SVG files has been uploaded to `assets/brand/`. Palette/asset verification, the Step 04 runtime copy, brand-component visuals, and the favicon are gated on it. No placeholder or fabricated asset was created.
+- Aktiv Grotesk binaries are not committed (licensing rule); the prototype will render with Tahoma until licensing is confirmed (assumption A-03).
+- No application code, framework initialization, or UI component was created in this step.
+
+#### Decisions Required
+
+- Owner confirmation of C-03: default to Latin digits (0-9) for all financial values (recommended, per `04-typography.md`), or Arabic-Indic digits per the `07-data-visualization.md` example.
+- Owner may override C-01 (light sidebar recommended) and C-02 (white symbol composed on a primary-blue container in collapsed mode / favicon) at the Step 05 visual review; no action needed if the recommendations stand.
+- B-01: owner uploads the seven official SVG files to `assets/brand/`.
+
+#### Recommended Next Step
+
+- Review and approve Step 02. After approval, execute Step 03 — Domain and Mock-Data Foundation Planning (`prompts/02-design-system/01-domain-and-mock-data-foundation.md`, planning-only per DEC-013). Step 03 is not blocked by B-01, but the owner should upload the brand assets in parallel so Step 04 can copy them.
 
 ## 9. Review Ownership
 
