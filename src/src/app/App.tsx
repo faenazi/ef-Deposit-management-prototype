@@ -18,10 +18,10 @@ import { UserProvider } from '@/app/UserProvider'
 import { AccessDeniedPage } from '@/app/pages/AccessDeniedPage'
 import { DepositDetailsPlaceholderPage } from '@/app/pages/DepositDetailsPlaceholderPage'
 import { DesignSystemPreviewPage } from '@/app/pages/DesignSystemPreviewPage'
-import { HomePage } from '@/app/pages/HomePage'
 import { NotFoundPage } from '@/app/pages/NotFoundPage'
 import { PlaceholderPage } from '@/app/pages/PlaceholderPage'
 import { RequestWorkspacePlaceholderPage } from '@/app/pages/RequestWorkspacePlaceholderPage'
+import { DashboardPage } from '@/features/dashboard'
 
 /**
  * Canonical routes per DEC-015, guarded by RouteAccessBoundary against the
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         element: <RouteAccessBoundary />,
         children: [
-          { path: '/', element: <HomePage /> },
+          { path: '/', element: <DashboardPage /> },
           {
             path: '/tasks',
             element: (

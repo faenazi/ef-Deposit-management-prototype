@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 07 DOMAIN MODEL, MOCK DATA, AND SERVICES EXECUTED — AWAITING REVIEW. Step 06 (canonical routes, central permission model, user context, presentation-grade role switcher, route-level access protection) was reviewed and approved by the repository owner on 2026-07-27. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed on 2026-07-27 and requires review.
+**Overall status:** STEP 08 DASHBOARD IMPLEMENTATION IN PROGRESS. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed and approved on 2026-07-27. Step 08 (dashboard) is now executing.
 
-**Current phase:** Domain model, mock data, and services (Step 07, review required)
+**Current phase:** Dashboard (Step 08, in progress)
 
-**Current active step:** Step 07 — Domain Model and Mock Services (REVIEW REQUIRED)
+**Current active step:** Step 08 — Dashboard (IN PROGRESS)
 
 **Next prompt to execute:**
 
-After Step 07 approval: `prompts/03-page-design/01-dashboard.md` (Step 08 — Dashboard). Do not start Step 08 before the Step 07 review is approved.
+After Step 08 completion and review: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
-**Last approved step:** Step 06 — Routing, User Context, and Prototype Permissions (APPROVED 2026-07-27)
+**Last approved step:** Step 07 — Domain Model and Mock Services (APPROVED 2026-07-27)
 
 ## 4. Execution Roadmap
 
