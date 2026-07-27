@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 02 BRAND PLANNING APPROVED — STEP 03 DOMAIN PLANNING IS THE ACTIVE STEP (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 02–04 planning and initialization)
+**Overall status:** STEP 03 DOMAIN PLANNING EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 03–04 planning and initialization)
 
-**Current phase:** Domain planning (Step 03, not started); awaiting brand assets (B-01)
+**Current phase:** Domain planning (Step 03, review required); awaiting brand assets (B-01)
 
-**Current active step:** Step 03 — Domain Planning (NOT STARTED)
+**Current active step:** Step 03 — Domain Planning (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-`prompts/02-design-system/01-domain-and-mock-data-foundation.md` (Step 03 — Domain and Mock-Data Foundation Planning, planning-only per DEC-013). The owner should add the seven official SVG assets (B-01) in parallel.
+After Step 03 approval: `prompts/04-frontend/01-initialize-frontend-project.md` (Step 04 — Frontend initialization). The owner should add the seven official SVG assets (B-01) in parallel so Step 04 can copy them.
 
 **Last approved step:** Step 02 — Brand Interpretation and Design-Token Planning (APPROVED)
 
@@ -44,7 +44,7 @@ Do not mark any step as completed unless:
 | 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
 | 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
-| 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | NOT STARTED | Pending | Rescoped per DEC-013: domain-model and mock-data planning reference only. |
+| 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 (planning-only per DEC-013). Deliverable: `docs/05-data/domain-and-mock-data-implementation-plan.md`. See Step 03 report below. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
@@ -329,6 +329,66 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 #### Recommended Next Step
 
 - Step 02 is approved. Execute Step 03 — Domain and Mock-Data Foundation Planning (`prompts/02-design-system/01-domain-and-mock-data-foundation.md`, planning-only per DEC-013). Step 03 is not blocked by B-01, but the owner should upload the brand assets in parallel so Step 04 can copy them.
+
+### Step 03 — Domain and Mock-Data Foundation Planning
+
+#### Step Summary
+
+- Step number and title: Step 03 — Domain and Mock-Data Foundation Planning
+- Prompt executed: `prompts/02-design-system/01-domain-and-mock-data-foundation.md` (planning-only per DEC-013)
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/domain-mock-data-planning-227bjx`
+
+#### Files Changed
+
+- Created: `docs/05-data/domain-and-mock-data-implementation-plan.md` (the Step 03 planning deliverable).
+- Updated: `docs/05-data/domain-model.md` (cross-reference note to the plan under Purpose — no entity content changed), `docs/00-index.md` (section 05 index entry), `EXECUTION-STATUS.md` (this file).
+- Deleted: none.
+
+#### Files Reviewed
+
+- `CLAUDE.md`, `EXECUTION-STATUS.md`, `docs/00-index.md`
+- All 4 files under `docs/01-product/`
+- All 6 files under `docs/02-business/`
+- All 12 files under `docs/03-functional/`
+- All 11 files under `docs/04-ui-ux/`
+- All 4 pre-existing files under `docs/05-data/`
+- All 4 files under `docs/06-quality/`
+- All 9 files under `docs/08-design-specifications/`
+- All 5 files under `docs/09-ai-governance/`
+- `prompts/02-design-system/01-domain-and-mock-data-foundation.md` and `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` (Step 07 alignment check)
+
+#### Validation Results
+
+- TypeScript / Lint / Production build: not applicable — planning-only step; no `/src` code exists and none was created or modified (`src/` still contains only the pre-existing `public/brand/` READMEs).
+- Manual checks: verified no file under `src/` was created or modified; verified every status, role, transition, and default in the plan against `statuses-and-transitions.md`, `roles-and-permissions.md`, and `business-rules.md` (DEC-017); verified all scenario-pinned identifiers (`IR-2026-0004/0006/0009/0011/0018/0021`, `DEP-2026-0008/0012`) are covered by the curated-fixture plan; verified fixture-module plan is a superset of the `mock-data-requirements.md` seed tree; verified no new persisted status, role, or business rule was introduced.
+
+#### Completed Scope
+
+- Produced `docs/05-data/domain-and-mock-data-implementation-plan.md`, containing: domain boundaries; the full 30-concept entity catalogue with planned TypeScript names, identifier formats, fields, relationships, ownership, editability, lifecycle, persisted-vs-derived values, validation, and sources; 19 controlled-value sets with code + Arabic + English labels and persisted/derived designation; the 20-rule centralized business-rules contract for `src/src/domain/business-rules.ts`; derived-calculation and validation catalogues (including the 12-item submission-readiness checklist with stable codes); the role-based editability matrix; the finalized deterministic mock-data plan (fixture tree, fixed seed 20260727, reference date 2026-07-27, curated-vs-generated split, volumes and distributions); the 10 curated demo-scenario fixtures; the 15-point referential-integrity checker specification; the Step 07 implementation checklist; and full traceability to canonical documents.
+- Domain coverage confirmed for all 30 required concepts: users; roles and permissions; banks; investment requests; section completion; liquidity information; bank RFQs; RFQ recipients/communications; bank offers; offer comparison (derived); evaluation and recommendation; approval workflow, steps, and return/resubmission history; winning bank and IBAN details; Investment Support review; Finance review; Accounting execution; deposit activation; active and matured/historical deposits; tasks; attachments; notes; activity history; notifications; reports/dashboard-derived data (derived only); system settings; and demo-data reset behavior.
+- Business rules confirmed for centralization: SAR 100,000,000 threshold from the submitted amount with recalculation after amount change; short and extended routes; draft/section-completion principle; `معاد للاستكمال` resuming at the returning stage; minimum 3 contacted banks; expected return `principal × annualRate × tenorDays ÷ 360`; 14-day derived maturity window; SLAs GM 2d / Executive 2d / Support 1d / Finance 1d / Accounting 1d / Activation 1d; mandatory return/reject/cancel reasons; in-memory-only state with deterministic reset (DEC-019); Latin digits (DEC-021); identifier formats `IR-2026-####` / `DEP-2026-####` (DEC-020).
+
+#### Known Issues or Deviations
+
+- Documentation gaps found and closed in the plan (no new business rules invented; recorded as G-01–G-04 and PD-01–PD-07 in the plan §15):
+  - G-01: `domain-model.md` lacked entities the documented workflow requires (`InvestmentSupportReview`, structured `LiquidityInformation`, `DepositActivation`, `Note`, `SectionCompletion`, `SystemSettings`); all fields trace to existing functional/design documents.
+  - G-02: no Notification entity despite the documented top-bar indicator and Settings notification rules; planned as a minimal projection of activity events.
+  - G-03: several controlled-value sets had no canonical Arabic labels (offer statuses, decisions, task statuses/priorities, attachment categories, activity types); glossary-consistent labels fixed in the plan.
+  - G-04: volume contradiction — the documented 30-request distribution contains zero converted requests while all 25 deposits require completed source requests; resolved by a 55-request baseline (30 documented + 25 converted source requests), satisfying all "at least" minimums.
+  - PD-01–PD-07: planning-level value fixes (reference date 2026-07-27 / seed 20260727; persisted TaskStatus set; single `INTERNAL` NoteVisibility; RFQ channel values; IR number-block allocation; derived-not-persisted override for bank exposure and days-to-maturity; months×30 tenor-days convention for the 360-day basis).
+- **B-01 remains OPEN.** The seven official brand SVG files are still missing from `assets/brand/`. It does not affect this step.
+- No application code, TypeScript type, mock-data file, or service was created; nothing under `src/` was touched.
+
+#### Decisions Required
+
+- Owner review of the Step 03 deliverable, in particular the gap resolutions G-01–G-04 and planning decisions PD-01–PD-07 recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` §15. None of them changes an approved business rule; they finalize undefined values so Step 07 needs no new business decisions.
+- B-01 remains with the owner: upload the seven official SVG files to `assets/brand/`.
+
+#### Recommended Next Step
+
+- After owner approval of Step 03: execute Step 04 — Frontend initialization (`prompts/04-frontend/01-initialize-frontend-project.md`). The domain and mock-data plan is complete and sufficient for Step 07. Step 04 is not blocked by B-01 for initialization, but the brand-asset copy inside Step 04 needs the B-01 upload.
 
 ## 9. Review Ownership
 
