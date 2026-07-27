@@ -1,6 +1,8 @@
 # Design Token Plan — Step 02 Brand and Design System Foundation
 
 Status: planning deliverable of Step 02 (Decision DEC-013 — planning and interpretation only). **Reviewed and approved by the repository owner on 2026-07-27** (see `EXECUTION-STATUS.md`, Step 02 report). The owner decisions resolving C-01, C-02, and C-03 are recorded in §17 and in the decision log (DEC-021–DEC-023).
+
+**Update 2026-07-27 (Step 05 visual review):** the owner superseded the light-sidebar direction of DEC-022 with **DEC-024 — dark institutional navy sidebar**. See the sidebar token group in §4 and the updated C-01 record in §17. All other decisions are unchanged.
 Implementation target: Step 05 (`prompts/04-frontend/02-build-design-system-and-app-shell.md`), after initialization in Step 04.
 
 This document consolidates every design token, component foundation, layout rule, RTL rule, and brand-asset mapping that Step 05 needs, so that Step 05 can implement the design system without making new design decisions. It interprets — it does not replace — the authoritative brand documents `00`–`11` in this folder. When a value here conflicts with `00-brand-source-of-truth.md`, the source of truth wins.
@@ -103,6 +105,20 @@ Add one documented extension pair (required by `00-brand-source-of-truth.md` §9
 | `--color-surface-disabled` | `#F1F1F0` | neutral derived between canvas and border-default |
 
 If review prefers, `--color-surface-disabled` can alias `--color-canvas`; the token name is the contract.
+
+### Sidebar (dark institutional surface — DEC-024, supersedes DEC-022)
+
+The primary navigation sidebar uses the official Environment Fund navy in expanded and collapsed modes; the top header and all content surfaces remain light. Borders and hover states on navy use low-opacity white — never the light-page border tokens.
+
+| Token | Value | Use |
+|---|---|---|
+| `--color-sidebar-surface` | `#0F1822` (`--ef-navy-900`) | sidebar background, expanded and collapsed |
+| `--color-sidebar-text` | `rgba(255, 255, 255, 0.78)` | inactive labels and icons (≈11.1:1 on navy) |
+| `--color-sidebar-hover` | `rgba(255, 255, 255, 0.07)` | hover background on navy |
+| `--color-sidebar-active` | `#2C3A82` (`--ef-primary-700`) | active item background |
+| `--color-sidebar-border` | `rgba(255, 255, 255, 0.12)` | internal sidebar separators |
+
+Active-item treatment: primary-blue background, **white** label and icon (≈10.3:1), plus a slim white start-edge indicator — the blue-on-navy background difference alone (≈1.7:1) is never the only active signal. Keyboard focus on navy uses a **white** outline (per §4 focus rules). Logo usage on navy: `ef-logo-horizontal-white.svg` expanded, `ef-logo-symbol-white.svg` rendered directly when collapsed (the DEC-023 blue-container composition remains for the favicon and light-surface symbol contexts). One controlled `ef-pattern-secondary.svg` crop may appear at low opacity (~0.10, within the 8%–16% navy range of `06-pattern-system.md` §7) behind non-critical empty space near the bottom of the expanded sidebar only.
 
 ## 5. Workflow status visual mapping
 
@@ -362,12 +378,12 @@ Runtime code references only `/brand/...` paths and never imports from root `ass
 
 | Asset | Approved application use |
 |---|---|
-| `ef-logo-horizontal-blue.svg` | standard expanded shell on light surfaces |
-| `ef-logo-horizontal-white.svg` | approved dark navy / primary-blue surfaces only |
+| `ef-logo-horizontal-blue.svg` | light surfaces (entry, executive, light panels) — the shell sidebar is navy per DEC-024 and uses the white variant |
+| `ef-logo-horizontal-white.svg` | approved dark navy / primary-blue surfaces only, including the expanded navy sidebar (DEC-024) |
 | `ef-logo-primary-horizontal-ksa-blue.svg` | formal entry screen, about, executive contexts |
-| `ef-logo-symbol-white.svg` | favicon, collapsed navigation state, subtle watermark — never replaces the full logo in the expanded shell |
+| `ef-logo-symbol-white.svg` | favicon (DEC-023 composition), collapsed navy sidebar rendered directly (DEC-024), subtle watermark — never replaces the full logo in the expanded shell |
 | `ef-pattern-primary.svg` | entry screen, major hero, executive summary header |
-| `ef-pattern-secondary.svg` | empty states, side panels, report dividers |
+| `ef-pattern-secondary.svg` | empty states, side panels, report dividers — including the controlled bottom crop in the expanded navy sidebar (DEC-024) |
 | `ef-graphic-radial-master.svg` | rare cropped atmospheric use: entry screen, executive overview header, major empty state |
 
 Opacity, placement, scale, and responsive reduction follow `06-pattern-system.md` §6–10 exclusively, enforced through the brand components' fixed variants.
@@ -380,7 +396,9 @@ The favicon uses the official `ef-logo-symbol-white.svg` **unmodified**, compose
 
 Per the Step 02 prompt, conflicts between brand documentation and the shared layout specification were recorded rather than silently resolved. **The repository owner reviewed Step 02 and resolved all three conflicts on 2026-07-27.** C-01, C-02, and C-03 are now CLOSED; the approved resolutions below are binding for Step 05 implementation and are recorded in the decision log as DEC-021–DEC-023 (`EXECUTION-STATUS.md` §6).
 
-### C-01 — Sidebar surface direction — RESOLVED (owner approved, DEC-022)
+### C-01 — Sidebar surface direction — RESOLVED (owner approved, DEC-022) — **SUPERSEDED BY DEC-024**
+
+**Update 2026-07-27 (Step 05 visual review):** after reviewing the implemented Step 05 shell, the repository owner superseded DEC-022 with **DEC-024**: the primary application sidebar uses the **dark institutional navy surface** (`#0F1822`) in expanded and collapsed modes — white horizontal logo expanded, official white symbol directly on navy collapsed, restrained light text and icons, primary-blue (`#2C3A82`) active item with white label and slim start-edge indicator, low-opacity white hover and borders, and one controlled low-opacity secondary-pattern crop near the bottom of the expanded sidebar. The top header and content surfaces remain light; the application does not become a dark theme. The DEC-023 blue-container symbol composition remains in force for the favicon and light-surface symbol contexts. The token contract is the sidebar group in §4. The original DEC-022 record below is retained for history:
 
 `docs/08-design-specifications/00-shared-layout-and-components.md` §3 left the sidebar surface open ("light or deep navy institutional surface based on the final shell direction"), while `02-brand-application.md` describes the shell as "a clean light workspace" with dark surfaces reserved for compact prominent areas. **Approved resolution: the primary application sidebar uses the recommended light-surface design** — `--color-surface` background, `--color-surface-brand-soft` + primary-blue text/icon for the active item, warm-grey hover — using `ef-logo-horizontal-blue.svg`. A deep-navy sidebar is rejected (it would conflict with "do not turn the operational application dark" and enlarge the dark-surface footprint). The Step 05 visual review remains a quality gate for execution details, not for reopening this decision.
 
@@ -410,6 +428,6 @@ Step 05 can implement the design system and app shell from this document plus th
 1. tokens are created exactly as specified in §3–§13 in `src/src/styles/`;
 2. RTL rules in §14 are applied at the shell level;
 3. the component inventory in §15 is used as the build list;
-4. the approved C-01 resolution (light sidebar, DEC-022) and C-02 resolution (official white symbol composed inside an official primary-blue container, DEC-023) are implemented as recorded in §17;
+4. the sidebar direction of DEC-024 (dark institutional navy sidebar, superseding the DEC-022 light sidebar) and the C-02 resolution (official white symbol composed inside an official primary-blue container for favicon/light-surface contexts, DEC-023) are implemented as recorded in §4 and §17;
 5. the approved C-03 resolution (Latin digits 0-9 by default, DEC-021) is implemented in the central formatter;
 6. brand-asset-dependent visuals degrade gracefully (reserved logo slot, no fabricated placeholder artwork) until B-01 is resolved.

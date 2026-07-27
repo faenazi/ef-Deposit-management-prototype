@@ -60,6 +60,15 @@
   --color-text-disabled: var(--color-text-muted);
   --color-surface-disabled: #f1f1f0;
 
+  /* Sidebar — dark institutional navy surface (DEC-024, supersedes DEC-022).
+     Borders and hover are low-opacity white, never the light-page border
+     tokens; the active item uses the official primary blue. */
+  --color-sidebar-surface: var(--ef-navy-900);
+  --color-sidebar-text: rgba(255, 255, 255, 0.78);
+  --color-sidebar-hover: rgba(255, 255, 255, 0.07);
+  --color-sidebar-active: var(--ef-primary-700);
+  --color-sidebar-border: rgba(255, 255, 255, 0.12);
+
   /* ------------------------------------------------------------------ */
   /* Layout, breakpoint context, z-index (token plan §11)               */
   /* ------------------------------------------------------------------ */
@@ -130,6 +139,12 @@
   --color-text-muted: var(--color-text-muted);
   --color-text-inverse: var(--color-text-inverse);
   --color-text-disabled: var(--color-text-disabled);
+
+  --color-sidebar-surface: var(--color-sidebar-surface);
+  --color-sidebar-text: var(--color-sidebar-text);
+  --color-sidebar-hover: var(--color-sidebar-hover);
+  --color-sidebar-active: var(--color-sidebar-active);
+  --color-sidebar-border: var(--color-sidebar-border);
 
   --color-border-default: var(--color-border-default);
   --color-border-strong: var(--color-border-strong);
