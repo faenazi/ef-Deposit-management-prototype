@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 03 DOMAIN PLANNING EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates brand-asset copying and final visual completion but not Steps 03–04 planning and initialization)
+**Overall status:** STEP 04 FRONTEND INITIALIZATION EXECUTED — AWAITING REVIEW (one open blocker: B-01 official brand SVG assets, which gates the brand-asset runtime copy and final visual completion but did not block technical initialization)
 
-**Current phase:** Domain planning (Step 03, review required); awaiting brand assets (B-01)
+**Current phase:** Frontend initialization (Step 04, review required); awaiting brand assets (B-01)
 
-**Current active step:** Step 03 — Domain Planning (REVIEW REQUIRED)
+**Current active step:** Step 04 — Frontend Initialization (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-After Step 03 approval: `prompts/04-frontend/01-initialize-frontend-project.md` (Step 04 — Frontend initialization). The owner should add the seven official SVG assets (B-01) in parallel so Step 04 can copy them.
+After Step 04 approval: `prompts/04-frontend/02-build-design-system-and-app-shell.md` (Step 05 — Design system and shell). The owner should add the seven official SVG assets (B-01) first: Step 05 visual completion depends on them.
 
-**Last approved step:** Step 02 — Brand Interpretation and Design-Token Planning (APPROVED)
+**Last approved step:** Step 03 — Domain and Mock-Data Foundation Planning (APPROVED)
 
 ## 4. Execution Roadmap
 
@@ -44,8 +44,8 @@ After Step 03 approval: `prompts/04-frontend/01-initialize-frontend-project.md` 
 | 01 | Foundation | `prompts/00-foundation/01-repository-audit-and-plan.md` | COMPLETED | APPROVED WITH CONDITIONS | Audit completed 2026-07-26. Conditions resolved by Step 01.5. |
 | 01.5 | Foundation | `prompts/00-foundation/02-documentation-alignment-and-decisions.md` | COMPLETED | APPROVED | Documentation Alignment and Decision Resolution. Completed 2026-07-26; approved by the repository owner 2026-07-27. B-01 remains open. See Step 01.5 report below. |
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
-| 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 (planning-only per DEC-013). Deliverable: `docs/05-data/domain-and-mock-data-implementation-plan.md`. See Step 03 report below. |
-| 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | NOT STARTED | Pending | All frontend files must remain under `/src`. |
+| 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
+| 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. All frontend files are under `/src`. Technical initialization only; brand-asset runtime copy still gated by B-01. See Step 04 report below. |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | NOT STARTED | Pending | Requires visual review before continuing. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
@@ -336,8 +336,9 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 03 — Domain and Mock-Data Foundation Planning
 - Prompt executed: `prompts/02-design-system/01-domain-and-mock-data-foundation.md` (planning-only per DEC-013)
-- Status: REVIEW REQUIRED
-- Date: 2026-07-27
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and approved Step 03 on 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (gap resolutions G-01–G-04 and planning decisions PD-01–PD-07). B-01 remains open until the official Environment Fund SVG assets are uploaded.
+- Date: 2026-07-27 (executed and approved)
 - Commit or working branch: `claude/domain-mock-data-planning-227bjx`
 
 #### Files Changed
@@ -383,12 +384,71 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 #### Decisions Required
 
-- Owner review of the Step 03 deliverable, in particular the gap resolutions G-01–G-04 and planning decisions PD-01–PD-07 recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` §15. None of them changes an approved business rule; they finalize undefined values so Step 07 needs no new business decisions.
-- B-01 remains with the owner: upload the seven official SVG files to `assets/brand/`.
+- All Step 03 decision requests were resolved by the owner approval of 2026-07-27: the deliverable and all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04 and PD-01–PD-07) are approved. None of them changes an approved business rule; Step 07 needs no new business decisions.
+- Only B-01 remains with the owner: upload the seven official SVG files to `assets/brand/`. B-01 remains OPEN until then.
 
 #### Recommended Next Step
 
 - After owner approval of Step 03: execute Step 04 — Frontend initialization (`prompts/04-frontend/01-initialize-frontend-project.md`). The domain and mock-data plan is complete and sufficient for Step 07. Step 04 is not blocked by B-01 for initialization, but the brand-asset copy inside Step 04 needs the B-01 upload.
+
+### Step 04 — Frontend Initialization
+
+#### Step Summary
+
+- Step number and title: Step 04 — Frontend Initialization
+- Prompt executed: `prompts/04-frontend/01-initialize-frontend-project.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/step-04-frontend-initialization-ge7e81` (created from the latest `main`); commit SHA, PR URL, and merge details recorded in the Git Delivery Record below.
+
+#### Files Changed
+
+- Created (all under `/src` per DEC-001/DEC-014): `src/package.json`, `src/package-lock.json`, `src/index.html`, `src/vite.config.ts`, `src/tsconfig.json`, `src/tsconfig.app.json`, `src/tsconfig.node.json`, `src/eslint.config.js`, `src/.gitignore`, `src/src/main.tsx`, `src/src/app/App.tsx`, `src/src/app/SetupVerificationScreen.tsx`, `src/src/styles/globals.css`, and `.gitkeep` placeholders for the DEC-014 skeleton folders `src/src/{components,domain,features,hooks,layouts,lib,mock-data,services}/`.
+- Updated: `CLAUDE.md` (added §19 Coding Validation and Git Delivery), `EXECUTION-STATUS.md` (Step 03 approval, Step 04 activation and this report).
+- Deleted: none.
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict mode) — passed, 0 errors.
+- Lint: `npm run lint` (`eslint .`, flat config with typescript-eslint, react-hooks, react-refresh) — passed, 0 errors.
+- Production build: `npm run build` (`tsc -b && vite build`) — passed.
+- Tests: no test script exists yet; none required by this step.
+- `npm audit`: 0 vulnerabilities.
+- Manual checks: production build served and rendered in Chromium at 1440×900 and 390×844 — `dir="rtl"` and `lang="ar"` confirmed on the document, no horizontal overflow at either viewport, no console errors or warnings, Arabic verification screen renders with the official palette variables.
+
+#### Completed Scope
+
+- Initialized the frontend entirely under `/src`: React 19, TypeScript 6 strict, Vite 8, Tailwind CSS 4 (via `@tailwindcss/vite`), React Router (`react-router` 8), ESLint 10, and Lucide React.
+- Document-level `lang="ar"` and `dir="rtl"`; `@/` alias configured in both Vite and TypeScript; scripts `dev`, `build`, `lint`, `typecheck`, `preview`.
+- `src/src/styles/globals.css` defines CSS variables for the seven official brand colors and the approved font fallback stack (`"Aktiv Grotesk", Tahoma, Arial, sans-serif`) only — the full design-token system remains Step 05 scope per `docs/07-brand-experience/12-design-token-plan.md`.
+- One minimal temporary technical verification screen (`SetupVerificationScreen`) reachable at `/`; it is explicitly labeled temporary and contains no business content, mock data, or final design.
+- DEC-014 folder skeleton created empty (`app/`, `styles/`, `lib/`, `domain/`, `mock-data/`, `services/`, `hooks/`, `components/`, `layouts/`, `features/`).
+- No backend, API, authentication, deployment, CI/CD, or GitHub Actions configuration was added; no frontend configuration was placed in the repository root.
+
+#### Technical Decisions
+
+- Package `react-router` v8 is used directly instead of the `react-router-dom` shim: in v7+ `react-router-dom` only re-exports `react-router`, and the latest `react-router-dom` (7.18.x) still depends on a `react-router` version affected by open security advisories, while `react-router` 8.3.0 audits clean. Imports use `from 'react-router'`.
+- ESLint flat config was authored manually (current `create-vite` scaffolds oxlint, which does not meet the explicit ESLint requirement). Prettier was not added — not needed at this stage (`عند الحاجة`).
+- Tailwind CSS v4 CSS-first configuration: brand palette exposed via `@theme` variables; no `tailwind.config.js` is required.
+- `index.html` uses an empty `data:` favicon with a comment: the favicon composition (DEC-023) requires the official symbol asset gated by B-01.
+
+#### Known Issues or Deviations
+
+- **B-01 remains OPEN.** None of the seven official Environment Fund SVG files has been uploaded to `assets/brand/`; therefore the Step 04 runtime asset copy to `src/public/brand/` could not be performed and no logo appears on the verification screen. No asset was fabricated, redrawn, or approximated. `src/public/brand/` still contains only the pre-existing README and `.gitkeep` files.
+- Aktiv Grotesk binaries are not committed (licensing rule); the app renders with Tahoma until licensing is confirmed.
+- The verification screen is intentionally temporary and will be replaced by the real application shell in Step 05.
+
+#### Decisions Required
+
+- Owner review of Step 04. The only open owner action remains B-01: upload the seven official SVG files to `assets/brand/`.
+
+#### Git Delivery Record
+
+- Branch: `claude/step-04-frontend-initialization-ge7e81` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, and production build all passed (see Validation Results); git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA: `a4d9e4434d7cd52d699872c64032e8c421b6d2bd` (Step 04 implementation commit).
+- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/7 (non-draft, targeting `main`).
+- Merge status and merge SHA: squash merge is performed automatically after PR diff review when repository rules permit; the resulting merge SHA is recorded in the pull request thread (it cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 
 ## 9. Review Ownership
 
