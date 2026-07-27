@@ -9,6 +9,8 @@ interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   /** Mandatory accessible name (05-iconography.md §9). */
   label: string
   variant?: 'ghost' | 'outline'
+  /** `dark` renders the approved navy-surface treatment (DEC-024). */
+  tone?: 'light' | 'dark'
   iconSize?: IconSize
   mirrorInRtl?: boolean
 }
@@ -18,6 +20,7 @@ export function IconButton({
   icon,
   label,
   variant = 'ghost',
+  tone = 'light',
   iconSize = 'md',
   mirrorInRtl,
   className,
@@ -30,8 +33,11 @@ export function IconButton({
       aria-label={label}
       title={label}
       className={cn(
-        'inline-flex size-10 items-center justify-center rounded-sm text-text-secondary',
-        'transition-colors duration-[var(--motion-fast)] hover:bg-surface-subtle hover:text-text-primary',
+        'inline-flex size-10 items-center justify-center rounded-sm',
+        'transition-colors duration-[var(--motion-fast)]',
+        tone === 'dark'
+          ? 'text-sidebar-text hover:bg-sidebar-hover hover:text-white focus-visible:outline-white'
+          : 'text-text-secondary hover:bg-surface-subtle hover:text-text-primary',
         'disabled:cursor-not-allowed disabled:text-text-disabled disabled:hover:bg-transparent',
         variant === 'outline' && 'border border-border-default bg-surface',
         className,

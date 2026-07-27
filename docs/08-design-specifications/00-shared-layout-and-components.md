@@ -49,7 +49,8 @@ Dimensions may be adjusted slightly during implementation, but visual proportion
 
 ### Visual treatment
 
-- Prefer a light or deep navy institutional surface based on the final shell direction.
+- The sidebar uses the approved dark institutional navy surface (`#0F1822`) in expanded and collapsed modes (owner decision DEC-024, superseding DEC-022); the top header and content surfaces remain light.
+- On navy, text, icons, and separators use white or restrained low-opacity white — not the light-page border tokens; the active item uses the official primary blue (`#2C3A82`) with a white label and icon.
 - Active navigation must use a clear background, icon, and text treatment, not color alone.
 - Do not place every item inside a separate card.
 - Use one icon family consistently.

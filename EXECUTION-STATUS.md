@@ -25,7 +25,7 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 05 DESIGN SYSTEM AND APP SHELL EXECUTED — AWAITING REVIEW. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`.
+**Overall status:** STEP 05 DESIGN SYSTEM AND APP SHELL EXECUTED — AWAITING REVIEW. B-01 is RESOLVED: the seven official Environment Fund SVG assets were located in the installed `ef-brand-identity` skill package, verified as real SVG artwork, and copied byte-identical to `assets/brand/` and `src/public/brand/`. The owner-requested dark-sidebar visual refinement (DEC-024, superseding DEC-022) was executed on 2026-07-27; Step 05 remains under visual review.
 
 **Current phase:** Design system and app shell (Step 05, review required)
 
@@ -46,7 +46,7 @@ After Step 05 approval: `prompts/04-frontend/03-routing-role-context-and-permiss
 | 02 | Brand planning | `prompts/01-brand-director/01-brand-and-design-system-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27. Deliverable: `docs/07-brand-experience/12-design-token-plan.md`. C-01/C-02/C-03 resolved (DEC-021–DEC-023). B-01 still open. |
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
-| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 with the seven official brand assets in place. Requires visual review before continuing. See Step 05 report below. |
+| 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Requires visual review before continuing. See Step 05 report and refinement report below. |
 | 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | NOT STARTED | Pending | Role switching and access rules must work. |
 | 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
 | 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
@@ -127,8 +127,9 @@ Record only decisions that affect later implementation.
 | DEC-019 | Prototype state is in-memory with deterministic seeded data. Reload resets. Explicit `إعادة ضبط البيانات التجريبية` action for administrators. No localStorage, IndexedDB, backend, or database. | 2026-07-26 | Defines persistence model. |
 | DEC-020 | Standard terminology and identifiers: `طلب استثمار`, `محفظة الودائع`, `مراجعة الإدارة المالية`, `تنفيذ التحويل المحاسبي`, value date = `تاريخ بدء الوديعة` / `valueDate`, `إعادة الاستثمار`, `IR-2026-####`, `DEP-2026-####`. | 2026-07-26 | Resolves terminology and identifier drift. |
 | DEC-021 | Financial values, rates, percentages, dates, identifiers, and tabular data use Latin digits (0-9) by default, implemented in the central format utility. | 2026-07-27 | Owner approval of Step 02; resolves C-03 in `docs/07-brand-experience/12-design-token-plan.md` §17. |
-| DEC-022 | The primary application sidebar uses the recommended light-surface design (`--color-surface` background, brand-soft active state, `ef-logo-horizontal-blue.svg`); a deep-navy sidebar is rejected. | 2026-07-27 | Owner approval of Step 02; resolves C-01 in `docs/07-brand-experience/12-design-token-plan.md` §17. |
-| DEC-023 | In collapsed sidebar mode and favicon contexts, the official white Environment Fund symbol may be placed inside an official primary-blue (`#2C3A82`) container. The composition must use only the official supplied SVG asset — the logo/symbol must never be redrawn, traced, approximated, modified, or fabricated. | 2026-07-27 | Owner approval of Step 02; resolves C-02 in `docs/07-brand-experience/12-design-token-plan.md` §17; complements DEC-008. |
+| DEC-022 | **SUPERSEDED BY DEC-024 (2026-07-27).** The primary application sidebar uses the recommended light-surface design (`--color-surface` background, brand-soft active state, `ef-logo-horizontal-blue.svg`); a deep-navy sidebar is rejected. | 2026-07-27 | Owner approval of Step 02; resolved C-01 in `docs/07-brand-experience/12-design-token-plan.md` §17. Retained for history; no longer in force. |
+| DEC-023 | In collapsed sidebar mode and favicon contexts, the official white Environment Fund symbol may be placed inside an official primary-blue (`#2C3A82`) container. The composition must use only the official supplied SVG asset — the logo/symbol must never be redrawn, traced, approximated, modified, or fabricated. | 2026-07-27 | Owner approval of Step 02; resolves C-02 in `docs/07-brand-experience/12-design-token-plan.md` §17; complements DEC-008. With DEC-024 the collapsed navy sidebar renders the white symbol directly; the composed treatment remains for the favicon and light-surface symbol contexts. |
+| DEC-024 | The primary application sidebar uses the dark institutional navy surface (`#0F1822`, `--ef-navy-900`) in expanded and collapsed modes: white horizontal logo expanded, official white symbol directly on navy collapsed, white / low-opacity-white text, icons, and separators, primary-blue (`#2C3A82`) active item with white label and slim start-edge indicator, low-opacity white hover, and one controlled cropped `ef-pattern-secondary` moment (~10% opacity) behind non-critical empty space near the bottom of the expanded sidebar only. No gradients, glassmorphism, glow, or heavy shadows. The top header and content surfaces remain light. Supersedes DEC-022. | 2026-07-27 | Owner direction during the Step 05 visual review; sidebar token group recorded in `docs/07-brand-experience/12-design-token-plan.md` §4 and updated C-01 record in §17. |
 
 ## 7. Blockers
 
@@ -512,6 +513,54 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 #### Git Delivery Record
 
 - Branch: `claude/ef-brand-assets-verify-bp48pv` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
+
+### Step 05 Refinement — Dark Institutional Sidebar (DEC-024)
+
+#### Step Summary
+
+- Step number and title: Step 05 visual refinement — dark institutional sidebar (owner-requested during the Step 05 visual review; not a new roadmap step)
+- Prompt executed: owner refinement request (supersedes the DEC-022 sidebar direction with DEC-024)
+- Status: REVIEW REQUIRED (Step 05 remains under visual review; Step 06 not started)
+- Date: 2026-07-27
+- Commit or working branch: `claude/step-05-dark-sidebar-refinement-f38jfp` (created from the latest `main`); commit SHA, PR URL, and merge details in the Git Delivery Record below.
+
+#### Files Changed
+
+- Created: none.
+- Updated (code): `src/src/styles/tokens.css` (new DEC-024 sidebar token group: `--color-sidebar-{surface,text,hover,active,border}` + Tailwind wiring), `src/src/layouts/SidebarNav.tsx` (navy surface, white logo variants, primary-blue active state with slim white start-edge indicator, low-opacity white hover/borders, white focus outline, controlled bottom secondary-pattern crop in expanded mode only), `src/src/layouts/AppShell.tsx` (removed the light border on the sidebar edge — the navy surface itself is the separator; dark navigation drawer tone), `src/src/components/brand/BrandLogo.tsx` (new `symbol-white` variant — the official white symbol rendered directly on navy; `symbol-tile` retained for favicon/light-surface contexts per DEC-023), `src/src/components/ui/Drawer.tsx` and `src/src/components/ui/IconButton.tsx` (controlled `tone="dark"` navy treatment for the navigation drawer).
+- Updated (documentation): `EXECUTION-STATUS.md` (DEC-024 recorded; DEC-022 marked superseded and retained), `docs/07-brand-experience/12-design-token-plan.md` (status note, §4 sidebar token group, §16 usage mapping, §17 C-01 superseded record, §18 readiness), `docs/08-design-specifications/00-shared-layout-and-components.md` (§3 sidebar visual treatment), `docs/07-brand-experience/02-brand-application.md` (dark-surfaces section: sidebar recorded as an approved persistent navy surface).
+- Deleted: none. `BrandPattern` needed no changes — its existing controlled variants (approved asset, edge placement, `soft` 10% opacity, corner scale) already support the navy surface.
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict) — passed, 0 errors.
+- Lint: `npm run lint` (`eslint .`) — passed, 0 errors.
+- Production build: `npm run build` — passed.
+- Tests: no test script exists.
+- Manual checks (production build in Chromium at 1440×900, 1024×768, 768×1024, 390×844): zero horizontal overflow in every state; expanded and collapsed desktop sidebar render the white horizontal logo / white symbol on navy; active item shows primary-blue background, white label/icon, and the white start-edge indicator; hover shows the low-opacity white state; keyboard focus shows a white outline on navy (tab order verified into the navigation); tablet and mobile navigation drawer renders fully navy with the same states, closes on Escape and after navigating; the pattern crop appears only at the bottom of the expanded desktop sidebar (hidden when collapsed, hidden in the drawer, hidden below 768px).
+- Contrast (WCAG): white on navy `#0F1822` ≈ 17.9:1; inactive text `rgba(255,255,255,0.78)` on navy ≈ 11.1:1; white on active primary blue `#2C3A82` ≈ 10.3:1 — all above AA/AAA for UI text. The blue-on-navy background difference (≈1.7:1) is deliberately never the only active signal (white indicator + white label/icon).
+
+#### Completed Scope
+
+- Replaced the DEC-022 light sidebar with the DEC-024 dark institutional navy sidebar (`#0F1822`) in expanded, collapsed, tablet, and mobile drawer modes; header and content surfaces remain light for a clear premium contrast.
+- Active navigation: official primary blue `#2C3A82` background, white label and icon, slim white start-edge indicator; subtle low-opacity white hover; low-opacity white internal borders; no gradients, glassmorphism, glow, or heavy shadows.
+- Brand pattern moment: one `ef-pattern-secondary.svg` crop (best contrast against navy — light-green line art vs. the primary pattern's mid-blue) at 10% opacity (inside the 8%–16% navy range of `06-pattern-system.md` §7), intentionally cropped at the bottom-start corner behind non-critical empty space, above the collapse control; it collapses away when vertical space runs out and is omitted in collapsed mode, the drawer, and below 768px.
+- Logo variants: `ef-logo-horizontal-white.svg` expanded; `ef-logo-symbol-white.svg` directly on navy collapsed (DEC-023 composition unchanged for the favicon).
+- No business pages, domain types, mock data, services, routes, or permissions were modified; no deployment configuration was added.
+
+#### Known Issues or Deviations
+
+- None beyond the pre-existing Step 05 notes (Tahoma fallback, deferred Tooltip/chart wrappers, large official pattern SVGs served as-is).
+
+#### Decisions Required
+
+- Owner visual review of the refined Step 05 shell. DEC-024 is recorded as the owner's direction from this refinement request; DEC-022 is retained in the log as superseded.
+
+#### Git Delivery Record
+
+- Branch: `claude/step-05-dark-sidebar-refinement-f38jfp` (from latest `main`; no direct commits to `main`).
 - Validation before delivery: typecheck, lint, and production build all passed; git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
 - Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 

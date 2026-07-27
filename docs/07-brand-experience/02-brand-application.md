@@ -77,6 +77,8 @@ Charts use approved brand colors with controlled variation. Avoid rainbow palett
 
 Use dark navy or primary-blue surfaces only for deliberately prominent areas. Keep them compact. Use white text and validate contrast. Do not turn the entire operational application into a dark theme for the prototype.
 
+The primary navigation sidebar is an approved persistent dark navy surface (owner decision DEC-024): it uses the white horizontal logo expanded and the official white symbol collapsed, while the top header and the operational content area remain light.
+
 ## Photography and illustration
 
 The prototype should not depend on photography. When illustrations are required, use abstract institutional geometry derived from approved EF patterns and radial language. Avoid generic leaves, trees, globes, coins, handshakes, or stock banking imagery.

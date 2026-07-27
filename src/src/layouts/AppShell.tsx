@@ -10,10 +10,10 @@ import { TopHeader } from '@/layouts/TopHeader'
 import { prototypeUsers, type PrototypeUser } from '@/app/prototype-users'
 
 /**
- * RTL application shell (00-shared §2): right sidebar (264/80px, light surface
- * per DEC-022), 72px top header, flexible main region. Tablet/mobile use an
- * accessible navigation drawer that opens from the right (it replaces the
- * right sidebar).
+ * RTL application shell (00-shared §2): right sidebar (264/80px, dark
+ * institutional navy per DEC-024), 72px top header and light content region.
+ * Tablet/mobile use an accessible navigation drawer that opens from the right
+ * (it replaces the right sidebar).
  */
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false)
@@ -40,9 +40,12 @@ export function AppShell() {
 
       <div className="flex min-h-dvh">
         {/* Desktop sidebar — first flex child renders on the right in RTL. */}
+        {/* The navy surface itself separates the sidebar from the light
+            content; a light border token on that edge would read as a halo
+            (DEC-024). */}
         <aside
           className={cn(
-            'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 border-e border-border-default lg:block',
+            'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 lg:block',
             'transition-[width] duration-[var(--motion-standard)]',
           )}
           style={{
@@ -73,6 +76,7 @@ export function AppShell() {
         onClose={() => setMobileNavOpen(false)}
         title="التنقل"
         side="right"
+        tone="dark"
         widthClassName="w-[300px] max-w-[85vw]"
       >
         <div className="-m-5">
