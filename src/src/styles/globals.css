@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/*
+ * Official Environment Fund palette only (docs/07-brand-experience/00-brand-source-of-truth.md).
+ * The full semantic/component token system is built in Step 05 from
+ * docs/07-brand-experience/12-design-token-plan.md — do not extend here.
+ */
+@theme {
+  --color-ef-navy: #0f1822;
+  --color-ef-primary-blue: #2c3a82;
+  --color-ef-white: #ffffff;
+  --color-ef-secondary-blue: #0051b1;
+  --color-ef-green: #c0cb6c;
+  --color-ef-brown: #a18e77;
+  --color-ef-warm-grey: #f1eee8;
+
+  --font-sans: "Aktiv Grotesk", Tahoma, Arial, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--color-ef-warm-grey);
+  color: var(--color-ef-navy);
+}

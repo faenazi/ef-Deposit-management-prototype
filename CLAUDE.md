@@ -347,3 +347,23 @@ A feature is not complete unless:
 - Validation messages are clear.
 - TypeScript validation passes.
 - The production build passes.
+
+## 19. Coding Validation and Git Delivery
+
+For every step that creates or modifies application code:
+
+- Work on a dedicated feature branch created from the latest main branch.
+- Never commit directly to main.
+- Run typecheck, lint, tests when available, and production build.
+- Fix all errors and rerun the complete validation sequence.
+- Do not commit, push, create a PR, or merge when validation fails.
+- Review git diff before committing.
+- Do not commit secrets, build output, licensed fonts, fabricated brand assets, or unrelated files.
+- After successful validation, commit and push the feature branch.
+- Create a non-draft Pull Request targeting main.
+- Review the Pull Request diff.
+- Squash merge the Pull Request automatically when validation succeeds and repository rules permit.
+- Delete the feature branch after merge.
+- Never bypass branch protection or required checks.
+- Record the branch, commit SHA, validation results, PR URL, merge status, and merge SHA in EXECUTION-STATUS.md.
+- The deployment restrictions in section 4 remain in force: no GitHub Actions, CI/CD, deployment, Docker, or Vercel configuration.
