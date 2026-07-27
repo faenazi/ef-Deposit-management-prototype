@@ -446,8 +446,9 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Branch: `claude/step-04-frontend-initialization-ge7e81` (from latest `main`; no direct commits to `main`).
 - Validation before delivery: typecheck, lint, and production build all passed (see Validation Results); git diff reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
-- Commit SHA: recorded below after commit.
-- PR URL, merge status, and merge SHA: recorded below after PR creation and squash merge.
+- Commit SHA: `a4d9e4434d7cd52d699872c64032e8c421b6d2bd` (Step 04 implementation commit).
+- PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/7 (non-draft, targeting `main`).
+- Merge status and merge SHA: squash merge is performed automatically after PR diff review when repository rules permit; the resulting merge SHA is recorded in the pull request thread (it cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 
 ## 9. Review Ownership
 
