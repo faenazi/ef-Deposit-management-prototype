@@ -25,17 +25,17 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 06 ROUTING AND PERMISSIONS EXECUTED — AWAITING REVIEW. Step 05 was completed and approved by the repository owner on 2026-07-27, including the dark institutional sidebar refinement implemented under DEC-024. Step 06 (canonical routes, central permission model, user context, presentation-grade role switcher, route-level access protection) was executed on 2026-07-27 and requires review.
+**Overall status:** STEP 07 DOMAIN MODEL, MOCK DATA, AND SERVICES EXECUTED — AWAITING REVIEW. Step 06 (canonical routes, central permission model, user context, presentation-grade role switcher, route-level access protection) was reviewed and approved by the repository owner on 2026-07-27. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed on 2026-07-27 and requires review.
 
-**Current phase:** Routing, user context, and prototype permissions (Step 06, review required)
+**Current phase:** Domain model, mock data, and services (Step 07, review required)
 
-**Current active step:** Step 06 — Routing and Permissions (REVIEW REQUIRED)
+**Current active step:** Step 07 — Domain Model and Mock Services (REVIEW REQUIRED)
 
 **Next prompt to execute:**
 
-After Step 06 approval: `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` (Step 07 — Domain model, mock data, and services). Do not start Step 07 before the Step 06 review is approved.
+After Step 07 approval: `prompts/03-page-design/01-dashboard.md` (Step 08 — Dashboard). Do not start Step 08 before the Step 07 review is approved.
 
-**Last approved step:** Step 05 — Design System and App Shell (APPROVED 2026-07-27, including the DEC-024 dark-sidebar refinement)
+**Last approved step:** Step 06 — Routing, User Context, and Prototype Permissions (APPROVED 2026-07-27)
 
 ## 4. Execution Roadmap
 
@@ -47,8 +47,8 @@ After Step 06 approval: `prompts/04-frontend/04-build-domain-model-mock-data-and
 | 03 | Domain planning | `prompts/02-design-system/01-domain-and-mock-data-foundation.md` | COMPLETED | APPROVED | Executed 2026-07-27 (planning-only per DEC-013); approved by the repository owner 2026-07-27, including all decisions recorded in `docs/05-data/domain-and-mock-data-implementation-plan.md` (G-01–G-04, PD-01–PD-07). B-01 still open. |
 | 04 | Frontend initialization | `prompts/04-frontend/01-initialize-frontend-project.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. All frontend files are under `/src`. The brand-asset runtime copy deferred by B-01 was completed with the B-01 resolution (see Step 05 report). |
 | 05 | Design system and shell | `prompts/04-frontend/02-build-design-system-and-app-shell.md` | COMPLETED | APPROVED | Executed 2026-07-27 with the seven official brand assets in place. Dark-sidebar visual refinement (DEC-024) executed 2026-07-27. Approved by the repository owner 2026-07-27, including the DEC-024 refinement. See Step 05 report and refinement report below. |
-| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Role switching and access rules work and were browser-verified per role. See Step 06 report below. |
-| 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | NOT STARTED | Pending | Must use deterministic realistic data. |
+| 06 | Routing and permissions | `prompts/04-frontend/03-routing-role-context-and-permissions.md` | COMPLETED | APPROVED | Executed 2026-07-27; approved by the repository owner 2026-07-27. Role switching and access rules work and were browser-verified per role. See Step 06 report below. |
+| 07 | Domain model and mock services | `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md` | REVIEW REQUIRED | Pending | Executed 2026-07-27. Deterministic seed (55 requests, 25 deposits, 164 offers, 50 tasks) verified by a 15-check integrity checker and a determinism assertion. See Step 07 report below. |
 | 08 | Dashboard | `prompts/03-page-design/01-dashboard.md` | NOT STARTED | Pending | Review per role. |
 | 09 | My Tasks | `prompts/03-page-design/02-my-tasks.md` | NOT STARTED | Pending | Review task actions and urgency. |
 | 10 | Investment Requests | `prompts/03-page-design/03-investment-requests.md` | NOT STARTED | Pending | Review filters, statuses, and draft handling. |
@@ -571,7 +571,8 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 
 - Step number and title: Step 06 — Routing, User Context, and Prototype Permissions
 - Prompt executed: `prompts/04-frontend/03-routing-role-context-and-permissions.md`
-- Status: REVIEW REQUIRED
+- Status: COMPLETED
+- Review result: APPROVED — the repository owner reviewed and approved Step 06 on 2026-07-27, including the permission-matrix readings recorded under Known Issues or Deviations.
 - Date: 2026-07-27
 - Commit or working branch: `claude/step-06-routing-role-context-permissions-1mnesg` (created from the latest `main`); details in the Git Delivery Record below.
 
@@ -627,6 +628,98 @@ Stale-reference issues recorded by Step 01 (prompts/README.md, docs/00-index.md)
 - Commit SHA: `021d0b354739129c2e148a387e83e262d546f6b2` (Step 06 implementation commit; this report is delivered in a follow-up commit on the same branch).
 - PR URL: https://github.com/faenazi/ef-Deposit-management-prototype/pull/10 (non-draft, targeting `main`).
 - Merge status and merge SHA: squash merge is performed automatically after PR diff review when repository rules permit; the resulting merge SHA is recorded in the pull request thread (it cannot be written back to this file without a direct commit to `main`, which §19 forbids).
+
+### Step 07 — Domain Model, Mock Data, and Services
+
+#### Step Summary
+
+- Step number and title: Step 07 — Domain Model, Deterministic Mock Data, and Mock Services
+- Prompt executed: `prompts/04-frontend/04-build-domain-model-mock-data-and-services.md`
+- Status: REVIEW REQUIRED
+- Date: 2026-07-27
+- Commit or working branch: `claude/step-07-domain-model-services-hqk6qk` (created from the latest `main`); details in the Git Delivery Record below.
+
+#### Files Changed
+
+- Created (domain, `src/src/domain/`): `common.ts` (shared primitives, entity types, currency, tenor units, communication channels, bank risk categories), `user.ts`, `bank.ts` (+ derived `BankExposure`), `investment-request.ts` (statuses, section-completion states, the 15 DEC-016 section keys, `LiquidityInformation`, `TreasuryRecommendation`, `WinningBankDetails`, `InvestmentRequest`), `approval.ts` (stages, decisions, `Approval`), `offer.ts` (`BankInvitation`, `BankOffer`, `EvaluationCriterion`, `OfferEvaluation`, RFQ/offer/recommendation enums), `execution.ts` (`InvestmentSupportReview`, `FinanceReview`, `AccountingExecution`, `DepositActivation` + their decision enums), `deposit.ts` (`Deposit`, `MaturityAction`), `task.ts`, `audit.ts` (`Attachment`, `Note`, `AuditEntry`/`TimelineEvent`, `AppNotification`, activity and attachment enums), `settings.ts` (`SystemSettings`), `analytics.ts` (dashboard/report/derived shapes incl. `DashboardSummary`, `ReportDefinition`, `ReportFilter`), `business-rules.ts` (R-01…R-20), `section-access.ts` (role × stage × section mode matrix), `index.ts` (barrel).
+- Created (utilities, `src/src/lib/`): `dates.ts` (ISO date math, Saudi Sun–Thu business days), `collections.ts` (sort, group, paginate, sum, Arabic-normalizing search), `ids.ts` (deterministic identifier composition and runtime allocators).
+- Created (mock data, `src/src/mock-data/`): `reference-date.ts`, `seed.ts` (fixed seed + mulberry32 PRNG), `roles.ts`, `users.ts` (23 users), `banks.ts` (10 banks), `evaluation-criteria.ts` (7 criteria), `phrases.ts` (Arabic phrase pools), `investment-requests.ts` (55 seed specs), `timeline.ts` (per-case lifecycle date derivation), `bank-invitations.ts`, `bank-offers.ts`, `evaluations.ts`, `approvals.ts`, `execution-reviews.ts`, `deposits.ts` (25 seed specs + builders), `attachments.ts`, `tasks.ts`, `activities.ts`, `notes.ts`, `notifications.ts`, `system-settings.ts`, `scenarios.ts` (SCN-01…SCN-10), `integrity.ts` (the 15-point checker), `index.ts` (the composer producing the baseline dataset).
+- Created (services, `src/src/services/`): `service-config.ts` (central latency + one-shot error simulation), `store.ts` (in-memory store, runtime ID allocators, `resetStoreToBaseline`, `loadScenarioState`, dev-time seed assertions), `workflow-engine.ts` (single transition executor: guards, approval records, task completion/creation, notifications, audit entries), `investment-request-service.ts`, `deposit-service.ts`, `task-service.ts`, `dashboard-service.ts`, `report-service.ts`, `notification-service.ts`, `lookup-service.ts`, `user-service.ts`, `settings-service.ts`, `analytics.ts` (derived selectors), `index.ts` (barrel).
+- Updated: `src/src/domain/roles.ts` (added the full `Role` entity and `DashboardProfile` — role identity itself unchanged), `src/src/mock-data/demo-users.ts` (now derived from the single `users.ts` fixture instead of duplicating the eight identities; the exported `DemoUser` shape is unchanged so the Step 06 user context and switcher are untouched), `EXECUTION-STATUS.md` (Step 06 approval and this report).
+- Deleted: `src/src/services/.gitkeep` (folder now populated).
+
+#### Validation Results
+
+- TypeScript: `npm run typecheck` (`tsc -b`, strict, `noUnusedLocals`/`noUnusedParameters`) — passed, 0 errors. No `any` anywhere in the new code.
+- Lint: `npm run lint` (`eslint .`) — passed, 0 errors.
+- Production build: `npm run build` — passed (352 kB JS / 108 kB gzip).
+- `npm audit`: 0 vulnerabilities.
+- Seed integrity: the 15-point checker (`mock-data/integrity.ts`) executed against the composed baseline — **0 issues**.
+- Determinism: two independent compositions of the baseline are deep-equal (`JSON.stringify` identical) — **PASS**. `Math.random()` appears nowhere in the data layer; all generated values come from the seeded mulberry32 PRNG.
+- Service round-trip (executed against the real services with latency disabled): read-only mutation guard, wrong-role guard, submission readiness gate, mandatory-reason guard, R-19 transfer-variance guard, break-reason guard, and administrator-only settings guard all reject correctly; SCN-02 (100M → executive skipped), SCN-03 (180M → executive route), SCN-04 (return with reason + corrective task carrying the reason), SCN-07 (execution → activation creating exactly one deposit, `DEP-2026-0026`), SCN-08 (reinvestment draft with bidirectional link, source deposit unchanged), SCN-09 (early break with derived penalty and realized return), SCN-10 (dashboard totals reconcile with the reports and with bank exposure) all behave as documented; `resetDemoData()` restores the exact baseline.
+- Manual browser check (production build in Chromium): `dir="rtl" lang="ar"`; the role switcher still lists all eight primary demo users with job titles and departments after the `demo-users.ts` refactor; per-role navigation still applies; no horizontal overflow at 1440×900 or 390×844; zero console errors or warnings.
+
+#### Seeded Data Volumes
+
+| Set | Count | Documented minimum | Notes |
+|---|---|---|---|
+| Investment requests | 55 | 30 | The documented 30-request distribution exactly (5 draft, 3 returned, 4 pending GM, 3 pending executive, 3 pending winning bank, 3 pending Support, 3 pending Finance, 2 pending Accounting, 2 pending activation, 1 cancelled, 1 rejected) + 25 converted source requests (gap G-04) |
+| Deposits | 25 | 25 | 18 ACTIVE (4 inside the 14-day window, derived), 2 matured, 3 closed, 1 reinvested, 1 broken early |
+| Banks | 10 | 10 | 2 high exposure (28.2% / 21.9%), 2 low (3.8% / 1.4%), 1 inactive excluded from new RFQs |
+| Bank offers | 164 | 100 | 136 valid, 16 expired, 11 withdrawn, 1 incomplete |
+| Tasks | 50 | 40 | 34 open, 15 completed, 1 cancelled; all four priorities; overdue / due-today / upcoming present; all six workflow roles have inboxes |
+| Users | 23 | 22 | 8 primary demo users verbatim from `demo-users.md` + 15 supporting |
+| Attachments | 343 | 80 | All 10 categories with realistic Arabic filenames |
+| Activities | 621 | 150 | Full lifecycle coverage, strictly chronological per entity |
+| Approvals | 193 | 35 | Complete chains incl. preserved return cycles and pending decisions |
+| RFQ invitations | 199 | — | Includes declined and no-response banks |
+| Evaluations | 133 | — | Every eligible offer of an evaluated request is scored |
+| Notes / Notifications / Maturity actions | 15 / 20 / 7 | — | Notes on scenario-critical records; notifications projected from recent activities |
+| Amount spread | — | — | 33 below, 4 exactly at, 18 above SAR 100,000,000 |
+
+All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the exact documented starting states, including every ID pinned by `demo-scenarios.md` (`IR-2026-0004/0006/0009/0011/0018/0021`, `DEP-2026-0008/0012`).
+
+#### Completed Scope
+
+- **Domain model:** every entity of the Step 03 catalogue (plan §4) as strongly typed, `readonly` interfaces with string-literal unions and bilingual label maps for all 19 controlled-value sets. Statuses come only from `statuses-and-transitions.md` (DEC-012); no status, role code, or business constant is written as a literal outside the domain layer.
+- **Centralized business rules** (`domain/business-rules.ts`): R-01…R-20 implemented exactly once — SAR 100,000,000 threshold evaluated from the submitted amount with route recalculation, short/extended approval routes, the transition table with `getNextStatus`/`canTransition`, return targets and `getResumeStage` (executive returns route back through the Treasury path), mandatory-reason rule, expected return `principal × rate × tenorDays ÷ 360` with the months×30 convention, 14-day derived maturity window, maturity buckets, stage SLAs on Saudi business days, derived offer expiry, derived task urgency, and the 12-item submission-readiness checklist with stable codes and Arabic labels.
+- **Role-based section access** (`domain/section-access.ts`): one central `getSectionMode(role, request, section)` returning `HIDDEN`/`READ_ONLY`/`EDITABLE`/`ACTIONABLE`, including the Finance information boundary (Finance cannot see draft-working sections such as bank offers) and the rule that completed stages are always read-only.
+- **Deterministic mock data:** fixed seed `20260727`, reference date `2026-07-27T09:00:00+03:00`, curated fixtures plus seeded generators split across 24 focused modules — no single large data file, no `Math.random()`, no system-clock reads.
+- **Referential-integrity checker:** all 15 documented checks implemented and passing, including foreign-key resolution, stage-appropriate approver roles, offers belonging to invited banks, one-to-one request↔deposit conversion, expected-return recomputation against the central formula, approval chains matching the threshold, task-to-stage alignment, chronological ordering, impossible-status detection, the 14-day maturity assertion, and the read-only-permission guarantee. Check 15 (reset determinism) is asserted in the store as a deep-equality comparison of two independent compositions.
+- **Mock services:** ten async services over one in-memory store with centrally configured latency and an optional one-shot error simulation (off by default). Every workflow action routes through a single `workflow-engine` transition executor that applies the domain guards, records the approval decision, completes the current task, creates the next stage's task and notification, and appends exactly one audit entry. No `fetch`, no API client, no backend, no `localStorage`/`IndexedDB` (DEC-002, DEC-019).
+- **Reset and scenarios:** `resetDemoData()` (administrator-only) rebuilds the identical baseline without a page reload; `loadScenario()` resets then returns the scenario's starting user and route.
+- No page, chart, form, dialog, or business layout was implemented; nothing under `app/`, `layouts/`, `components/`, or `features/` was touched beyond the `demo-users.ts` de-duplication described above.
+
+#### Implementation Notes
+
+- **`demo-users.ts` de-duplicated.** Step 06 created an eight-user list for the switcher. Rather than keeping two sources of the same identities, it now derives from the single `mock-data/users.ts` fixture; the exported `DemoUser` shape is unchanged, so `UserProvider`, `UserSwitcher`, and `TopHeader` needed no edits (browser-verified).
+- **Historical vs in-flight timelines.** Converted requests chain their event dates forward from the deposit value date; in-flight requests chain backwards from the current stage age. Events are collected in code order and flushed chronologically, so each entity's history is lifecycle-ordered regardless of authoring order.
+- **Derived-only values.** Bank exposure and days-to-maturity are computed by the analytics selectors and never seeded (PD-06), so portfolio totals, dashboards, and reports always reconcile — verified numerically (bank exposure sums exactly to total active principal).
+- **Stored-but-verified values.** `expectedReturnAmount` is stored on offers and deposits for display stability and the integrity checker recomputes every one of them against the central formula.
+- **The layer is intentionally not yet consumed by any route.** Step 07 forbids page implementation, so the services are exercised only by the verification harness in this step; Step 08 will wire the dashboard to `fetchDashboardSummary`.
+
+#### Known Issues or Deviations
+
+- **Scenario 1 readiness is 62%, documented as "approximately 65%".** With the 13-item readiness checklist, `IR-2026-0018` fails five checks (liquidity evidence, recommended offer set, recommendation rationale, mandatory attachments, completeness confirmation), giving 8/13 = 62%. This matches the three demonstration gaps named in `demo-scenarios.md` (missing liquidity attachment, an incomplete offer's validity field, and the recommendation rationale); the percentage differs only because the documented figure was approximate.
+- **Two readiness codes overlap by design.** `LIQUIDITY_EVIDENCE` and `MANDATORY_ATTACHMENTS` both fail when the liquidity analysis attachment is absent, because the documented checklist lists both conditions separately. This is faithful to `business-rules.md`; it can be collapsed into one indicator during the workspace step if the owner prefers a shorter missing-requirements list.
+- **The read-only user and the System Administrator hold no tasks.** `mock-data-requirements.md` asks for every role's inbox to be populated; the read-only role has no assignable actions and the administrator must not perform business decisions (both per `demo-users.md`), so tasks exist for the six workflow roles only. This follows the Step 06 permission readings that the owner approved.
+- **The incomplete offer on `IR-2026-0018` does not raise its own readiness code.** `VALID_OFFER_EXISTS` still passes because two other valid offers exist; the gap surfaces through the bank-offers section indicator (`MISSING_REQUIREMENTS`) instead, which is what the scenario's "update the incomplete offer" step demonstrates.
+- **`Comment`, `Department`, `ApplicationConfiguration` from the prompt's model list are intentionally not separate entities.** Comments are modeled as `Note` (the canonical term in the workspace spec), departments are a string field on `User` (no documented department entity exists), and application configuration is `SystemSettings`. Inventing parallel entities would have duplicated documented concepts.
+- Pre-existing notes remain unchanged (Tahoma font fallback, deferred Tooltip and chart wrappers, large official pattern SVGs served as-is).
+
+#### Decisions Required
+
+- Owner review of Step 07: the seeded volumes and distributions, the ten scenario starting states, the readiness-checklist behavior (including the two notes above), and the bank-concentration profile (top bank 28.2% of active principal).
+
+#### Recommended Next Step
+
+- After Step 07 approval: execute Step 08 — Dashboard (`prompts/03-page-design/01-dashboard.md`). The dashboard should consume `fetchDashboardSummary` and the analytics selectors rather than deriving any metric in the page.
+
+#### Git Delivery Record
+
+- Branch: `claude/step-07-domain-model-services-hqk6qk` (from latest `main`; no direct commits to `main`).
+- Validation before delivery: typecheck, lint, production build, the seed integrity checker, and the determinism assertion all passed (see Validation Results); `git diff` reviewed before committing; no secrets, build output, licensed fonts, fabricated brand assets, or unrelated files committed.
+- Commit SHA, PR URL, merge status: recorded in the pull request thread for this branch (the merge SHA cannot be written back to this file without a direct commit to `main`, which §19 forbids).
 
 ## 9. Review Ownership
 
