@@ -55,6 +55,7 @@ Claude Code prompts must reference only the documents required for the current i
 - `05-data/mock-data-requirements.md` — volumes, distributions, and realism rules.
 - `05-data/demo-users.md` — mock identities and roles.
 - `05-data/demo-scenarios.md` — curated end-to-end demonstration scenarios.
+- `05-data/domain-and-mock-data-implementation-plan.md` — Step 03 planning deliverable: the finalized domain-model, enum, business-rule, and deterministic mock-data plan that Step 07 implements.
 
 ## 06 — Quality
 

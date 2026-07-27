@@ -6,6 +6,8 @@ This document defines the core business entities, their responsibilities, and th
 
 The model must remain implementation-agnostic and must not depend on React component structure.
 
+The finalized Step 07 implementation catalogue — including entities added during Step 03 planning to close documented gaps (`LiquidityInformation`, `SectionCompletion`, `InvestmentSupportReview`, `DepositActivation`, `Note`, `Notification`, `SystemSettings`), the canonical enums with Arabic labels, and the derived-value overrides for `Bank.currentExposure*` and `Deposit.daysToMaturity` — is defined in `domain-and-mock-data-implementation-plan.md`. On any detail difference, that plan is the implementation reference; statuses and business rules remain canonical in `docs/02-business/`.
+
 ## Core Entities
 
 ### User
