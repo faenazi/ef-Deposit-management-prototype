@@ -839,6 +839,13 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 - Tahoma remains the prototype fallback because licensed Aktiv Grotesk binaries are intentionally not committed.
 - Placeholder pages remain non-functional by design; no Step 09+ business page was implemented.
 
+### Git Delivery Record
+
+- Branch: `codex/platform-visual-redesign` (from `main`; no direct commits to `main`).
+- Delivery commit: `f22d209ca650e25bce7cc34f0694585fe15f183e`.
+- Pull request: https://github.com/faenazi/ef-Deposit-management-prototype/pull/13 (draft, open, targeting `main`).
+- Merge status: not merged; awaiting visual review and repository-owner approval.
+
 ### Recommended Next Step
 
 - Review the refreshed Dashboard at the five target viewport sizes and across Deposit Specialist, GM Treasury, and Executive Director roles; after approval, resume Step 09 without changing the approved visual foundation.
