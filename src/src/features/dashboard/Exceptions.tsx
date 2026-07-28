@@ -1,6 +1,7 @@
 import { AlertTriangle, ArrowLeft, CircleAlert, Info } from 'lucide-react'
 import { Link } from 'react-router'
 
+import { Badge, type BadgeVariant } from '@/components/ui/Badge'
 import { Card, SectionHeading } from '@/components/ui/Card'
 import { Icon } from '@/components/ui/Icon'
 import type { DashboardSummary } from '@/services/dashboard-service'
@@ -17,18 +18,33 @@ const severityStyle = {
   info: 'bg-info-bg text-info-text',
 }
 
+const severityLabel: Record<DashboardSummary['exceptions'][number]['severity'], string> = {
+  critical: 'عاجل',
+  warning: 'يحتاج متابعة',
+  info: 'للاطلاع',
+}
+
+const severityBadge: Record<DashboardSummary['exceptions'][number]['severity'], BadgeVariant> = {
+  critical: 'danger',
+  warning: 'warning',
+  info: 'info-soft',
+}
+
 export function Exceptions({ exceptions }: { exceptions: DashboardSummary['exceptions'] }) {
-  const visible = exceptions.slice(0, 4)
+  const visible = exceptions.slice(0, 3)
+  const hiddenCount = Math.max(exceptions.length - visible.length, 0)
 
   return (
     <Card padding="none" className="overflow-hidden">
       <div className="px-5 py-5">
         <SectionHeading
           className="mb-0"
-          title="تنبيهات تحتاج انتباهًا"
-          description={`${exceptions.length} مؤشرات مرتبطة بالأولوية والمخاطر.`}
+          title="تنبيهات القرار والمتابعة"
+          description="أهم المؤشرات التي قد تؤثر على موعد التنفيذ أو جودة القرار."
+          action={<Badge variant="neutral">{exceptions.length} مؤشرات</Badge>}
         />
       </div>
+
       <ol className="divide-y divide-divider-soft border-t border-divider-soft">
         {visible.map((exception) => {
           const ExceptionIcon = severityIcon[exception.severity]
@@ -37,22 +53,37 @@ export function Exceptions({ exceptions }: { exceptions: DashboardSummary['excep
               {exception.actionPath ? (
                 <Link
                   to={exception.actionPath}
+                  aria-label={exception.actionLabel ?? `عرض ${exception.title}`}
                   className="group flex items-start gap-3 px-5 py-4 transition-colors hover:bg-surface-raised"
                 >
                   <ExceptionContent exception={exception} icon={ExceptionIcon} />
-                  <span className="ms-auto flex size-8 shrink-0 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
-                    <Icon icon={ArrowLeft} size="sm" />
+                  <span className="ms-auto flex shrink-0 flex-col items-end gap-2">
+                    <Badge variant={severityBadge[exception.severity]}>
+                      {severityLabel[exception.severity]}
+                    </Badge>
+                    <span className="flex size-8 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
+                      <Icon icon={ArrowLeft} size="sm" />
+                    </span>
                   </span>
                 </Link>
               ) : (
                 <div className="flex items-start gap-3 px-5 py-4">
                   <ExceptionContent exception={exception} icon={ExceptionIcon} />
+                  <Badge variant={severityBadge[exception.severity]} className="ms-auto shrink-0">
+                    {severityLabel[exception.severity]}
+                  </Badge>
                 </div>
               )}
             </li>
           )
         })}
       </ol>
+
+      {hiddenCount > 0 && (
+        <div className="border-t border-divider-soft bg-surface-subtle px-5 py-3 text-small text-text-secondary">
+          يوجد {hiddenCount} مؤشر إضافي ضمن بيانات المتابعة.
+        </div>
+      )}
     </Card>
   )
 }
@@ -69,11 +100,16 @@ function ExceptionContent({
       <span className={`flex size-9 shrink-0 items-center justify-center rounded-full ${severityStyle[exception.severity]}`}>
         <Icon icon={icon} size="sm" />
       </span>
-      <span className="min-w-0">
+      <span className="min-w-0 grow">
         <span className="block text-body font-semibold text-text-primary">{exception.title}</span>
-        <span className="mt-1 block line-clamp-2 text-small text-text-secondary">
+        <span className="mt-1 block line-clamp-2 text-small leading-5 text-text-secondary">
           {exception.description}
         </span>
+        {exception.actionLabel && (
+          <span className="mt-1.5 block text-small font-semibold text-action-primary">
+            {exception.actionLabel}
+          </span>
+        )}
       </span>
     </>
   )
