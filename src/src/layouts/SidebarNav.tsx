@@ -47,7 +47,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
           title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
           className={cn(
             'absolute -left-3.5 top-24 z-10 flex size-9 items-center justify-center rounded-full',
-            'border-[5px] border-canvas bg-[#e0d7c6] text-action-primary shadow-xs',
+            'border-[5px] border-canvas bg-surface-subtle text-action-primary shadow-xs',
             'transition-transform hover:scale-105 focus-visible:outline-action-primary',
           )}
         >
