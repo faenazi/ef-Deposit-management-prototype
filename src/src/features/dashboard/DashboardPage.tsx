@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 
 import { useUser } from '@/app/user-context'
 import { BrandPattern } from '@/components/brand/BrandPattern'
-import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { Icon } from '@/components/ui/Icon'
@@ -84,7 +83,7 @@ function DashboardSkeleton() {
 }
 
 export function DashboardPage() {
-  const { role, can } = useUser()
+  const { user, role, can } = useUser()
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -113,13 +112,20 @@ export function DashboardPage() {
     }
   }, [role.code])
 
+  const dashboardPending = !error && (loading || summary?.roleId !== role.code)
+
   return (
     <PageContainer>
-      <DashboardContext role={role.code} roleName={role.nameAr} canCreate={can('requests.create')} />
+      <DashboardContext
+        role={role.code}
+        roleName={role.nameAr}
+        firstName={user.nameAr.split(' ')[0]}
+        canCreate={can('requests.create')}
+      />
 
-      {loading && <DashboardSkeleton />}
+      {dashboardPending && <DashboardSkeleton />}
 
-      {!loading && error && !summary && (
+      {!dashboardPending && error && summary?.roleId !== role.code && (
         <div className="rounded-xl border border-divider-soft bg-surface shadow-xs">
           <ErrorState
             title="تعذر تحميل لوحة المعلومات"
@@ -128,7 +134,7 @@ export function DashboardPage() {
         </div>
       )}
 
-      {!loading && summary && <DashboardContent summary={summary} />}
+      {!dashboardPending && summary && <DashboardContent summary={summary} />}
     </PageContainer>
   )
 }
@@ -136,44 +142,50 @@ export function DashboardPage() {
 function DashboardContext({
   role,
   roleName,
+  firstName,
   canCreate,
 }: {
   role: RoleCode
   roleName: string
+  firstName: string
   canCreate: boolean
 }) {
   const context = roleContext[role]
   const today = new Date()
 
   return (
-    <section className="relative mb-6 overflow-hidden rounded-xl border border-divider-soft bg-surface px-5 py-5 shadow-xs md:px-7 md:py-6">
+    <section className="relative mb-4 overflow-hidden rounded-xl border border-divider-soft bg-surface px-4 py-4 shadow-xs md:mb-6 md:px-7 md:py-6">
       <BrandPattern
         asset="pattern-primary"
-        placement="top-start"
+        placement="bottom-end"
         opacity="subtle"
-        scale="hero"
-        className="max-w-[22rem]"
+        scale="corner"
+        className="max-w-[13rem]"
       />
-      <div className="relative z-[1] flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="relative z-[1] flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between md:gap-6">
         <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="primary">{roleName}</Badge>
+          <p className="text-small font-semibold text-action-primary">مرحبًا، {firstName}</p>
+          <h1 className="mt-1 text-[22px] font-bold leading-8 tracking-[-0.02em] text-text-primary md:text-[28px] md:leading-10">
+            {context.title}
+          </h1>
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-text-secondary">
+            <span className="font-semibold text-text-primary">{roleName}</span>
+            <span aria-hidden="true" className="hidden size-1 rounded-full bg-border-strong sm:block" />
             <span className="inline-flex items-center gap-1.5 text-small font-medium text-text-secondary">
               <Icon icon={CalendarDays} size="xs" />
               {formatDate(today)}
             </span>
           </div>
-          <h1 className="mt-3 text-[24px] font-bold leading-8 tracking-[-0.02em] text-text-primary md:text-[28px] md:leading-10">
-            {context.title}
-          </h1>
-          <p className="mt-1.5 max-w-3xl text-body leading-6 text-text-secondary">
+          <p className="mt-2 hidden max-w-3xl text-body leading-6 text-text-secondary sm:block">
             {context.description}
           </p>
         </div>
 
         {canCreate && (
-          <Link to="/investment-requests/new" className="relative z-[1] shrink-0">
-            <Button leadingIcon={FilePlus2}>طلب استثمار جديد</Button>
+          <Link to="/investment-requests/new" className="relative z-[1] w-full shrink-0 sm:w-auto">
+            <Button leadingIcon={FilePlus2} className="w-full sm:w-auto">
+              طلب استثمار جديد
+            </Button>
           </Link>
         )}
       </div>
@@ -189,18 +201,18 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
   const hasExceptions = summary.exceptions.length > 0
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <ExecutiveSummary summary={summary} />
 
       {showTasks ? (
         <div
           className={cn(
-            'grid items-start gap-6',
+            'grid items-start gap-4 md:gap-6',
             hasExceptions && 'lg:grid-cols-[minmax(0,1.55fr)_minmax(19rem,0.75fr)]',
           )}
         >
-          <PriorityTasks summary={summary} />
-          {hasExceptions && <Exceptions exceptions={summary.exceptions} />}
+          <PriorityTasks summary={summary} className={hasExceptions ? 'order-2 lg:order-none' : undefined} />
+          {hasExceptions && <Exceptions exceptions={summary.exceptions} className="order-1 lg:order-none" />}
         </div>
       ) : (
         hasExceptions && <Exceptions exceptions={summary.exceptions} />
@@ -210,14 +222,14 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
 
       {showPortfolio ? (
         <>
-          <div className="grid items-start gap-6 lg:grid-cols-2">
+          <div className="grid items-start gap-4 md:gap-6 lg:grid-cols-2">
             <PortfolioDistribution summary={summary} />
             <RequestPipeline summary={summary} />
           </div>
           {showRecentActivity && <RecentActivity summary={summary} />}
         </>
       ) : (
-        <div className="grid items-start gap-6 lg:grid-cols-2">
+        <div className="grid items-start gap-4 md:gap-6 lg:grid-cols-2">
           <RequestPipeline summary={summary} />
           {showRecentActivity && <RecentActivity summary={summary} />}
         </div>
