@@ -2,16 +2,11 @@ import type { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react'
 
 import { cn } from '@/lib/cn'
 
-/**
- * Professional financial table primitives (00-shared §9, token plan §15).
- * Responsive strategy: keep the table with controlled horizontal scrolling
- * first; column-priority hiding and row-detail drawers are applied per page.
- */
 export function TableContainer({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        'overflow-x-auto rounded-md border border-border-default bg-surface',
+        'overflow-x-auto rounded-xl border border-divider-soft bg-surface shadow-xs',
         className,
       )}
       {...rest}
@@ -31,7 +26,7 @@ export function Table({ className, children, ...rest }: HTMLAttributes<HTMLTable
 
 export function TableHead({ className, children, ...rest }: HTMLAttributes<HTMLTableSectionElement>) {
   return (
-    <thead className={cn('sticky top-0 z-[var(--z-sticky)] bg-canvas', className)} {...rest}>
+    <thead className={cn('bg-surface-subtle', className)} {...rest}>
       {children}
     </thead>
   )
@@ -49,9 +44,9 @@ export function TableRow({ interactive = false, className, children, ...rest }: 
   return (
     <tr
       className={cn(
-        'border-b border-border-default last:border-b-0',
+        'h-[var(--table-row-height)] border-b border-divider-soft last:border-b-0',
         interactive &&
-          'cursor-pointer transition-colors duration-[var(--motion-fast)] hover:bg-canvas focus-within:bg-canvas',
+          'cursor-pointer transition-colors duration-[var(--motion-fast)] hover:bg-surface-raised focus-within:bg-surface-brand-muted',
         className,
       )}
       {...rest}
@@ -62,7 +57,6 @@ export function TableRow({ interactive = false, className, children, ...rest }: 
 }
 
 interface TableHeaderCellProps extends ThHTMLAttributes<HTMLTableCellElement> {
-  /** Monetary/numeric columns get stable tabular alignment. */
   numeric?: boolean
 }
 
@@ -71,7 +65,7 @@ export function TableHeaderCell({ numeric = false, className, children, ...rest 
     <th
       scope="col"
       className={cn(
-        'whitespace-nowrap px-3 py-3 text-start text-table font-semibold text-text-secondary',
+        'whitespace-nowrap border-b border-divider-soft px-4 py-3 text-start text-table font-semibold text-text-secondary',
         numeric && 'text-end',
         className,
       )}
@@ -90,7 +84,7 @@ export function TableCell({ numeric = false, className, children, ...rest }: Tab
   return (
     <td
       className={cn(
-        'px-3 py-3 text-start align-middle',
+        'px-4 py-3 text-start align-middle text-text-primary',
         numeric && 'ef-financial text-end font-medium',
         className,
       )}
