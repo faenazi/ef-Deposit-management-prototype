@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router'
 
 import { cn } from '@/lib/cn'
@@ -21,6 +21,7 @@ const contextLabels: Record<string, string> = {
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
 
   const currentPageLabel =
@@ -61,6 +62,7 @@ export function AppShell() {
           <TopHeader
             currentPageLabel={currentPageLabel}
             onOpenMobileNav={() => setMobileNavOpen(true)}
+            menuButtonRef={mobileMenuButtonRef}
           />
           <main id="main-content" className="min-w-0 grow overflow-x-clip">
             <Outlet />
@@ -74,10 +76,11 @@ export function AppShell() {
         title="التنقل"
         side="right"
         tone="dark"
-        widthClassName="w-[280px] max-w-[88vw]"
+        widthClassName="w-[320px] max-w-[90vw]"
+        returnFocusRef={mobileMenuButtonRef}
       >
-        <div className="-m-5 h-[calc(100dvh-4.5rem)]">
-          <SidebarNav onNavigate={() => setMobileNavOpen(false)} />
+        <div className="-m-4 h-[calc(100dvh-4.25rem)]">
+          <SidebarNav mobile onNavigate={() => setMobileNavOpen(false)} />
         </div>
       </Drawer>
     </ToastProvider>

@@ -7,15 +7,22 @@ import { BrandPattern } from '@/components/brand/BrandPattern'
 import { Icon } from '@/components/ui/Icon'
 import { cn } from '@/lib/cn'
 import { navigationItems } from '@/layouts/navigation'
+import { UserSwitcher } from '@/layouts/UserSwitcher'
 
 interface SidebarNavProps {
   collapsed?: boolean
   onToggleCollapsed?: () => void
   onNavigate?: () => void
+  mobile?: boolean
 }
 
 /** Environment Fund right navigation rail, adapted from Figma node 54764:53867. */
-export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }: SidebarNavProps) {
+export function SidebarNav({
+  collapsed = false,
+  onToggleCollapsed,
+  onNavigate,
+  mobile = false,
+}: SidebarNavProps) {
   const { canAccessPath } = useUser()
   const visibleItems = navigationItems.filter((item) => canAccessPath(item.path))
 
@@ -23,12 +30,13 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
     <div
       className={cn(
         'relative flex h-full flex-col overflow-hidden bg-sidebar-surface text-white',
-        'lg:rounded-bl-[40px] lg:rounded-tl-[40px]',
+        !mobile && 'lg:rounded-bl-[40px] lg:rounded-tl-[40px]',
       )}
     >
       <div
         className={cn(
-          'flex h-28 shrink-0 items-center justify-center px-4',
+          'flex shrink-0 items-center justify-center px-4',
+          mobile ? 'h-20' : 'h-28',
           collapsed && 'px-2',
         )}
       >
@@ -56,13 +64,19 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
       )}
 
       {!collapsed && (
-        <div className="px-5 pb-3">
+        <div className={cn('px-5 pb-3', mobile && 'pb-4')}>
           <p className="text-small font-semibold text-white">منصة إدارة الودائع الاستثمارية</p>
           <p className="mt-1 text-[11px] leading-5 text-sidebar-text">الإدارة العامة للخزينة</p>
         </div>
       )}
 
-      <nav aria-label="التنقل الرئيسي" className="relative z-[2] overflow-y-auto py-2">
+      {mobile && (
+        <div className="relative z-[3] px-3 pb-2">
+          <UserSwitcher variant="drawer" />
+        </div>
+      )}
+
+      <nav aria-label="التنقل الرئيسي" className="relative z-[2] min-h-0 overflow-y-auto py-2">
         <ul className="space-y-1 px-2">
           {visibleItems.map((item) => (
             <li key={item.path}>
@@ -73,7 +87,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    'group relative flex h-12 items-center gap-3 rounded-lg px-3 text-body font-semibold',
+                    'group relative flex min-h-12 items-center gap-3 rounded-lg px-3 py-2 text-body font-semibold',
                     'transition-colors duration-[var(--motion-fast)] focus-visible:outline-white',
                     collapsed && 'justify-center px-2',
                     isActive
@@ -112,9 +126,9 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
           <BrandPattern
             asset="pattern-secondary"
             placement="bottom-start"
-            opacity="soft"
-            scale="hero"
-            className="max-h-[240px] max-w-[260px]"
+            opacity={mobile ? 'subtle' : 'soft'}
+            scale={mobile ? 'corner' : 'hero'}
+            className={cn('max-h-[240px] max-w-[260px]', mobile && '!block max-h-32 max-w-36')}
           />
         )}
       </div>
@@ -128,9 +142,11 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
               </span>
               <p className="text-small font-semibold">بيئة عرض تجريبية</p>
             </div>
-            <p className="mt-2 text-[11px] leading-5 text-sidebar-text">
-              البيانات تجريبية، وتتغير القوائم والمحتوى بحسب الدور المحدد.
-            </p>
+            {!mobile && (
+              <p className="mt-2 text-[11px] leading-5 text-sidebar-text">
+                البيانات تجريبية، وتتغير القوائم والمحتوى بحسب الدور المحدد.
+              </p>
+            )}
           </div>
         </div>
       )}
