@@ -59,7 +59,6 @@ export function DashboardPage() {
 
   useEffect(() => {
     let mounted = true
-    setLoading(true)
 
     fetchDashboardSummary(role.code)
       .then((data) => {
