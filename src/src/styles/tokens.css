@@ -1,86 +1,85 @@
 /*
- * Design tokens — layers 1 and 2 (docs/07-brand-experience/12-design-token-plan.md).
- * Layer 1: brand tokens (--ef-*) — official Environment Fund identity values.
- *          Never referenced directly by feature components.
- * Layer 2: semantic tokens — the product contract. Feature code consumes these
- *          (or the Tailwind utilities generated from them) only.
+ * Design tokens — layers 1 and 2.
+ * Layer 1 contains approved Environment Fund brand values.
+ * Layer 2 contains semantic product tokens consumed by application components.
  * Raw HEX values are prohibited outside this file.
  */
 
 :root {
-  /* ------------------------------------------------------------------ */
-  /* Layer 1 — brand tokens (00-brand-source-of-truth.md §3–4)          */
-  /* ------------------------------------------------------------------ */
+  /* Brand */
   --ef-navy-900: #0f1822;
   --ef-primary-700: #2c3a82;
+  --ef-interface-blue: #2a3886;
+  --ef-interface-blue-soft: #4e61c8;
   --ef-white: #ffffff;
   --ef-secondary-blue-600: #0051b1;
   --ef-green-400: #c0cb6c;
   --ef-brown-400: #a18e77;
   --ef-warm-grey-100: #f1eee8;
 
-  /* ------------------------------------------------------------------ */
-  /* Layer 2 — semantic colors (token plan §4)                          */
-  /* ------------------------------------------------------------------ */
-  --color-canvas: #f5f6f8;
+  /* Application surfaces — aligned with the EF internal-portal Figma file. */
+  --color-canvas: #f3f4f6;
   --color-surface: var(--ef-white);
-  --color-surface-subtle: var(--ef-warm-grey-100);
+  --color-surface-subtle: #fcfcfd;
   --color-surface-brand-soft: #eaecf8;
   --color-surface-brand-muted: #f4f5fb;
-  --color-surface-raised: #fbfbfc;
+  --color-surface-raised: #fcfcfd;
   --color-surface-navy-soft: #172331;
+  --color-surface-disabled: #f1f1f0;
 
-  --color-text-primary: var(--ef-navy-900);
+  --color-text-primary: #383f48;
   --color-text-secondary: #646a71;
-  --color-text-muted: #95999e;
+  --color-text-muted: #9da4ae;
   --color-text-inverse: var(--ef-white);
+  --color-text-disabled: var(--color-text-muted);
 
-  --color-border-default: #e2e3e5;
-  --color-border-strong: #c8cacd;
+  --color-border-default: #e5e7eb;
+  --color-border-strong: #d2d6db;
+  --color-divider-soft: #eff1f4;
 
   --color-action-primary: var(--ef-primary-700);
-  --color-action-primary-hover: #1e285f;
-  --color-action-primary-active: #121838;
+  --color-action-primary-hover: #232f70;
+  --color-action-primary-active: #182052;
   --color-action-secondary: var(--ef-secondary-blue-600);
   --color-focus-ring: var(--ef-secondary-blue-600);
 
-  --color-success-text: #365314;
+  --color-success-text: #536b1f;
   --color-success-bg: #f4f7e6;
   --color-success-border: var(--ef-green-400);
-
   --color-warning-text: #7a4d00;
   --color-warning-bg: #fff7e6;
-  --color-warning-border: #d79b29;
-
+  --color-warning-border: #d99800;
   --color-danger-text: #8a1c1c;
   --color-danger-bg: #fff1f1;
   --color-danger-border: #c93c3c;
+  --color-info-text: #2c3a82;
+  --color-info-bg: #eef0fb;
+  --color-info-border: #8f9bd7;
 
-  --color-info-text: #003a85;
-  --color-info-bg: #ebf4ff;
-  --color-info-border: #529dff;
-
-  --color-text-disabled: var(--color-text-muted);
-  --color-surface-disabled: #f1f1f0;
-
-  /* Sidebar — dark institutional navy surface (DEC-024, supersedes DEC-022).
-     Borders and hover are low-opacity white, never the light-page border
-     tokens; the active item uses the official primary blue. */
-  --color-sidebar-surface: var(--ef-navy-900);
-  --color-sidebar-text: rgba(255, 255, 255, 0.78);
-  --color-sidebar-hover: rgba(255, 255, 255, 0.07);
-  --color-sidebar-active: var(--ef-primary-700);
+  /* Sidebar — the Figma composition uses a 240px EF-blue rail. */
+  --color-sidebar-surface: var(--ef-interface-blue);
+  --color-sidebar-text: #aeb5dc;
+  --color-sidebar-text-strong: rgba(255, 255, 255, 0.94);
+  --color-sidebar-hover: rgba(234, 236, 248, 0.08);
+  --color-sidebar-active: rgba(234, 236, 248, 0.12);
   --color-sidebar-border: rgba(255, 255, 255, 0.12);
 
-  /* ------------------------------------------------------------------ */
-  /* Layout, breakpoint context, z-index (token plan §11)               */
-  /* ------------------------------------------------------------------ */
-  --layout-sidebar-expanded: 276px;
-  --layout-sidebar-collapsed: 76px;
+  /* Layout */
+  --layout-sidebar-expanded: 240px;
+  --layout-sidebar-collapsed: 72px;
   --layout-header-height: 64px;
-  --layout-content-max-wide: 1600px;
-  --layout-content-max-standard: 1360px;
+  --layout-content-max-wide: 1360px;
+  --layout-content-max-standard: 1136px;
+  --layout-page-gutter: 32px;
 
+  /* Operational surfaces */
+  --surface-section-radius: 20px;
+  --surface-card-radius: 14px;
+  --table-row-height: 58px;
+  --control-height-sm: 36px;
+  --control-height-md: 44px;
+
+  /* Z index */
   --z-base: 0;
   --z-sticky: 10;
   --z-shell: 30;
@@ -91,9 +90,7 @@
   --z-toast: 80;
   --z-tooltip: 90;
 
-  /* ------------------------------------------------------------------ */
-  /* Iconography (token plan §12)                                       */
-  /* ------------------------------------------------------------------ */
+  /* Iconography */
   --icon-xs: 14px;
   --icon-sm: 16px;
   --icon-md: 20px;
@@ -101,35 +98,24 @@
   --icon-xl: 32px;
   --icon-display: 48px;
 
-  /* ------------------------------------------------------------------ */
-  /* Chart palette (token plan §13) — consumed by chart wrappers only   */
-  /* ------------------------------------------------------------------ */
+  /* Charts */
   --chart-cat-1: var(--ef-primary-700);
   --chart-cat-2: var(--ef-secondary-blue-600);
   --chart-cat-3: var(--ef-green-400);
   --chart-cat-4: var(--ef-brown-400);
   --chart-cat-5: var(--ef-navy-900);
   --chart-cat-6: #95999e;
-  --chart-grid: #e2e3e5;
+  --chart-grid: #e5e7eb;
 
-  /* ------------------------------------------------------------------ */
-  /* Shadows (token plan §9) — restrained, navy-derived                 */
-  /* ------------------------------------------------------------------ */
-  --shadow-xs: 0 1px 2px rgba(15, 24, 34, 0.05);
-  --shadow-sm: 0 2px 8px rgba(15, 24, 34, 0.08);
-  --shadow-md: 0 8px 24px rgba(15, 24, 34, 0.12);
-  --shadow-shell: 0 12px 36px rgba(15, 24, 34, 0.08);
-  --shadow-sticky: 0 -1px 0 #e2e3e5, 0 -4px 12px rgba(15, 24, 34, 0.06);
+  /* Elevation — subtle, border-led rather than card-heavy. */
+  --shadow-xs: 0 1px 2px rgba(15, 24, 34, 0.04);
+  --shadow-sm: 0 4px 14px rgba(15, 24, 34, 0.06);
+  --shadow-md: 0 12px 30px rgba(15, 24, 34, 0.09);
+  --shadow-shell: 0 18px 42px rgba(15, 24, 34, 0.09);
+  --shadow-sticky: 0 1px 0 rgba(210, 214, 219, 0.75);
 }
 
-/*
- * Tailwind theme wiring. `inline` keeps this file's :root definitions as the
- * single source: utilities inline the var() references and Tailwind emits no
- * duplicate variables.
- */
 @theme inline {
-  /* Reset default palette: arbitrary Tailwind palette classes are prohibited
-     in product components (03-color-system.md §8). */
   --color-*: initial;
 
   --color-canvas: var(--color-canvas);
@@ -149,12 +135,14 @@
 
   --color-sidebar-surface: var(--color-sidebar-surface);
   --color-sidebar-text: var(--color-sidebar-text);
+  --color-sidebar-text-strong: var(--color-sidebar-text-strong);
   --color-sidebar-hover: var(--color-sidebar-hover);
   --color-sidebar-active: var(--color-sidebar-active);
   --color-sidebar-border: var(--color-sidebar-border);
 
   --color-border-default: var(--color-border-default);
   --color-border-strong: var(--color-border-strong);
+  --color-divider-soft: var(--color-divider-soft);
 
   --color-action-primary: var(--color-action-primary);
   --color-action-primary-hover: var(--color-action-primary-hover);
@@ -185,11 +173,11 @@
 }
 
 @theme {
-  /* Type scale (token plan §6) */
+  /* Typography — Aktiv Grotesk through the approved project stack/fallback. */
   --text-display: 36px;
   --text-display--line-height: 44px;
-  --text-h1: 28px;
-  --text-h1--line-height: 38px;
+  --text-h1: 30px;
+  --text-h1--line-height: 40px;
   --text-h2: 22px;
   --text-h2--line-height: 32px;
   --text-h3: 18px;
@@ -203,20 +191,18 @@
   --text-table: 13px;
   --text-table--line-height: 20px;
 
-  /* Radius (token plan §8) — nothing larger than 12px in operational UI */
   --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 
-  /* Breakpoints (token plan §11) */
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1440px;
 
-  /* Easing (token plan §10) */
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-enter: cubic-bezier(0, 0, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);

@@ -1,4 +1,4 @@
-import { ArrowUpLeft, CalendarClock } from 'lucide-react'
+import { ArrowLeft, ArrowUpLeft, CalendarClock } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { Badge } from '@/components/ui/Badge'
@@ -13,19 +13,19 @@ export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
 
   return (
     <Card padding="none" className="overflow-hidden">
-      <div className="border-b border-border-default px-5 py-5">
+      <div className="px-5 py-5 md:px-6">
         <SectionHeading
           className="mb-0"
-          title="ما يستحق قريبًا"
-          description="ودائع تحتاج تجهيز قرار الاستحقاق."
+          title="الاستحقاقات القادمة"
+          description="ودائع ضمن نافذة التنبيه وتحتاج تجهيز قرار الاستحقاق."
           action={
             maturities.length > 0 ? (
               <Link
                 to="/deposits?filter=approaching-maturity"
-                aria-label="عرض جميع الودائع القريبة من الاستحقاق"
-                className="text-action-primary"
+                className="inline-flex items-center gap-1 text-small font-semibold text-action-primary hover:underline"
               >
-                <Icon icon={ArrowUpLeft} size="sm" mirrorInRtl />
+                عرض الكل
+                <Icon icon={ArrowUpLeft} size="xs" mirrorInRtl />
               </Link>
             ) : undefined
           }
@@ -37,41 +37,58 @@ export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
           icon={CalendarClock}
           title="لا توجد استحقاقات قريبة"
           description="لا توجد ودائع ضمن نافذة التنبيه الحالية."
-          className="py-9"
+          className="border-t border-divider-soft py-9"
         />
       ) : (
-        <ol className="divide-y divide-border-default">
-          {maturities.map((maturity) => (
-            <li key={maturity.depositId}>
-              <Link
-                to={`/deposits/${maturity.depositId}`}
-                className="block px-5 py-4 transition-colors hover:bg-surface-raised"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="truncate font-semibold text-text-primary">{maturity.bankName}</p>
-                    <bdi className="mt-0.5 block text-small text-text-secondary">
-                      {maturity.depositId}
-                    </bdi>
-                  </div>
-                  <Badge variant={maturity.daysUntilMaturity <= 7 ? 'warning' : 'neutral'}>
-                    {maturity.daysUntilMaturity === 0
-                      ? 'يستحق اليوم'
-                      : `متبقٍ ${maturity.daysUntilMaturity} يومًا`}
-                  </Badge>
-                </div>
-                <div className="mt-3 flex items-end justify-between gap-3">
-                  <span className="ef-financial font-bold text-text-primary">
+        <div className="border-t border-divider-soft">
+          <div className="hidden grid-cols-[minmax(0,1fr)_9rem_7rem_7rem_2.5rem] items-center gap-3 bg-surface-subtle px-6 py-3 text-table font-semibold text-text-secondary md:grid">
+            <span>البنك والوديعة</span>
+            <span>أصل الوديعة</span>
+            <span>العائد</span>
+            <span>الاستحقاق</span>
+            <span className="sr-only">فتح</span>
+          </div>
+          <ol className="divide-y divide-divider-soft">
+            {maturities.map((maturity) => (
+              <li key={maturity.depositId}>
+                <Link
+                  to={`/deposits/${maturity.depositId}`}
+                  className="group grid gap-3 px-5 py-4 transition-colors hover:bg-surface-raised md:grid-cols-[minmax(0,1fr)_9rem_7rem_7rem_2.5rem] md:items-center md:px-6"
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate font-semibold text-text-primary group-hover:text-action-primary">
+                      {maturity.bankName}
+                    </span>
+                    <bdi className="mt-1 block text-small text-text-muted">{maturity.depositId}</bdi>
+                  </span>
+
+                  <span className="ef-financial font-semibold text-text-primary">
                     <FinancialValue value={maturity.principal} kind="currency-compact" />
                   </span>
-                  <span className="text-small text-text-secondary">
-                    <FinancialValue value={maturity.maturityDate} kind="date" />
+
+                  <span className="ef-financial text-small font-semibold text-text-primary">
+                    <FinancialValue value={maturity.rate} kind="percent" />
                   </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
+
+                  <span className="flex flex-wrap items-center gap-2">
+                    <span className="text-small text-text-secondary">
+                      <FinancialValue value={maturity.maturityDate} kind="date" />
+                    </span>
+                    <Badge variant={maturity.daysUntilMaturity <= 7 ? 'warning' : 'neutral'}>
+                      {maturity.daysUntilMaturity === 0
+                        ? 'اليوم'
+                        : `${maturity.daysUntilMaturity} يوم`}
+                    </Badge>
+                  </span>
+
+                  <span className="flex size-8 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
+                    <Icon icon={ArrowLeft} size="sm" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
       )}
     </Card>
   )

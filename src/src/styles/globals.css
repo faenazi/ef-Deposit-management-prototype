@@ -4,24 +4,54 @@
 @import './motion.css';
 
 html {
+  min-width: 320px;
   font-family: var(--font-family-base);
   background-color: var(--color-canvas);
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 body {
   min-width: 320px;
   min-height: 100dvh;
   margin: 0;
+  overflow-x: hidden;
   background-color: var(--color-canvas);
   color: var(--color-text-primary);
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100dvh;
 }
 
 ::selection {
   background-color: var(--color-surface-brand-soft);
   color: var(--color-text-primary);
+}
+
+* {
+  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--color-border-strong);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 a,
@@ -32,21 +62,23 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-@media (max-width: 767px) {
-  body {
-    background-color: var(--color-surface);
-  }
+button,
+a {
+  touch-action: manipulation;
 }
 
-/* Visible keyboard focus everywhere (00-brand-source-of-truth.md §7.9).
-   Components on navy/primary-blue surfaces override with a white outline. */
 :focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
 }
 
-/* Financial values are directionally safe and vertically stable. */
 .ef-financial {
   font-variant-numeric: tabular-nums;
   unicode-bidi: isolate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
