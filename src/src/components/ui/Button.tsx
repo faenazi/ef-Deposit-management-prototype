@@ -40,8 +40,8 @@ const variantClass: Record<ButtonVariant, string> = {
 
 const sizeClass: Record<ButtonSize, string> = {
   sm: 'min-h-9 px-3 text-small',
-  md: 'min-h-10 px-4 text-body',
-  lg: 'min-h-11 px-5 text-body-lg',
+  md: 'min-h-11 px-4 text-body',
+  lg: 'min-h-12 px-5 text-body-lg',
 }
 
 export function Button({

@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowUpLeft, Landmark } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, ArrowUpLeft, Landmark } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { Card, SectionHeading } from '@/components/ui/Card'
@@ -8,7 +8,7 @@ import { Icon } from '@/components/ui/Icon'
 import type { DashboardSummary } from '@/services/dashboard-service'
 
 export function PortfolioDistribution({ summary }: { summary: DashboardSummary }) {
-  const banks = [...summary.activeBanks.byBank].sort((a, b) => b.value - a.value).slice(0, 5)
+  const banks = [...summary.activeBanks.byBank].sort((a, b) => b.value - a.value).slice(0, 4)
   const total = summary.activeBanks.totalValue
   const largestShare = banks[0] && total > 0 ? Math.round((banks[0].value / total) * 100) : 0
 
@@ -39,7 +39,7 @@ export function PortfolioDistribution({ summary }: { summary: DashboardSummary }
         />
       ) : (
         <>
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-4 rounded-lg bg-surface-brand-muted px-4 py-4">
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-4 rounded-lg bg-surface-brand-muted px-4 py-4 md:mb-4">
             <div className="min-w-0">
               <p className="text-small font-medium text-text-muted">أعلى تعرض حالي</p>
               <p className="mt-1 truncate text-body font-bold text-text-primary">{banks[0].bankName}</p>
@@ -55,30 +55,25 @@ export function PortfolioDistribution({ summary }: { summary: DashboardSummary }
             </div>
           </div>
 
-          <ol className="space-y-4">
-            {banks.map((bank, index) => {
+          <ol className="divide-y divide-divider-soft">
+            {banks.slice(1).map((bank, index) => {
               const percentage = total > 0 ? (bank.value / total) * 100 : 0
               return (
-                <li key={bank.bankId}>
-                  <div className="mb-2 flex items-end justify-between gap-4">
-                    <div className="min-w-0">
-                      <p className="truncate text-small font-semibold text-text-primary">
-                        <span className="me-2 text-text-muted">{index + 1}</span>
-                        {bank.bankName}
-                      </p>
-                      <p className="mt-0.5 text-small text-text-secondary">
-                        <FinancialValue value={bank.value} kind="currency-compact" />
-                      </p>
-                    </div>
-                    <bdi className="ef-financial shrink-0 text-small font-bold text-text-primary">
+                <li key={bank.bankId} className="flex items-center justify-between gap-4 py-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-small font-semibold text-text-primary">
+                      <span className="me-2 text-text-muted">{index + 2}</span>
+                      {bank.bankName}
+                    </p>
+                    <p className="mt-0.5 text-small text-text-secondary">
+                      <FinancialValue value={bank.value} kind="currency-compact" />
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2.5">
+                    <span aria-hidden="true" className="size-2 rounded-full bg-action-primary" />
+                    <bdi className="ef-financial text-small font-bold text-text-primary">
                       {Math.round(percentage)}%
                     </bdi>
-                  </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-surface-brand-soft">
-                    <div
-                      className="h-full rounded-full bg-action-primary"
-                      style={{ width: `${Math.max(percentage, 4)}%` }}
-                    />
                   </div>
                 </li>
               )
@@ -86,15 +81,23 @@ export function PortfolioDistribution({ summary }: { summary: DashboardSummary }
           </ol>
 
           {summary.highConcentrationBanks.length > 0 && (
-            <div className="mt-5 flex items-start gap-3 rounded-lg border border-warning-border/60 bg-warning-bg px-4 py-3">
+            <Link
+              to="/deposits"
+              className="group mt-4 flex min-h-11 items-start gap-3 rounded-lg border border-warning-border/60 bg-warning-bg px-4 py-3 transition-colors hover:border-warning-border"
+            >
               <Icon icon={AlertTriangle} size="sm" className="mt-0.5 shrink-0 text-warning-text" />
-              <div>
-                <p className="text-small font-semibold text-warning-text">تركز يتجاوز الحد الإرشادي</p>
-                <p className="mt-0.5 text-small leading-5 text-warning-text">
-                  راجع التعرض لدى {summary.highConcentrationBanks.map((bank) => bank.bankName).join('، ')}.
-                </p>
-              </div>
-            </div>
+              <span className="min-w-0 grow">
+                <span className="block text-small font-semibold text-warning-text">
+                  راجع التركز قبل الاستثمار
+                </span>
+                <span className="mt-0.5 block line-clamp-2 text-small leading-5 text-warning-text">
+                  يتجاوز التعرض لدى {summary.highConcentrationBanks.map((bank) => bank.bankName).join('، ')} الحد الإرشادي.
+                </span>
+              </span>
+              <span className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/60 text-warning-text">
+                <Icon icon={ArrowLeft} size="sm" />
+              </span>
+            </Link>
           )}
         </>
       )}

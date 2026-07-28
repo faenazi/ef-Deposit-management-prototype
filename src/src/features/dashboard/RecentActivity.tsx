@@ -37,7 +37,7 @@ export function RecentActivity({ summary }: { summary: DashboardSummary }) {
 
   return (
     <Card padding="none" className="overflow-hidden">
-      <div className="px-5 py-5 md:px-6">
+      <div className="px-4 py-4 md:px-6 md:py-5">
         <SectionHeading
           className="mb-0"
           title="آخر التحديثات"
@@ -67,26 +67,28 @@ export function RecentActivity({ summary }: { summary: DashboardSummary }) {
               <li key={activity.id}>
                 <Link
                   to={href}
-                  className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 py-4 transition-colors hover:bg-surface-raised md:px-6"
+                  className="group grid min-h-11 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 transition-colors hover:bg-surface-raised md:px-6 md:py-4"
                 >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-surface-brand-muted text-action-primary">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-brand-muted text-action-primary md:size-9">
                     <Icon icon={ActivityIcon} size="sm" />
                   </span>
 
                   <span className="min-w-0">
-                    <span className="block truncate text-body font-semibold text-text-primary group-hover:text-action-primary">
+                    <span className="block line-clamp-1 text-body font-semibold text-text-primary group-hover:text-action-primary">
                       {activity.description}
                     </span>
-                    <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-text-secondary">
-                      <span>{activity.actor}</span>
+                    <span className="mt-0.5 flex min-w-0 items-center gap-x-1.5 text-small text-text-secondary">
+                      <span className="max-w-24 truncate sm:max-w-none">{activity.actor}</span>
                       <span aria-hidden="true">·</span>
-                      <span>{formatDate(activity.timestamp)}</span>
-                      <span aria-hidden="true">·</span>
-                      <bdi className="font-semibold text-action-secondary">{activity.entityId}</bdi>
+                      <span className="shrink-0">{formatDate(activity.timestamp)}</span>
+                      <span aria-hidden="true" className="hidden sm:inline">·</span>
+                      <bdi className="hidden truncate font-semibold text-action-secondary sm:inline">
+                        {activity.entityId}
+                      </bdi>
                     </span>
                   </span>
 
-                  <span className="flex size-8 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
+                  <span className="flex size-9 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
                     <Icon icon={ArrowLeft} size="sm" />
                   </span>
                 </Link>

@@ -32,33 +32,34 @@ export function ExecutiveSummary({ summary }: { summary: DashboardSummary }) {
       aria-labelledby="portfolio-summary-title"
       className="overflow-hidden rounded-xl border border-divider-soft bg-surface shadow-xs"
     >
-      <div className="flex flex-wrap items-start justify-between gap-4 px-5 pb-4 pt-5 md:px-6 md:pt-6">
+      <div className="flex flex-wrap items-start justify-between gap-3 px-4 pb-3 pt-4 md:px-6 md:pb-4 md:pt-5">
         <div>
-          <h2 id="portfolio-summary-title" className="text-h2 font-bold text-action-primary">
+          <h2 id="portfolio-summary-title" className="text-h3 font-bold text-action-primary md:text-h2">
             ملخص المحفظة
           </h2>
-          <p className="mt-1.5 max-w-2xl text-body leading-6 text-text-secondary">
+          <p className="mt-1 hidden max-w-2xl text-small leading-5 text-text-secondary sm:block md:text-body md:leading-6">
             {summaryLabel[summary.roleId]}
           </p>
         </div>
-        <span className="rounded-full bg-canvas px-3 py-1.5 text-small font-medium text-text-secondary">
+        <span className="hidden rounded-full bg-canvas px-3 py-1.5 text-small font-medium text-text-secondary sm:inline-flex">
           آخر تحديث: {formatDate(summary.referenceDate)}
         </span>
       </div>
 
-      <div className="grid gap-3 border-t border-divider-soft bg-surface-subtle/60 p-4 sm:grid-cols-2 md:p-5 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-2.5 border-t border-divider-soft bg-surface-subtle/60 p-3 sm:gap-3 md:grid-cols-3 md:p-5 xl:grid-cols-[1.2fr_repeat(5,minmax(0,1fr))]">
         <SummaryMetric
           icon={Landmark}
-          label="إجمالي الودائع"
+          label="أصل الودائع النشط"
           value={<FinancialValue value={summary.activeBanks.totalValue} kind="currency-compact" />}
-          context={`${summary.activeBanks.count} وديعة نشطة`}
+          context={`${summary.activeBanks.count} وديعة`}
           tone="primary"
+          primary
         />
         <SummaryMetric
           icon={TrendingUp}
-          label="متوسط العائد المرجّح"
+          label="العائد المرجّح"
           value={<FinancialValue value={summary.weightedAverageReturn} kind="percent" />}
-          context="للـودائع النشطة"
+          context="للمحفظة النشطة"
           tone="blue"
         />
         <SummaryMetric
@@ -67,27 +68,29 @@ export function ExecutiveSummary({ summary }: { summary: DashboardSummary }) {
           value={<FinancialValue value={summary.totalExpectedReturn} kind="currency-compact" />}
           context="حتى نهاية مدد الودائع"
           tone="success"
+          wrapValue
         />
         <SummaryMetric
           icon={FileClock}
-          label="طلبات تحت الإجراء"
+          label="قيد الإجراء"
           value={summary.pendingRequests.count}
           context={<FinancialValue value={summary.pendingRequests.value} kind="currency-compact" />}
           tone="neutral"
         />
         <SummaryMetric
           icon={CalendarClock}
-          label="استحقاقات قريبة"
+          label="تستحق قريبًا"
           value={summary.approachingMaturity.count}
           context="خلال 14 يومًا"
           tone="warning"
         />
         <SummaryMetric
           icon={CircleAlert}
-          label="تنبيهات عاجلة"
+          label="تحتاج انتباهًا"
           value={attentionCount}
           context={`${summary.overdueTasks} متأخرة · ${summary.returnedRequests} معادة`}
           tone="danger"
+          hideOnMobile
         />
       </div>
     </section>
@@ -109,26 +112,47 @@ function SummaryMetric({
   value,
   context,
   tone,
+  primary = false,
+  wrapValue = false,
+  hideOnMobile = false,
 }: {
   icon: Parameters<typeof Icon>[0]['icon']
   label: string
   value: ReactNode
   context: ReactNode
   tone: keyof typeof toneClass
+  primary?: boolean
+  wrapValue?: boolean
+  hideOnMobile?: boolean
 }) {
   return (
-    <article className="group flex min-h-[150px] flex-col rounded-lg border border-divider-soft bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm">
+    <article
+      className={[
+        'group flex min-h-[90px] flex-col rounded-lg border border-divider-soft bg-surface p-2.5 transition-colors hover:border-border-strong',
+        'md:min-h-[132px] md:p-4 xl:min-h-[144px]',
+        primary ? 'col-span-2 min-h-[96px] border-action-primary/15 bg-surface-brand-muted md:col-span-1' : '',
+        hideOnMobile ? 'hidden sm:flex' : '',
+      ].join(' ')}
+    >
       <div className="flex items-start justify-between gap-3">
         <p className="text-small font-semibold leading-5 text-text-secondary">{label}</p>
-        <span className={`flex size-9 shrink-0 items-center justify-center rounded-full ${toneClass[tone]}`}>
+        <span className={`flex size-6 shrink-0 items-center justify-center rounded-full md:size-9 ${toneClass[tone]}`}>
           <Icon icon={icon} size="sm" />
         </span>
       </div>
-      <div className="mt-auto pt-5">
-        <p className="ef-financial text-[26px] font-bold leading-8 tracking-[-0.025em] text-text-primary">
+      <div className="mt-auto pt-1 md:pt-5">
+        <p
+          className={[
+            'ef-financial font-bold tracking-[-0.025em] text-text-primary',
+            primary ? 'text-[23px] leading-8 md:text-[25px]' : 'text-[20px] leading-7 md:text-[23px]',
+            wrapValue ? 'max-w-full leading-6' : 'whitespace-nowrap',
+          ].join(' ')}
+        >
           {value}
         </p>
-        <p className="mt-1.5 truncate text-small text-text-muted">{context}</p>
+        <p className="mt-0.5 line-clamp-1 text-[11px] leading-5 text-text-muted md:mt-1">
+          {context}
+        </p>
       </div>
     </article>
   )
