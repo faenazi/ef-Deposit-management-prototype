@@ -3,13 +3,13 @@ import { FilePlus2 } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { useUser } from '@/app/user-context'
+import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { Skeleton } from '@/components/ui/Skeleton'
 import type { RoleCode } from '@/domain/roles'
 import { cn } from '@/lib/cn'
 import { PageContainer } from '@/layouts/PageContainer'
-import { PageHeader } from '@/layouts/PageHeader'
 import { fetchDashboardSummary, type DashboardSummary } from '@/services/dashboard-service'
 import { Exceptions } from './Exceptions'
 import { ExecutiveSummary } from './ExecutiveSummary'
@@ -21,38 +21,51 @@ import { UpcomingMaturities } from './UpcomingMaturities'
 
 const roleContext: Record<RoleCode, string> = {
   'deposit-specialist':
-    'إليك ملخص محفظة الودائع والطلبات والمهام التي تتطلب إجراءك اليوم.',
+    'ابدأ بالمهام ذات الأولوية، ثم راجع الطلبات المعادة والاستحقاقات التي تحتاج تجهيز قرار.',
   'treasury-general-manager':
-    'راجع قرارات الاعتماد والتعرض البنكي والاستحقاقات مرتبة حسب أثرها المالي.',
+    'راجع الاعتمادات المعلقة والتعرض البنكي والاستحقاقات حسب أثرها المالي وموعدها.',
   'investment-treasury-executive':
-    'موجز تنفيذي للطلبات مرتفعة القيمة ووضع المحفظة وأهم مؤشرات التركّز والاستحقاق.',
+    'ركز على القرارات مرتفعة القيمة ومؤشرات التركّز والاستحقاقات ذات الأثر التنفيذي.',
   'investment-support':
-    'المراجعات المسندة إليك ونواقص المستندات التي تعيق انتقال الطلبات إلى المالية.',
+    'راجع التوصيات والمستندات الناقصة التي تمنع انتقال الطلبات إلى المرحلة المالية.',
   'finance-reviewer':
-    'الطلبات الجاهزة للمراجعة المالية والقيم المعلقة قبل تنفيذ التحويل.',
+    'تابع الطلبات الجاهزة للمراجعة المالية والقيم المعلقة قبل تنفيذ التحويل.',
   'accounting-executor':
-    'عمليات التحويل والأدلة المحاسبية التي يجب استكمالها قبل تفعيل الوديعة.',
+    'تابع عمليات التحويل والإثباتات المحاسبية المطلوبة قبل تفعيل الوديعة.',
   'system-admin':
-    'موجز تشغيلي لبيانات العرض التجريبي وحالة الوصول إلى وحدات المنصة.',
+    'استعرض بيانات المنصة التجريبية ومسارات العمل دون اتخاذ قرارات مالية نيابة عن المستخدمين.',
   'read-only-user':
-    'عرض موحد للوضع المالي وسير الطلبات دون صلاحيات تنفيذية.',
+    'استعرض الموقف المالي وسير الطلبات دون ظهور إجراءات إنشاء أو اعتماد أو تنفيذ.',
 }
+
+const maturityRoles = new Set<RoleCode>([
+  'deposit-specialist',
+  'treasury-general-manager',
+  'investment-treasury-executive',
+  'read-only-user',
+])
+
+const portfolioRoles = new Set<RoleCode>([
+  'treasury-general-manager',
+  'investment-treasury-executive',
+  'read-only-user',
+])
 
 function DashboardSkeleton() {
   return (
     <div className="space-y-6" aria-label="جارٍ تحميل لوحة المعلومات">
-      <Skeleton className="h-[390px] rounded-xl" />
+      <Skeleton className="h-[330px] rounded-xl" />
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(19rem,0.75fr)]">
         <Skeleton className="h-96 rounded-xl" />
         <Skeleton className="h-96 rounded-xl" />
       </div>
-      <Skeleton className="h-80 rounded-xl" />
+      <Skeleton className="h-72 rounded-xl" />
     </div>
   )
 }
 
 export function DashboardPage() {
-  const { user, role, can } = useUser()
+  const { role, can } = useUser()
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -83,18 +96,23 @@ export function DashboardPage() {
 
   return (
     <PageContainer>
-      <PageHeader
-        eyebrow={role.nameAr}
-        title={`مرحبًا، ${user.nameAr.split(' ')[0]}`}
-        description={roleContext[role.code]}
-        primaryAction={
-          can('requests.create') ? (
-            <Link to="/investment-requests/new">
-              <Button leadingIcon={FilePlus2}>طلب استثمار جديد</Button>
-            </Link>
-          ) : undefined
-        }
-      />
+      <div className="mb-6 flex flex-col gap-4 border-b border-divider-soft pb-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="primary">{role.nameAr}</Badge>
+            <span className="text-small font-medium text-text-muted">ملخص العمل اليومي</span>
+          </div>
+          <p className="mt-2 max-w-3xl text-body leading-6 text-text-secondary">
+            {roleContext[role.code]}
+          </p>
+        </div>
+
+        {can('requests.create') && (
+          <Link to="/investment-requests/new" className="shrink-0">
+            <Button leadingIcon={FilePlus2}>طلب استثمار جديد</Button>
+          </Link>
+        )}
+      </div>
 
       {loading && <DashboardSkeleton />}
 
@@ -107,35 +125,52 @@ export function DashboardPage() {
         </div>
       )}
 
-      {!loading && summary && (
-        <div className="space-y-6">
-          <ExecutiveSummary summary={summary} />
+      {!loading && summary && <DashboardContent summary={summary} />}
+    </PageContainer>
+  )
+}
 
-          <div
-            className={cn(
-              'grid items-start gap-6',
-              summary.exceptions.length > 0 &&
-                'lg:grid-cols-[minmax(0,1.55fr)_minmax(19rem,0.75fr)]',
-            )}
-          >
-            <PriorityTasks summary={summary} />
-            {summary.exceptions.length > 0 && <Exceptions exceptions={summary.exceptions} />}
-          </div>
+function DashboardContent({ summary }: { summary: DashboardSummary }) {
+  const showTasks = summary.roleId !== 'read-only-user'
+  const showMaturities = maturityRoles.has(summary.roleId)
+  const showPortfolio = portfolioRoles.has(summary.roleId)
+  const showRecentActivity = summary.roleId !== 'investment-treasury-executive'
+  const hasExceptions = summary.exceptions.length > 0
 
-          <UpcomingMaturities summary={summary} />
+  return (
+    <div className="space-y-6">
+      <ExecutiveSummary summary={summary} />
 
-          {(summary.roleId === 'investment-treasury-executive' ||
-            summary.roleId === 'treasury-general-manager' ||
-            summary.roleId === 'read-only-user') && (
-            <div className="grid items-start gap-6 lg:grid-cols-2">
-              <PortfolioDistribution summary={summary} />
-              <RequestPipeline summary={summary} />
-            </div>
+      {showTasks ? (
+        <div
+          className={cn(
+            'grid items-start gap-6',
+            hasExceptions && 'lg:grid-cols-[minmax(0,1.55fr)_minmax(19rem,0.75fr)]',
           )}
+        >
+          <PriorityTasks summary={summary} />
+          {hasExceptions && <Exceptions exceptions={summary.exceptions} />}
+        </div>
+      ) : (
+        hasExceptions && <Exceptions exceptions={summary.exceptions} />
+      )}
 
-          {summary.roleId !== 'investment-treasury-executive' && <RecentActivity summary={summary} />}
+      {showMaturities && <UpcomingMaturities summary={summary} />}
+
+      {showPortfolio ? (
+        <>
+          <div className="grid items-start gap-6 lg:grid-cols-2">
+            <PortfolioDistribution summary={summary} />
+            <RequestPipeline summary={summary} />
+          </div>
+          {showRecentActivity && <RecentActivity summary={summary} />}
+        </>
+      ) : (
+        <div className="grid items-start gap-6 lg:grid-cols-2">
+          <RequestPipeline summary={summary} />
+          {showRecentActivity && <RecentActivity summary={summary} />}
         </div>
       )}
-    </PageContainer>
+    </div>
   )
 }

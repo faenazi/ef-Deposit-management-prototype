@@ -33,12 +33,14 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ title, description, action, className }: SectionHeadingProps) {
   return (
-    <div className={cn('mb-4 flex flex-wrap items-start justify-between gap-3', className)}>
+    <div className={cn('mb-5 flex flex-wrap items-start justify-between gap-4', className)}>
       <div className="min-w-0">
-        <h3 className="text-h3 font-bold tracking-[-0.01em] text-action-primary">{title}</h3>
-        {description && <p className="mt-1 text-body text-text-secondary">{description}</p>}
+        <h3 className="text-h2 font-bold tracking-[-0.015em] text-action-primary">{title}</h3>
+        {description && (
+          <p className="mt-1.5 max-w-2xl text-body leading-6 text-text-secondary">{description}</p>
+        )}
       </div>
-      {action}
+      {action && <div className="shrink-0">{action}</div>}
     </div>
   )
 }
