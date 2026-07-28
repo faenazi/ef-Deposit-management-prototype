@@ -831,7 +831,7 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 - Production build: `npm run build` — passed.
 - RTL/accessibility review: semantic headings, labelled navigation/actions, visible focus, bidi-isolated financial values, text-plus-color states, and logical RTL layout preserved.
 - Responsive implementation review: verified in source against 1440×900, 1280×800, 1024×768, 768×1024, and 390×844 rules; grids collapse to one column below 768px, sidebar becomes a drawer below 1024px, and no fixed-width dashboard content was introduced.
-- Screenshot review: local Vite server started successfully, but the available cloud browser blocks `localhost`/`127.0.0.1` with `ERR_BLOCKED_BY_CLIENT`; local Chromium download was also blocked by the environment CDN policy. Automated screenshots could not be captured in this execution environment and must be added during product-owner review from a standard browser.
+- Screenshot review: local Vite started successfully, but the available cloud browser blocks `localhost`/`127.0.0.1` with `ERR_BLOCKED_BY_CLIENT`; the fallback Chromium download was blocked by the environment CDN policy; and the successful Vercel PR Preview requires Vercel sign-in in the available browser. Automated product screenshots could not be captured in this execution environment and must be added during product-owner review from an authorized standard browser.
 
 ### Known Limitations
 
