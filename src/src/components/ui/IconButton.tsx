@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react'
+import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import type { LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/cn'
@@ -16,7 +16,7 @@ interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 }
 
 /** Icon-only action with a mandatory accessible name. */
-export function IconButton({
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton({
   icon,
   label,
   variant = 'ghost',
@@ -26,14 +26,15 @@ export function IconButton({
   className,
   type = 'button',
   ...rest
-}: IconButtonProps) {
+}, ref) {
   return (
     <button
+      ref={ref}
       type={type}
       aria-label={label}
       title={label}
       className={cn(
-        'inline-flex size-10 items-center justify-center rounded-sm',
+        'inline-flex size-11 items-center justify-center rounded-md',
         'transition-colors duration-[var(--motion-fast)]',
         tone === 'dark'
           ? 'text-sidebar-text hover:bg-sidebar-hover hover:text-white focus-visible:outline-white'
@@ -47,4 +48,4 @@ export function IconButton({
       <Icon icon={icon} size={iconSize} mirrorInRtl={mirrorInRtl} />
     </button>
   )
-}
+})

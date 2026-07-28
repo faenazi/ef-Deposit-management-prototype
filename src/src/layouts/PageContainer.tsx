@@ -13,7 +13,7 @@ export function PageContainer({ width = 'standard', children, className }: PageC
   return (
     <div
       className={cn(
-        'mx-auto w-full px-4 pb-8 pt-5 md:px-5 md:pb-10 md:pt-7 lg:px-0 lg:pb-12 lg:pt-8',
+        'mx-auto w-full px-4 pb-8 pt-4 md:px-5 md:pb-10 md:pt-6 lg:px-0 lg:pb-12 lg:pt-7',
         width === 'standard'
           ? 'max-w-[var(--layout-content-max-standard)]'
           : 'max-w-[var(--layout-content-max-wide)]',
