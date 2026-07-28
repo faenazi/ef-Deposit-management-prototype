@@ -1,7 +1,9 @@
 import { Bell, Languages, Menu } from 'lucide-react'
+import { useLocation } from 'react-router'
 
-import { cn } from '@/lib/cn'
+import { useUser } from '@/app/user-context'
 import { Icon } from '@/components/ui/Icon'
+import { cn } from '@/lib/cn'
 import { UserSwitcher } from '@/layouts/UserSwitcher'
 
 interface TopHeaderProps {
@@ -11,11 +13,16 @@ interface TopHeaderProps {
 
 /** Compact utility header aligned with the EF internal-portal frame. */
 export function TopHeader({ currentPageLabel, onOpenMobileNav }: TopHeaderProps) {
+  const { pathname } = useLocation()
+  const { user } = useUser()
+  const isDashboard = pathname === '/'
+  const firstName = user.nameAr.split(' ')[0]
+
   return (
     <header
       className={cn(
         'sticky top-0 z-[var(--z-shell)] h-[var(--layout-header-height)] shrink-0',
-        'bg-canvas/95 backdrop-blur-sm',
+        'border-b border-divider-soft bg-canvas',
       )}
     >
       <div className="mx-auto flex h-full w-full max-w-[var(--layout-content-max-standard)] items-center gap-3 px-4 md:px-5 lg:px-0">
@@ -29,8 +36,17 @@ export function TopHeader({ currentPageLabel, onOpenMobileNav }: TopHeaderProps)
         </button>
 
         <div className="min-w-0">
-          <p className="truncate text-h3 font-bold text-text-primary">{currentPageLabel}</p>
-          <p className="hidden text-small text-text-muted sm:block">منصة إدارة الودائع الاستثمارية</p>
+          <p
+            className={cn(
+              'truncate font-bold tracking-[-0.02em] text-text-primary',
+              isDashboard ? 'text-[26px] leading-9 md:text-[30px] md:leading-10' : 'text-h3',
+            )}
+          >
+            {isDashboard ? `مرحبًا، ${firstName}!` : currentPageLabel}
+          </p>
+          {!isDashboard && (
+            <p className="hidden text-small text-text-muted sm:block">منصة إدارة الودائع الاستثمارية</p>
+          )}
         </div>
 
         <div className="ms-auto flex items-center gap-1.5 sm:gap-2">
