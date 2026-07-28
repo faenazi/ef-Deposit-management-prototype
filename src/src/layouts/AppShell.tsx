@@ -40,7 +40,7 @@ export function AppShell() {
         تخطي إلى المحتوى الرئيسي
       </a>
 
-      <div className="flex min-h-dvh">
+      <div className="flex min-h-dvh bg-canvas">
         {/* Desktop sidebar — first flex child renders on the right in RTL. */}
         {/* The navy surface itself separates the sidebar from the light
             content; a light border token on that edge would read as a halo
@@ -64,7 +64,7 @@ export function AppShell() {
             currentPageLabel={currentPageLabel}
             onOpenMobileNav={() => setMobileNavOpen(true)}
           />
-          <main id="main-content" className="grow">
+          <main id="main-content" className="grow overflow-x-clip">
             <Outlet />
           </main>
         </div>

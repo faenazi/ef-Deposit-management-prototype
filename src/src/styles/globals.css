@@ -5,13 +5,37 @@
 
 html {
   font-family: var(--font-family-base);
+  background-color: var(--color-canvas);
+  color-scheme: light;
 }
 
 body {
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
   background-color: var(--color-canvas);
   color: var(--color-text-primary);
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
+}
+
+::selection {
+  background-color: var(--color-surface-brand-soft);
+  color: var(--color-text-primary);
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-color: var(--color-surface);
+  }
 }
 
 /* Visible keyboard focus everywhere (00-brand-source-of-truth.md §7.9).

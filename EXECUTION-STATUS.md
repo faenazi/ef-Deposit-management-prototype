@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** STEP 08 DASHBOARD IMPLEMENTATION COMPLETE AND MERGED. Step 07 (domain model, centralized business rules, lookups, deterministic seeded mock data, referential-integrity checker, and the async mock-service layer) was executed and approved on 2026-07-27. Step 08 (dashboard) was executed and merged on 2026-07-27.
+**Overall status:** GLOBAL VISUAL REDESIGN — REVIEW REQUIRED. Step 07 and Step 08 remain completed and approved. The platform shell, shared visual foundation, Dashboard composition, and route placeholders were redesigned on 2026-07-28 without advancing the business roadmap.
 
-**Current phase:** Ready for Step 09
+**Current phase:** Global visual redesign review
 
-**Current active step:** None — Step 08 complete. Step 09 awaits execution per roadmap.
+**Current active step:** Platform Visual Redesign — implementation complete; awaiting product-owner review.
 
 **Next prompt to execute:**
 
-`prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
+After visual-redesign approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
 **Last approved step:** Step 08 — Dashboard (APPROVED AND MERGED 2026-07-27)
 
@@ -786,6 +786,69 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 - Merge method: squash merge.
 - Merge SHA: `9e0b8b6a3267820fdde25b17b2ed875c276b0b2e`
 - Merge status: MERGED to main on 2026-07-27.
+
+## 8.5 Global Visual Redesign — 2026-07-28
+
+### Step Summary
+
+- Step title: Platform Visual Redesign — Global UI/UX Foundation Refresh
+- Status: REVIEW REQUIRED
+- Date: 2026-07-28
+- Working branch: `codex/platform-visual-redesign`
+- Business roadmap: unchanged; Step 09 and later pages remain NOT STARTED.
+
+### Scope Completed
+
+- Refined the global token layer, canvas, spacing, content widths, surfaces, radii, and restrained elevation.
+- Reworked the dark institutional sidebar, compact top header, page framing, page headers, buttons, surfaces, empty states, and financial KPI hierarchy.
+- Rebuilt the Dashboard as a decision surface answering immediate action, financial position, and approaching attention.
+- Added meaningfully different composition and copy for Deposit Specialist, GM Treasury, and Executive Director roles while preserving the existing role-aware service data.
+- Replaced gradients, arbitrary Tailwind colors, emoji, dark-mode remnants, and repeated nested card treatments with approved semantic tokens and Lucide icons.
+- Aligned My Tasks, Deposit Portfolio, Investment Requests, Reports, Settings, request/deposit detail placeholders, Access Denied, and Not Found states with the refreshed visual language.
+- Preserved routes, permissions, role switching, domain types, mock services, workflow rules, and business-step progression.
+
+### Files Changed
+
+- Styles: `src/src/styles/tokens.css`, `src/src/styles/globals.css`.
+- Layouts: `AppShell.tsx`, `SidebarNav.tsx`, `TopHeader.tsx`, `PageContainer.tsx`, `PageHeader.tsx`.
+- Shared UI: `Button.tsx`, `Card.tsx`, `EmptyState.tsx`, `FinancialKpi.tsx`.
+- Dashboard: `DashboardPage.tsx`, `ExecutiveSummary.tsx`, `PriorityTasks.tsx`, `UpcomingMaturities.tsx`, `RequestPipeline.tsx`, `PortfolioDistribution.tsx`, `Exceptions.tsx`, `RecentActivity.tsx`.
+- Route states: `PlaceholderPage.tsx`, `DepositDetailsPlaceholderPage.tsx`, `RequestWorkspacePlaceholderPage.tsx`, `AccessDeniedPage.tsx`, `NotFoundPage.tsx`.
+
+### Key Visual Decisions
+
+- One dark, branded financial overview replaces the former gradient KPI-card wall.
+- Operational content uses light, border-first surfaces with asymmetric hierarchy and fewer containers.
+- Primary blue is controlled; navy carries institutional emphasis; semantic colors are limited to operational meaning.
+- The official pattern is limited to the executive summary, sidebar accent, and intentional placeholder states.
+- Dashboard module order changes by role rather than only swapping metric values.
+- Mobile remains single-column, task-first, with a navigation drawer and no compressed desktop grids.
+
+### Validation Results
+
+- TypeScript: `npm run typecheck` — passed.
+- Lint: `npm run lint` — passed.
+- Production build: `npm run build` — passed.
+- RTL/accessibility review: semantic headings, labelled navigation/actions, visible focus, bidi-isolated financial values, text-plus-color states, and logical RTL layout preserved.
+- Responsive implementation review: verified in source against 1440×900, 1280×800, 1024×768, 768×1024, and 390×844 rules; grids collapse to one column below 768px, sidebar becomes a drawer below 1024px, and no fixed-width dashboard content was introduced.
+- Screenshot review: local Vite started successfully, but the available cloud browser blocks `localhost`/`127.0.0.1` with `ERR_BLOCKED_BY_CLIENT`; the fallback Chromium download was blocked by the environment CDN policy; and the successful Vercel PR Preview requires Vercel sign-in in the available browser. Automated product screenshots could not be captured in this execution environment and must be added during product-owner review from an authorized standard browser.
+
+### Known Limitations
+
+- Automated before/after screenshots are not included for the documented environment reason.
+- Tahoma remains the prototype fallback because licensed Aktiv Grotesk binaries are intentionally not committed.
+- Placeholder pages remain non-functional by design; no Step 09+ business page was implemented.
+
+### Git Delivery Record
+
+- Branch: `codex/platform-visual-redesign` (from `main`; no direct commits to `main`).
+- Delivery commit: `f22d209ca650e25bce7cc34f0694585fe15f183e`.
+- Pull request: https://github.com/faenazi/ef-Deposit-management-prototype/pull/13 (draft, open, targeting `main`).
+- Merge status: not merged; awaiting visual review and repository-owner approval.
+
+### Recommended Next Step
+
+- Review the refreshed Dashboard at the five target viewport sizes and across Deposit Specialist, GM Treasury, and Executive Director roles; after approval, resume Step 09 without changing the approved visual foundation.
 
 ## 9. Review Ownership
 

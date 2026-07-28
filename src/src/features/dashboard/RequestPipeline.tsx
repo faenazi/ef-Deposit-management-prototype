@@ -1,91 +1,78 @@
-import { Link } from 'react-router';
-import { Card } from '@/components/ui/Card';
-import { SectionHeading } from '@/components/ui/Card';
-import { EmptyState } from '@/components/ui/EmptyState';
-import type { DashboardSummary } from '@/services/dashboard-service';
+import { ArrowUpLeft, FileText } from 'lucide-react'
+import { Link } from 'react-router'
+
+import { Card, SectionHeading } from '@/components/ui/Card'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { Icon } from '@/components/ui/Icon'
+import { formatNumber } from '@/lib/format'
+import type { DashboardSummary } from '@/services/dashboard-service'
 
 const STAGE_LABELS: Record<string, string> = {
-  draft: 'مسودة',
-  returned: 'معاد للاستكمال',
+  draft: 'مسودات قيد الإعداد',
+  returned: 'معادة للاستكمال',
   'pending-treasury': 'مراجعة الخزينة',
-  'pending-executive': 'مراجعة المدير التنفيذي',
-  'pending-winning-bank': 'بيانات البنك الفائز',
+  'pending-executive': 'الاعتماد التنفيذي',
+  'pending-winning-bank': 'استكمال البنك الفائز',
   'pending-investment-support': 'مراجعة دعم الاستثمار',
   'pending-finance': 'مراجعة المالية',
-  'pending-accounting': 'تنفيذ التحويل المحاسبي',
-  'pending-activation': 'تأكيد تفعيل الوديعة',
-  completed: 'مكتمل',
-  cancelled: 'ملغى',
-  rejected: 'مرفوض',
-};
+  'pending-accounting': 'التنفيذ المحاسبي',
+  'pending-activation': 'تفعيل الوديعة',
+  completed: 'مكتملة',
+  cancelled: 'ملغاة',
+  rejected: 'مرفوضة',
+}
 
 export function RequestPipeline({ summary }: { summary: DashboardSummary }) {
-  const pipeline = summary.requestPipeline;
-
-  if (!pipeline || Object.keys(pipeline).length === 0) {
-    return (
-      <Card>
-        <div className="p-6">
-          <SectionHeading title="توزيع طلبات الاستثمار" className="mb-6" />
-          <EmptyState
-            title="لا توجد طلبات"
-            description="لم يتم إنشاء أي طلبات استثمار بعد"
-          />
-        </div>
-      </Card>
-    );
-  }
-
-  // Calculate total for percentages
-  const total = Object.values(pipeline).reduce((sum, count) => sum + count, 0);
+  const items = Object.entries(summary.requestPipeline)
+    .filter(([, count]) => count > 0)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 6)
+  const total = Object.values(summary.requestPipeline).reduce((sum, count) => sum + count, 0)
+  const max = Math.max(...items.map(([, count]) => count), 1)
 
   return (
     <Card>
-      <div className="p-6">
-        <SectionHeading title="توزيع طلبات الاستثمار" className="mb-6" />
+      <SectionHeading
+        title="أين تقف طلبات الاستثمار؟"
+        description={`إجمالي ${formatNumber(total)} طلبًا موزعة على مراحل العمل.`}
+        action={
+          items.length > 0 ? (
+            <Link to="/investment-requests" className="text-action-primary" aria-label="عرض طلبات الاستثمار">
+              <Icon icon={ArrowUpLeft} size="sm" mirrorInRtl />
+            </Link>
+          ) : undefined
+        }
+      />
 
-        <div className="space-y-3">
-          {Object.entries(pipeline).map(([stage, count]) => {
-            if (count === 0) return null;
-
-            const percentage = total > 0 ? (count / total) * 100 : 0;
-            const stageLabel = STAGE_LABELS[stage] || stage;
-
-            return (
-              <div key={stage} className="flex items-center gap-4">
-                <div className="flex-1">
-                  <div className="mb-1 flex justify-between text-sm">
-                    <span className="font-medium text-slate-900 dark:text-white">
-                      <Link
-                        to={`/investment-requests?stage=${stage}`}
-                        className="hover:underline text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                      >
-                        {stageLabel}
-                      </Link>
-                    </span>
-                    <span className="text-slate-600 dark:text-slate-400">
-                      {count} ({Math.round(percentage)}%)
-                    </span>
-                  </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
-                    <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all"
-                      style={{ width: `${percentage}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      {items.length === 0 ? (
+        <EmptyState
+          icon={FileText}
+          title="لا توجد طلبات استثمار"
+          description="تظهر مراحل الطلبات هنا بعد إنشاء أول مسودة."
+          className="py-8"
+        />
+      ) : (
+        <div className="space-y-4">
+          {items.map(([stage, count]) => (
+            <Link
+              key={stage}
+              to={`/investment-requests?stage=${stage}`}
+              className="group grid grid-cols-[minmax(8.5rem,1fr)_minmax(6rem,1.25fr)_2rem] items-center gap-3"
+            >
+              <span className="truncate text-small font-medium text-text-primary group-hover:text-action-primary">
+                {STAGE_LABELS[stage] ?? stage}
+              </span>
+              <span className="h-1.5 overflow-hidden rounded-full bg-surface-brand-soft">
+                <span
+                  className="block h-full rounded-full bg-action-primary"
+                  style={{ width: `${(count / max) * 100}%` }}
+                />
+              </span>
+              <bdi className="ef-financial text-end text-small font-bold text-text-primary">{count}</bdi>
+            </Link>
+          ))}
         </div>
-
-        <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-700">
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600 dark:text-slate-400">الإجمالي</span>
-            <span className="font-semibold text-slate-900 dark:text-white">{total} طلب</span>
-          </div>
-        </div>
-      </div>
+      )}
     </Card>
-  );
+  )
 }

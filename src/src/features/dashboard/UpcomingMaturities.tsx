@@ -1,86 +1,78 @@
-import { Link } from 'react-router';
-import { Card } from '@/components/ui/Card';
-import { SectionHeading } from '@/components/ui/Card';
-import { EmptyState } from '@/components/ui/EmptyState';
-import { Badge } from '@/components/ui/Badge';
-import { FinancialValue } from '@/components/ui/FinancialValue';
-import { formatDate, formatPercent } from '@/lib/format';
-import type { DashboardSummary } from '@/services/dashboard-service';
+import { ArrowUpLeft, CalendarClock } from 'lucide-react'
+import { Link } from 'react-router'
+
+import { Badge } from '@/components/ui/Badge'
+import { Card, SectionHeading } from '@/components/ui/Card'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { FinancialValue } from '@/components/ui/FinancialValue'
+import { Icon } from '@/components/ui/Icon'
+import type { DashboardSummary } from '@/services/dashboard-service'
 
 export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
-  const maturities = summary.approachingMaturity.deposits.slice(0, 10);
-
-  if (maturities.length === 0) {
-    return (
-      <Card>
-        <div className="p-6">
-          <SectionHeading title="الاستحقاقات القادمة" className="mb-6" />
-          <EmptyState
-            title="لا توجد استحقاقات"
-            description="لا توجد ودائع قريبة من الاستحقاق"
-          />
-        </div>
-      </Card>
-    );
-  }
+  const maturities = summary.approachingMaturity.deposits.slice(0, 4)
 
   return (
-    <Card>
-      <div className="p-6">
-        <div className="mb-6 flex items-center justify-between">
-          <SectionHeading title="الاستحقاقات القادمة" />
-          {summary.approachingMaturity.deposits.length > 10 && (
-            <Link
-              to="/deposits?filter=approaching-maturity"
-              className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
-            >
-              عرض الكل
-            </Link>
-          )}
-        </div>
+    <Card padding="none" className="overflow-hidden">
+      <div className="border-b border-border-default px-5 py-5">
+        <SectionHeading
+          className="mb-0"
+          title="ما يستحق قريبًا"
+          description="ودائع تحتاج تجهيز قرار الاستحقاق."
+          action={
+            maturities.length > 0 ? (
+              <Link
+                to="/deposits?filter=approaching-maturity"
+                aria-label="عرض جميع الودائع القريبة من الاستحقاق"
+                className="text-action-primary"
+              >
+                <Icon icon={ArrowUpLeft} size="sm" mirrorInRtl />
+              </Link>
+            ) : undefined
+          }
+        />
+      </div>
 
-        <div className="space-y-3">
+      {maturities.length === 0 ? (
+        <EmptyState
+          icon={CalendarClock}
+          title="لا توجد استحقاقات قريبة"
+          description="لا توجد ودائع ضمن نافذة التنبيه الحالية."
+          className="py-9"
+        />
+      ) : (
+        <ol className="divide-y divide-border-default">
           {maturities.map((maturity) => (
-            <Link
-              key={maturity.depositId}
-              to={`/deposits/${maturity.depositId}`}
-              className="block rounded-lg border border-slate-200 bg-slate-50 p-3 transition-all hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
-            >
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <span className="font-medium text-slate-900 dark:text-white break-all">
-                  {maturity.depositId}
-                </span>
-                <Badge
-                  variant={maturity.daysUntilMaturity <= 3 ? 'danger' : 'neutral'}
-                  className="text-xs whitespace-nowrap"
-                >
-                  {maturity.daysUntilMaturity === 0 && 'اليوم'}
-                  {maturity.daysUntilMaturity === 1 && 'غدًا'}
-                  {maturity.daysUntilMaturity > 1 &&
-                    `${maturity.daysUntilMaturity} أيام`}
-                </Badge>
-              </div>
-
-              <div className="space-y-1 text-xs text-slate-600 dark:text-slate-400">
-                <div className="flex justify-between">
-                  <span>{maturity.bankName}</span>
-                  <span>
+            <li key={maturity.depositId}>
+              <Link
+                to={`/deposits/${maturity.depositId}`}
+                className="block px-5 py-4 transition-colors hover:bg-surface-raised"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate font-semibold text-text-primary">{maturity.bankName}</p>
+                    <bdi className="mt-0.5 block text-small text-text-secondary">
+                      {maturity.depositId}
+                    </bdi>
+                  </div>
+                  <Badge variant={maturity.daysUntilMaturity <= 7 ? 'warning' : 'neutral'}>
+                    {maturity.daysUntilMaturity === 0
+                      ? 'يستحق اليوم'
+                      : `متبقٍ ${maturity.daysUntilMaturity} يومًا`}
+                  </Badge>
+                </div>
+                <div className="mt-3 flex items-end justify-between gap-3">
+                  <span className="ef-financial font-bold text-text-primary">
                     <FinancialValue value={maturity.principal} kind="currency-compact" />
                   </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500 dark:text-slate-500">
-                    {formatDate(new Date(maturity.maturityDate))}
-                  </span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">
-                    {formatPercent(maturity.rate)}
+                  <span className="text-small text-text-secondary">
+                    <FinancialValue value={maturity.maturityDate} kind="date" />
                   </span>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </li>
           ))}
-        </div>
-      </div>
+        </ol>
+      )}
     </Card>
-  );
+  )
 }
