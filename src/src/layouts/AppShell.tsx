@@ -14,10 +14,9 @@ const contextLabels: Record<string, string> = {
 }
 
 /**
- * RTL application shell (00-shared §2): right sidebar (264/80px, dark
- * institutional navy per DEC-024), 72px top header and light content region.
- * Tablet/mobile use an accessible navigation drawer that opens from the right
- * (it replaces the right sidebar).
+ * Arabic-first application shell aligned with the Environment Fund internal
+ * portal composition: a 240px right rail, 32px desktop separation, a calm
+ * 64px utility header, and a restrained gray application canvas.
  */
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false)
@@ -35,16 +34,12 @@ export function AppShell() {
     <ToastProvider>
       <a
         href="#main-content"
-        className="fixed top-2 right-2 z-[var(--z-tooltip)] -translate-y-20 rounded-sm bg-action-primary px-4 py-2 text-body font-semibold text-text-inverse transition-transform focus:translate-y-0"
+        className="fixed top-2 right-2 z-[var(--z-tooltip)] -translate-y-20 rounded-md bg-action-primary px-4 py-2 text-body font-semibold text-text-inverse transition-transform focus:translate-y-0"
       >
         تخطي إلى المحتوى الرئيسي
       </a>
 
-      <div className="flex min-h-dvh bg-canvas">
-        {/* Desktop sidebar — first flex child renders on the right in RTL. */}
-        {/* The navy surface itself separates the sidebar from the light
-            content; a light border token on that edge would read as a halo
-            (DEC-024). */}
+      <div className="flex min-h-dvh bg-canvas lg:gap-8">
         <aside
           className={cn(
             'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 lg:block',
@@ -56,7 +51,10 @@ export function AppShell() {
               : 'var(--layout-sidebar-expanded)',
           }}
         >
-          <SidebarNav collapsed={collapsed} onToggleCollapsed={() => setCollapsed((value) => !value)} />
+          <SidebarNav
+            collapsed={collapsed}
+            onToggleCollapsed={() => setCollapsed((value) => !value)}
+          />
         </aside>
 
         <div className="flex min-w-0 grow flex-col">
@@ -64,22 +62,21 @@ export function AppShell() {
             currentPageLabel={currentPageLabel}
             onOpenMobileNav={() => setMobileNavOpen(true)}
           />
-          <main id="main-content" className="grow overflow-x-clip">
+          <main id="main-content" className="min-w-0 grow overflow-x-clip">
             <Outlet />
           </main>
         </div>
       </div>
 
-      {/* Tablet/mobile navigation drawer (opens from the sidebar's right edge). */}
       <Drawer
         open={mobileNavOpen}
         onClose={() => setMobileNavOpen(false)}
         title="التنقل"
         side="right"
         tone="dark"
-        widthClassName="w-[300px] max-w-[85vw]"
+        widthClassName="w-[280px] max-w-[88vw]"
       >
-        <div className="-m-5">
+        <div className="-m-5 h-[calc(100dvh-4.5rem)]">
           <SidebarNav onNavigate={() => setMobileNavOpen(false)} />
         </div>
       </Drawer>
