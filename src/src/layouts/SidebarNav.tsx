@@ -1,11 +1,11 @@
-import { ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { ChevronsLeft, ChevronsRight, FlaskConical } from 'lucide-react'
 import { NavLink } from 'react-router'
 
-import { cn } from '@/lib/cn'
+import { useUser } from '@/app/user-context'
 import { BrandLogo } from '@/components/brand/BrandLogo'
 import { BrandPattern } from '@/components/brand/BrandPattern'
 import { Icon } from '@/components/ui/Icon'
-import { useUser } from '@/app/user-context'
+import { cn } from '@/lib/cn'
 import { navigationItems } from '@/layouts/navigation'
 
 interface SidebarNavProps {
@@ -62,8 +62,8 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
         </div>
       )}
 
-      <nav aria-label="التنقل الرئيسي" className="relative z-[1] overflow-y-auto py-2">
-        <ul className="space-y-1">
+      <nav aria-label="التنقل الرئيسي" className="relative z-[2] overflow-y-auto py-2">
+        <ul className="space-y-1 px-2">
           {visibleItems.map((item) => (
             <li key={item.path}>
               <NavLink
@@ -73,7 +73,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    'group relative flex h-12 items-center gap-3 px-4 text-body font-semibold',
+                    'group relative flex h-12 items-center gap-3 rounded-lg px-3 text-body font-semibold',
                     'transition-colors duration-[var(--motion-fast)] focus-visible:outline-white',
                     collapsed && 'justify-center px-2',
                     isActive
@@ -87,7 +87,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                     {isActive && (
                       <span
                         aria-hidden="true"
-                        className="absolute inset-y-0 right-0 w-1.5 rounded-l-full bg-white"
+                        className="absolute inset-y-2 right-0 w-1 rounded-l-full bg-white"
                       />
                     )}
                     <span
@@ -114,15 +114,24 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
             placement="bottom-start"
             opacity="soft"
             scale="hero"
-            className="max-h-[230px] max-w-[250px] opacity-70"
+            className="max-h-[240px] max-w-[260px]"
           />
         )}
       </div>
 
       {!collapsed && (
-        <div className="relative z-[1] px-5 pb-5 text-[11px] leading-5 text-sidebar-text">
-          <p className="font-semibold text-sidebar-text-strong">بيئة العرض التجريبي</p>
-          <p>تتغير القوائم والمحتوى بحسب صلاحيات الدور المحدد.</p>
+        <div className="relative z-[2] px-4 pb-4">
+          <div className="rounded-lg border border-white/10 bg-white/8 px-4 py-3 backdrop-blur-sm">
+            <div className="flex items-center gap-2 text-sidebar-text-strong">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10">
+                <Icon icon={FlaskConical} size="sm" />
+              </span>
+              <p className="text-small font-semibold">بيئة عرض تجريبية</p>
+            </div>
+            <p className="mt-2 text-[11px] leading-5 text-sidebar-text">
+              البيانات تجريبية، وتتغير القوائم والمحتوى بحسب الدور المحدد.
+            </p>
+          </div>
         </div>
       )}
     </div>
