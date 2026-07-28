@@ -1,4 +1,4 @@
-import { ChevronsLeft, ChevronsRight, LockKeyhole } from 'lucide-react'
+import { ChevronsLeft, ChevronsRight } from 'lucide-react'
 import { NavLink } from 'react-router'
 
 import { cn } from '@/lib/cn'
@@ -11,54 +11,59 @@ import { navigationItems } from '@/layouts/navigation'
 interface SidebarNavProps {
   collapsed?: boolean
   onToggleCollapsed?: () => void
-  /** Closes the mobile drawer after navigating. */
   onNavigate?: () => void
 }
 
-/**
- * Fixed six-item RTL navigation (DEC-009) on the dark institutional navy
- * surface (DEC-024, supersedes DEC-022): navy background, white horizontal
- * logo expanded, official white symbol collapsed, primary-blue active item
- * with white label and a slim start-edge indicator, low-opacity white hover
- * and borders. One cropped secondary-pattern moment sits in the flexible
- * empty space above the collapse control in expanded mode only
- * (06-pattern-system.md §7, navy-surface opacity range).
- */
+/** Environment Fund right navigation rail, adapted from Figma node 54764:53867. */
 export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }: SidebarNavProps) {
-  // Navigation reflects the current role's permissions (same central
-  // route-access map as the route guard, so hidden ≠ merely hidden).
   const { canAccessPath } = useUser()
   const visibleItems = navigationItems.filter((item) => canAccessPath(item.path))
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-sidebar-surface">
+    <div
+      className={cn(
+        'relative flex h-full flex-col overflow-hidden bg-sidebar-surface text-white',
+        'lg:rounded-bl-[40px] lg:rounded-tl-[40px]',
+      )}
+    >
       <div
         className={cn(
-          'flex h-[var(--layout-header-height)] shrink-0 items-center border-b border-sidebar-border',
-          collapsed ? 'justify-center px-2' : 'px-6',
+          'flex h-28 shrink-0 items-center justify-center px-4',
+          collapsed && 'px-2',
         )}
       >
         {collapsed ? (
-          <BrandLogo variant="symbol-white" heightClassName="h-7" />
+          <BrandLogo variant="symbol-white" heightClassName="h-9" />
         ) : (
-          <BrandLogo variant="horizontal-white" heightClassName="h-8" />
+          <BrandLogo variant="horizontal-white" heightClassName="h-[52px]" />
         )}
       </div>
 
+      {onToggleCollapsed && (
+        <button
+          type="button"
+          onClick={onToggleCollapsed}
+          aria-label={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
+          title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
+          className={cn(
+            'absolute -left-3.5 top-24 z-10 flex size-9 items-center justify-center rounded-full',
+            'border-[5px] border-canvas bg-[#e0d7c6] text-action-primary shadow-xs',
+            'transition-transform hover:scale-105 focus-visible:outline-action-primary',
+          )}
+        >
+          <Icon icon={collapsed ? ChevronsLeft : ChevronsRight} size="sm" />
+        </button>
+      )}
+
       {!collapsed && (
-        <div className="px-6 pb-3 pt-5">
-          <p className="text-small font-semibold text-white">إدارة الودائع الاستثمارية</p>
-          <p className="mt-1 text-small text-sidebar-text">مساحة عمل الخزينة</p>
+        <div className="px-5 pb-3">
+          <p className="text-small font-semibold text-white">منصة إدارة الودائع الاستثمارية</p>
+          <p className="mt-1 text-[11px] leading-5 text-sidebar-text">الإدارة العامة للخزينة</p>
         </div>
       )}
 
-      <nav aria-label="التنقل الرئيسي" className="overflow-y-auto px-3 py-2">
-        {!collapsed && (
-          <p className="mb-2 px-3 text-[11px] font-semibold tracking-wide text-sidebar-text">
-            القائمة الرئيسية
-          </p>
-        )}
-        <ul className="space-y-1.5">
+      <nav aria-label="التنقل الرئيسي" className="relative z-[1] overflow-y-auto py-2">
+        <ul className="space-y-1">
           {visibleItems.map((item) => (
             <li key={item.path}>
               <NavLink
@@ -68,11 +73,11 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    'group relative flex min-h-11 items-center gap-3 rounded-md px-3 text-body font-medium',
+                    'group relative flex h-12 items-center gap-3 px-4 text-body font-semibold',
                     'transition-colors duration-[var(--motion-fast)] focus-visible:outline-white',
-                    collapsed && 'justify-center px-0',
+                    collapsed && 'justify-center px-2',
                     isActive
-                      ? 'bg-sidebar-active text-white shadow-sm'
+                      ? 'bg-sidebar-active text-white'
                       : 'text-sidebar-text hover:bg-sidebar-hover hover:text-white',
                   )
                 }
@@ -82,10 +87,17 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                     {isActive && (
                       <span
                         aria-hidden="true"
-                        className="absolute inset-y-2 start-0 w-[3px] rounded-e-full bg-white"
+                        className="absolute inset-y-0 right-0 w-1.5 rounded-l-full bg-white"
                       />
                     )}
-                    <Icon icon={item.icon} size="md" />
+                    <span
+                      className={cn(
+                        'flex size-9 shrink-0 items-center justify-center',
+                        isActive ? 'text-white' : 'text-sidebar-text group-hover:text-white',
+                      )}
+                    >
+                      <Icon icon={item.icon} size="lg" />
+                    </span>
                     {!collapsed && <span className="truncate">{item.label}</span>}
                   </>
                 )}
@@ -95,51 +107,22 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
         </ul>
       </nav>
 
-      {/* Flexible empty space carrying the single controlled identity moment.
-          It collapses to zero height when vertical space runs out (the crop
-          simply disappears), stays out of the drawer's content flow, and is
-          omitted entirely in collapsed mode. */}
       <div aria-hidden="true" className="pointer-events-none relative grow overflow-hidden">
         {!collapsed && (
           <BrandPattern
             asset="pattern-secondary"
             placement="bottom-start"
             opacity="soft"
-            scale="corner"
+            scale="hero"
+            className="max-h-[230px] max-w-[250px] opacity-70"
           />
         )}
       </div>
 
       {!collapsed && (
-        <div className="mx-3 mb-2 rounded-md border border-sidebar-border bg-sidebar-hover px-3 py-3">
-          <div className="flex items-center gap-2 text-small font-semibold text-white">
-            <Icon icon={LockKeyhole} size="sm" />
-            بيئة عرض تجريبية
-          </div>
-          <p className="mt-1 text-[11px] leading-5 text-sidebar-text">
-            البيانات محلية ومخصصة لاستعراض تجربة الأدوار.
-          </p>
-        </div>
-      )}
-
-      {onToggleCollapsed && (
-        <div className={cn('border-t border-sidebar-border p-3', collapsed && 'flex justify-center')}>
-          <button
-            type="button"
-            onClick={onToggleCollapsed}
-            aria-label={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
-            title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
-            className={cn(
-              'flex min-h-10 items-center gap-3 rounded-md px-3 text-body text-sidebar-text',
-              'transition-colors duration-[var(--motion-fast)] hover:bg-sidebar-hover hover:text-white',
-              'focus-visible:outline-white',
-              collapsed && 'justify-center px-2',
-            )}
-          >
-            {/* The sidebar sits on the physical right; collapse moves toward it. */}
-            <Icon icon={collapsed ? ChevronsLeft : ChevronsRight} size="md" />
-            {!collapsed && <span>طي القائمة</span>}
-          </button>
+        <div className="relative z-[1] px-5 pb-5 text-[11px] leading-5 text-sidebar-text">
+          <p className="font-semibold text-sidebar-text-strong">بيئة العرض التجريبي</p>
+          <p>تتغير القوائم والمحتوى بحسب صلاحيات الدور المحدد.</p>
         </div>
       )}
     </div>
