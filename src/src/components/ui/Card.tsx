@@ -12,9 +12,9 @@ export function Card({ padding = 'default', className, children, ...rest }: Card
   return (
     <div
       className={cn(
-        'rounded-md border border-border-default bg-surface',
-        padding === 'default' && 'p-6',
-        padding === 'compact' && 'p-5',
+        'rounded-lg border border-border-default bg-surface',
+        padding === 'default' && 'p-5 md:p-6',
+        padding === 'compact' && 'p-4 md:p-5',
         className,
       )}
       {...rest}
@@ -35,8 +35,8 @@ interface SectionHeadingProps {
 export function SectionHeading({ title, description, action, className }: SectionHeadingProps) {
   return (
     <div className={cn('mb-4 flex flex-wrap items-start justify-between gap-3', className)}>
-      <div>
-        <h3 className="text-h3 font-semibold text-text-primary">{title}</h3>
+      <div className="min-w-0">
+        <h3 className="text-h3 font-semibold tracking-[-0.01em] text-text-primary">{title}</h3>
         {description && <p className="mt-1 text-body text-text-secondary">{description}</p>}
       </div>
       {action}

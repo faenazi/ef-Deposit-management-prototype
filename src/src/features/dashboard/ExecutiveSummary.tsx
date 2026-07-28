@@ -1,85 +1,124 @@
-import { Card } from '@/components/ui/Card';
-import { SectionHeading } from '@/components/ui/Card';
-import { FinancialValue } from '@/components/ui/FinancialValue';
-import { FinancialKpi } from '@/components/ui/FinancialKpi';
-import { formatCompactCurrency } from '@/lib/format';
-import type { DashboardSummary } from '@/services/dashboard-service';
+import { ArrowUpLeft, CalendarClock, CircleAlert, Landmark } from 'lucide-react'
+import { Link } from 'react-router'
+
+import { BrandPattern } from '@/components/brand/BrandPattern'
+import { FinancialValue } from '@/components/ui/FinancialValue'
+import { Icon } from '@/components/ui/Icon'
+import { formatDate } from '@/lib/format'
+import type { DashboardSummary } from '@/services/dashboard-service'
+
+const summaryLabel: Record<DashboardSummary['roleId'], string> = {
+  'deposit-specialist': 'وضع المحفظة أثناء عملك اليوم',
+  'treasury-general-manager': 'الموقف المالي والقرارات المعلقة',
+  'investment-treasury-executive': 'الموجز التنفيذي للمحفظة',
+  'investment-support': 'المحفظة المرتبطة بالمراجعات التشغيلية',
+  'finance-reviewer': 'القيمة المالية قيد الإجراء',
+  'accounting-executor': 'المحفظة وعمليات التنفيذ',
+  'system-admin': 'ملخص بيانات المنصة',
+  'read-only-user': 'الموجز المالي',
+}
 
 export function ExecutiveSummary({ summary }: { summary: DashboardSummary }) {
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 border-0 shadow-sm">
-      <div className="p-6 lg:p-8">
-        <SectionHeading title="ملخص المحفظة" className="mb-6" />
+    <section
+      aria-labelledby="portfolio-summary-title"
+      className="relative overflow-hidden rounded-lg bg-sidebar-surface text-white shadow-shell"
+    >
+      <BrandPattern
+        asset="pattern-primary"
+        placement="bottom-end"
+        opacity="soft"
+        scale="hero"
+        className="max-w-[24rem]"
+      />
 
-        {/* Primary KPIs */}
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <FinancialKpi
-            label="إجمالي الودائع النشطة"
-            value={<FinancialValue value={summary.activeBanks.totalValue} kind="currency" />}
-            context={`${summary.activeBanks.count} وديعة`}
-          />
-
-          <FinancialKpi
-            label="متوسط معدل العائد"
-            value={<FinancialValue value={summary.weightedAverageReturn} kind="percent" />}
-          />
-
-          <FinancialKpi
-            label="العائد المتوقع"
-            value={<FinancialValue value={summary.totalExpectedReturn} kind="currency" />}
-          />
-
-          <FinancialKpi
-            label="الطلبات قيد الإجراء"
-            value={summary.pendingRequests.count}
-            context={formatCompactCurrency(summary.pendingRequests.value)}
-          />
+      <div className="relative grid gap-7 p-5 sm:p-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(28rem,0.85fr)] lg:p-8">
+        <div>
+          <div className="flex items-center gap-2 text-small font-semibold text-sidebar-text">
+            <Icon icon={Landmark} size="sm" />
+            {summaryLabel[summary.roleId]}
+          </div>
+          <h2 id="portfolio-summary-title" className="mt-4 text-small font-medium text-sidebar-text">
+            إجمالي أصل الودائع النشطة
+          </h2>
+          <p className="ef-financial mt-1 text-[2.25rem] font-bold leading-[1.35] tracking-[-0.035em] sm:text-[2.75rem]">
+            <FinancialValue value={summary.activeBanks.totalValue} kind="currency-compact" />
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-small text-sidebar-text">
+            <span>{summary.activeBanks.count} وديعة نشطة</span>
+            <span aria-hidden="true" className="size-1 rounded-full bg-sidebar-text" />
+            <span>
+              كما في <FinancialValue value={summary.referenceDate} kind="date" />
+            </span>
+          </div>
+          <Link
+            to="/deposits"
+            className="mt-6 inline-flex items-center gap-2 text-body font-semibold text-white underline-offset-4 hover:underline"
+          >
+            عرض محفظة الودائع
+            <Icon icon={ArrowUpLeft} size="sm" mirrorInRtl />
+          </Link>
         </div>
 
-        {/* Secondary metrics */}
-        {summary.approachingMaturity.count > 0 && (
-          <div className="mt-6 space-y-2 border-t border-slate-200 pt-4 dark:border-slate-700">
-            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-              <div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">الودائع القريبة من الاستحقاق</p>
-                <p className="text-2xl font-semibold text-slate-900 dark:text-white">
-                  {summary.approachingMaturity.count}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-slate-600 dark:text-slate-400">القيمة الإجمالية</p>
-                <p className="text-2xl font-semibold text-slate-900 dark:text-white">
-                  <FinancialValue value={summary.approachingMaturity.value} />
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Overdue/urgent alerts summary */}
-        {(summary.overdueTasks > 0 || summary.returnedRequests > 0) && (
-          <div className="mt-6 space-y-2 border-t border-slate-200 pt-4 dark:border-slate-700">
-            <div className="flex flex-wrap gap-4">
-              {summary.overdueTasks > 0 && (
-                <div>
-                  <p className="text-sm text-red-600 dark:text-red-400">مهام متأخرة</p>
-                  <p className="text-xl font-semibold text-red-700 dark:text-red-300">
-                    {summary.overdueTasks}
-                  </p>
-                </div>
-              )}
-              {summary.returnedRequests > 0 && (
-                <div>
-                  <p className="text-sm text-amber-600 dark:text-amber-400">طلبات معادة للاستكمال</p>
-                  <p className="text-xl font-semibold text-amber-700 dark:text-amber-300">
-                    {summary.returnedRequests}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-sidebar-border bg-sidebar-border">
+          <SummaryMetric
+            label="متوسط العائد المرجّح"
+            value={<FinancialValue value={summary.weightedAverageReturn} kind="percent" />}
+          />
+          <SummaryMetric
+            label="العائد المتوقع"
+            value={<FinancialValue value={summary.totalExpectedReturn} kind="currency-compact" />}
+          />
+          <SummaryMetric
+            label="قيمة الطلبات الجارية"
+            value={<FinancialValue value={summary.pendingRequests.value} kind="currency-compact" />}
+            context={`${summary.pendingRequests.count} طلبًا`}
+          />
+          <SummaryMetric
+            label="استحقاقات قريبة"
+            value={<FinancialValue value={summary.approachingMaturity.value} kind="currency-compact" />}
+            context={`${summary.approachingMaturity.count} وديعة`}
+          />
+        </div>
       </div>
-    </Card>
-  );
+
+      {(summary.overdueTasks > 0 || summary.returnedRequests > 0) && (
+        <div className="relative flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-sidebar-border px-5 py-3 text-small sm:px-7 lg:px-8">
+          {summary.overdueTasks > 0 && (
+            <span className="inline-flex items-center gap-2 text-white">
+              <Icon icon={CircleAlert} size="sm" />
+              {summary.overdueTasks} مهام متأخرة تتطلب إجراء
+            </span>
+          )}
+          {summary.returnedRequests > 0 && (
+            <span className="inline-flex items-center gap-2 text-sidebar-text">
+              <Icon icon={CalendarClock} size="sm" />
+              {summary.returnedRequests} طلبات معادة للاستكمال
+            </span>
+          )}
+          <span className="ms-auto hidden text-sidebar-text md:inline">
+            آخر تحديث: {formatDate(summary.referenceDate)}
+          </span>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function SummaryMetric({
+  label,
+  value,
+  context,
+}: {
+  label: string
+  value: React.ReactNode
+  context?: string
+}) {
+  return (
+    <div className="min-w-0 bg-surface-navy-soft p-4 sm:p-5">
+      <p className="text-small font-medium text-sidebar-text">{label}</p>
+      <p className="ef-financial mt-2 break-words text-h3 font-bold text-white sm:text-h2">{value}</p>
+      {context && <p className="mt-1 text-small text-sidebar-text">{context}</p>}
+    </div>
+  )
 }

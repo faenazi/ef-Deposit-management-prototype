@@ -1,93 +1,91 @@
-import { Card } from '@/components/ui/Card';
-import { SectionHeading } from '@/components/ui/Card';
-import { EmptyState } from '@/components/ui/EmptyState';
-import { FinancialValue } from '@/components/ui/FinancialValue';
-import type { DashboardSummary } from '@/services/dashboard-service';
+import { AlertTriangle, ArrowUpLeft, Landmark } from 'lucide-react'
+import { Link } from 'react-router'
+
+import { Card, SectionHeading } from '@/components/ui/Card'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { FinancialValue } from '@/components/ui/FinancialValue'
+import { Icon } from '@/components/ui/Icon'
+import type { DashboardSummary } from '@/services/dashboard-service'
 
 export function PortfolioDistribution({ summary }: { summary: DashboardSummary }) {
-  const banks = summary.activeBanks.byBank.slice(0, 5);
-  const total = summary.activeBanks.totalValue;
-
-  if (banks.length === 0) {
-    return (
-      <Card>
-        <div className="p-6">
-          <SectionHeading title="توزيع المحفظة حسب البنك" className="mb-6" />
-          <EmptyState
-            title="لا توجد ودائع"
-            description="لم يتم تفعيل أي ودائع بعد"
-          />
-        </div>
-      </Card>
-    );
-  }
+  const banks = [...summary.activeBanks.byBank]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+  const total = summary.activeBanks.totalValue
+  const largestShare = banks[0] && total > 0 ? Math.round((banks[0].value / total) * 100) : 0
 
   return (
     <Card>
-      <div className="p-6">
-        <SectionHeading title="توزيع المحفظة حسب البنك" className="mb-6" />
+      <SectionHeading
+        title="توزيع التعرض على البنوك"
+        description={
+          banks[0]
+            ? `أكبر تعرض لدى ${banks[0].bankName} بنسبة ${largestShare}% من أصل المحفظة.`
+            : 'ترتيب قيمة أصل الودائع حسب البنك.'
+        }
+        action={
+          banks.length > 0 ? (
+            <Link to="/deposits" className="text-action-primary" aria-label="عرض محفظة الودائع">
+              <Icon icon={ArrowUpLeft} size="sm" mirrorInRtl />
+            </Link>
+          ) : undefined
+        }
+      />
 
-        <div className="space-y-4">
-          {banks.map((bank, idx) => {
-            const percentage = total > 0 ? (bank.value / total) * 100 : 0;
-            const isHighExposure = percentage > 25;
-            const colorClass = isHighExposure
-              ? 'from-amber-500 to-amber-600'
-              : 'from-blue-500 to-blue-600';
-
-            return (
-              <div key={bank.bankId} className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">
-                      {idx + 1}. {bank.bankName}
-                    </p>
-                    {isHighExposure && (
-                      <p className="text-xs text-amber-600 dark:text-amber-400">
-                        تركز مرتفع
+      {banks.length === 0 ? (
+        <EmptyState
+          icon={Landmark}
+          title="لا توجد ودائع نشطة"
+          description="سيظهر توزيع التعرض بعد تفعيل أول وديعة."
+          className="py-8"
+        />
+      ) : (
+        <>
+          <ol className="space-y-4">
+            {banks.map((bank, index) => {
+              const percentage = total > 0 ? (bank.value / total) * 100 : 0
+              return (
+                <li key={bank.bankId}>
+                  <div className="mb-2 flex items-end justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="truncate text-small font-semibold text-text-primary">
+                        <span className="me-2 text-text-muted">{index + 1}</span>
+                        {bank.bankName}
                       </p>
-                    )}
+                    </div>
+                    <div className="shrink-0 text-end">
+                      <bdi className="ef-financial block text-small font-bold text-text-primary">
+                        {Math.round(percentage)}%
+                      </bdi>
+                      <span className="text-small text-text-secondary">
+                        <FinancialValue value={bank.value} kind="currency-compact" />
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {Math.round(percentage)}%
-                    </p>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      <FinancialValue value={bank.value} kind="currency-compact" />
-                    </p>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-surface-brand-soft">
+                    <div
+                      className="h-full rounded-full bg-action-primary"
+                      style={{ width: `${percentage}%` }}
+                    />
                   </div>
-                </div>
+                </li>
+              )
+            })}
+          </ol>
 
-                <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
-                  <div
-                    className={`h-full bg-gradient-to-r ${colorClass} transition-all`}
-                    style={{ width: `${percentage}%` }}
-                  />
-                </div>
+          {summary.highConcentrationBanks.length > 0 && (
+            <div className="mt-5 flex items-start gap-3 rounded-md border border-warning-border bg-warning-bg px-4 py-3">
+              <Icon icon={AlertTriangle} size="sm" className="mt-0.5 shrink-0 text-warning-text" />
+              <div>
+                <p className="text-small font-semibold text-warning-text">مؤشر تركّز يحتاج مراجعة</p>
+                <p className="mt-0.5 text-small text-warning-text">
+                  {summary.highConcentrationBanks.map((bank) => bank.bankName).join('، ')}
+                </p>
               </div>
-            );
-          })}
-        </div>
-
-        {summary.activeBanks.byBank.length > 5 && (
-          <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-700">
-            <p className="text-xs text-slate-600 dark:text-slate-400">
-              +{summary.activeBanks.byBank.length - 5} بنوك أخرى
-            </p>
-          </div>
-        )}
-
-        {summary.highConcentrationBanks.length > 0 && (
-          <div className="mt-4 rounded-lg bg-amber-50 p-3 dark:bg-amber-900/20">
-            <p className="text-xs font-medium text-amber-900 dark:text-amber-200">
-              ⚠️ تركز بنكي مرتفع:
-            </p>
-            <p className="mt-1 text-xs text-amber-800 dark:text-amber-300">
-              {summary.highConcentrationBanks.map((b) => b.bankName).join('، ')}
-            </p>
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </>
+      )}
     </Card>
-  );
+  )
 }

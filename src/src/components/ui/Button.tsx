@@ -19,13 +19,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-sm font-semibold ' +
-  'transition-colors duration-[var(--motion-standard)] ' +
+  'inline-flex items-center justify-center gap-2 rounded-md font-semibold ' +
+  'transition-[color,background-color,border-color,box-shadow] duration-[var(--motion-standard)] ' +
   'disabled:cursor-not-allowed select-none whitespace-nowrap'
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    'bg-action-primary text-text-inverse hover:bg-action-primary-hover active:bg-action-primary-active ' +
+    'bg-action-primary text-text-inverse shadow-xs hover:bg-action-primary-hover active:bg-action-primary-active ' +
     'focus-visible:outline-white disabled:bg-surface-disabled disabled:text-text-disabled',
   secondary:
     'bg-surface text-action-primary border border-border-strong hover:bg-surface-brand-soft ' +
@@ -39,9 +39,9 @@ const variantClass: Record<ButtonVariant, string> = {
 }
 
 const sizeClass: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-small',
-  md: 'h-10 px-4 text-body',
-  lg: 'h-11 px-5 text-body-lg',
+  sm: 'min-h-9 px-3 text-small',
+  md: 'min-h-10 px-4 text-body',
+  lg: 'min-h-11 px-5 text-body-lg',
 }
 
 export function Button({

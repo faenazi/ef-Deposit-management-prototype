@@ -1,4 +1,4 @@
-import { ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { ChevronsLeft, ChevronsRight, LockKeyhole } from 'lucide-react'
 import { NavLink } from 'react-router'
 
 import { cn } from '@/lib/cn'
@@ -31,22 +31,34 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
   const visibleItems = navigationItems.filter((item) => canAccessPath(item.path))
 
   return (
-    <div className="flex h-full flex-col bg-sidebar-surface">
+    <div className="relative flex h-full flex-col overflow-hidden bg-sidebar-surface">
       <div
         className={cn(
           'flex h-[var(--layout-header-height)] shrink-0 items-center border-b border-sidebar-border',
-          collapsed ? 'justify-center px-2' : 'px-5',
+          collapsed ? 'justify-center px-2' : 'px-6',
         )}
       >
         {collapsed ? (
-          <BrandLogo variant="symbol-white" heightClassName="h-8" />
+          <BrandLogo variant="symbol-white" heightClassName="h-7" />
         ) : (
-          <BrandLogo variant="horizontal-white" heightClassName="h-9" />
+          <BrandLogo variant="horizontal-white" heightClassName="h-8" />
         )}
       </div>
 
-      <nav aria-label="التنقل الرئيسي" className="overflow-y-auto p-3">
-        <ul className="space-y-1">
+      {!collapsed && (
+        <div className="px-6 pb-3 pt-5">
+          <p className="text-small font-semibold text-white">إدارة الودائع الاستثمارية</p>
+          <p className="mt-1 text-small text-sidebar-text">مساحة عمل الخزينة</p>
+        </div>
+      )}
+
+      <nav aria-label="التنقل الرئيسي" className="overflow-y-auto px-3 py-2">
+        {!collapsed && (
+          <p className="mb-2 px-3 text-[11px] font-semibold tracking-wide text-sidebar-text">
+            القائمة الرئيسية
+          </p>
+        )}
+        <ul className="space-y-1.5">
           {visibleItems.map((item) => (
             <li key={item.path}>
               <NavLink
@@ -56,11 +68,11 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    'relative flex items-center gap-3 rounded-sm px-3 py-2.5 text-body font-medium',
+                    'group relative flex min-h-11 items-center gap-3 rounded-md px-3 text-body font-medium',
                     'transition-colors duration-[var(--motion-fast)] focus-visible:outline-white',
                     collapsed && 'justify-center px-0',
                     isActive
-                      ? 'bg-sidebar-active text-white'
+                      ? 'bg-sidebar-active text-white shadow-sm'
                       : 'text-sidebar-text hover:bg-sidebar-hover hover:text-white',
                   )
                 }
@@ -74,7 +86,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
                       />
                     )}
                     <Icon icon={item.icon} size="md" />
-                    {!collapsed && <span>{item.label}</span>}
+                    {!collapsed && <span className="truncate">{item.label}</span>}
                   </>
                 )}
               </NavLink>
@@ -98,6 +110,18 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
         )}
       </div>
 
+      {!collapsed && (
+        <div className="mx-3 mb-2 rounded-md border border-sidebar-border bg-sidebar-hover px-3 py-3">
+          <div className="flex items-center gap-2 text-small font-semibold text-white">
+            <Icon icon={LockKeyhole} size="sm" />
+            بيئة عرض تجريبية
+          </div>
+          <p className="mt-1 text-[11px] leading-5 text-sidebar-text">
+            البيانات محلية ومخصصة لاستعراض تجربة الأدوار.
+          </p>
+        </div>
+      )}
+
       {onToggleCollapsed && (
         <div className={cn('border-t border-sidebar-border p-3', collapsed && 'flex justify-center')}>
           <button
@@ -106,7 +130,7 @@ export function SidebarNav({ collapsed = false, onToggleCollapsed, onNavigate }:
             aria-label={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
             title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
             className={cn(
-              'flex items-center gap-3 rounded-sm px-3 py-2 text-body text-sidebar-text',
+              'flex min-h-10 items-center gap-3 rounded-md px-3 text-body text-sidebar-text',
               'transition-colors duration-[var(--motion-fast)] hover:bg-sidebar-hover hover:text-white',
               'focus-visible:outline-white',
               collapsed && 'justify-center px-2',
