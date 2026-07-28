@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   Calendar,
   CheckCircle2,
   FileCheck,
@@ -32,23 +33,27 @@ const activityIcons: Record<string, LucideIcon> = {
 }
 
 export function RecentActivity({ summary }: { summary: DashboardSummary }) {
-  const activities = summary.recentActivity.slice(0, 6)
+  const activities = summary.recentActivity.slice(0, 4)
 
   return (
-    <Card>
-      <SectionHeading
-        title="آخر الحركات المهمة"
-        description="أحداث تشغيلية مختارة تحفظ سياق القرار والمعاملة."
-      />
+    <Card padding="none" className="overflow-hidden">
+      <div className="px-5 py-5 md:px-6">
+        <SectionHeading
+          className="mb-0"
+          title="آخر التحديثات"
+          description="أحدث الحركات المسجلة على الطلبات والودائع بترتيبها الزمني."
+        />
+      </div>
+
       {activities.length === 0 ? (
         <EmptyState
           icon={Calendar}
           title="لا يوجد نشاط مسجل"
           description="ستظهر الأحداث المهمة بعد بدء العمل على الطلبات."
-          className="py-8"
+          className="border-t border-divider-soft py-8"
         />
       ) : (
-        <ol className="grid gap-x-8 gap-y-1 md:grid-cols-2">
+        <ol className="divide-y divide-divider-soft border-t border-divider-soft">
           {activities.map((activity) => {
             const ActivityIcon = activityIcons[activity.activityType] ?? Calendar
             const href =
@@ -62,21 +67,27 @@ export function RecentActivity({ summary }: { summary: DashboardSummary }) {
               <li key={activity.id}>
                 <Link
                   to={href}
-                  className="group flex items-start gap-3 border-b border-border-default py-3 last:border-b-0 hover:text-action-primary"
+                  className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 py-4 transition-colors hover:bg-surface-raised md:px-6"
                 >
-                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-surface-brand-muted text-action-primary">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-surface-brand-muted text-action-primary">
                     <Icon icon={ActivityIcon} size="sm" />
                   </span>
+
                   <span className="min-w-0">
-                    <span className="block text-small font-semibold text-text-primary group-hover:text-action-primary">
+                    <span className="block truncate text-body font-semibold text-text-primary group-hover:text-action-primary">
                       {activity.description}
                     </span>
-                    <span className="mt-1 block text-small text-text-secondary">
-                      {activity.actor} · {formatDate(activity.timestamp)}
+                    <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-text-secondary">
+                      <span>{activity.actor}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{formatDate(activity.timestamp)}</span>
+                      <span aria-hidden="true">·</span>
+                      <bdi className="font-semibold text-action-secondary">{activity.entityId}</bdi>
                     </span>
-                    <bdi className="mt-0.5 block text-small font-semibold text-action-secondary">
-                      {activity.entityId}
-                    </bdi>
+                  </span>
+
+                  <span className="flex size-8 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
+                    <Icon icon={ArrowLeft} size="sm" />
                   </span>
                 </Link>
               </li>
