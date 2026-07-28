@@ -13,7 +13,7 @@ export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
 
   return (
     <Card padding="none" className="overflow-hidden">
-      <div className="px-5 py-5 md:px-6">
+      <div className="px-4 py-4 md:px-6 md:py-5">
         <SectionHeading
           className="mb-0"
           title="استحقاقات خلال 14 يومًا"
@@ -49,7 +49,7 @@ export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
         />
       ) : (
         <div className="border-t border-divider-soft">
-          <div className="hidden grid-cols-[minmax(0,1.2fr)_8.5rem_5.5rem_8rem_6rem_2.5rem] items-center gap-3 bg-surface-subtle px-6 py-3 text-table font-semibold text-text-secondary md:grid">
+          <div className="hidden grid-cols-[minmax(0,1.2fr)_8.5rem_5.5rem_8rem_6rem_2.75rem] items-center gap-3 bg-surface-subtle px-6 py-3 text-table font-semibold text-text-secondary xl:grid">
             <span>البنك والوديعة</span>
             <span>أصل الوديعة</span>
             <span>العائد</span>
@@ -64,46 +64,53 @@ export function UpcomingMaturities({ summary }: { summary: DashboardSummary }) {
                 <Link
                   to={`/deposits/${maturity.depositId}`}
                   aria-label={`فتح الوديعة ${maturity.depositId} لدى ${maturity.bankName}`}
-                  className="group block px-5 py-4 transition-colors hover:bg-surface-raised md:grid md:min-h-16 md:grid-cols-[minmax(0,1.2fr)_8.5rem_5.5rem_8rem_6rem_2.5rem] md:items-center md:gap-3 md:px-6"
+                  className="group block min-h-11 px-4 py-3.5 transition-colors hover:bg-surface-raised md:px-6 xl:grid xl:min-h-16 xl:grid-cols-[minmax(0,1.2fr)_8.5rem_5.5rem_8rem_6rem_2.75rem] xl:items-center xl:gap-3"
                 >
-                  <span className="min-w-0">
-                    <span className="block truncate font-semibold text-text-primary group-hover:text-action-primary">
-                      {maturity.bankName}
+                  <span className="flex min-w-0 items-start justify-between gap-3 xl:block">
+                    <span className="min-w-0">
+                      <span className="block truncate font-semibold text-text-primary group-hover:text-action-primary">
+                        {maturity.bankName}
+                      </span>
+                      <bdi className="mt-0.5 block text-small text-text-muted xl:mt-1">{maturity.depositId}</bdi>
                     </span>
-                    <bdi className="mt-1 block text-small text-text-muted">{maturity.depositId}</bdi>
+                    <Badge
+                      variant={maturity.daysUntilMaturity <= 7 ? 'warning' : 'neutral'}
+                      className="shrink-0 xl:hidden"
+                    >
+                      {maturity.daysUntilMaturity === 0 ? 'يستحق اليوم' : `${maturity.daysUntilMaturity} يوم`}
+                    </Badge>
                   </span>
 
-                  <span className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 md:mt-0 md:contents">
+                  <span className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 xl:mt-0 xl:contents">
                     <span>
-                      <span className="mb-1 block text-[11px] font-medium text-text-muted md:hidden">أصل الوديعة</span>
+                      <span className="mb-0.5 block text-[11px] font-medium text-text-muted xl:hidden">أصل الوديعة</span>
                       <span className="ef-financial font-semibold text-text-primary">
                         <FinancialValue value={maturity.principal} kind="currency-compact" />
                       </span>
                     </span>
 
                     <span>
-                      <span className="mb-1 block text-[11px] font-medium text-text-muted md:hidden">العائد</span>
+                      <span className="mb-0.5 block text-[11px] font-medium text-text-muted xl:hidden">العائد</span>
                       <span className="ef-financial text-small font-semibold text-text-primary">
                         <FinancialValue value={maturity.rate} kind="percent" />
                       </span>
                     </span>
 
                     <span>
-                      <span className="mb-1 block text-[11px] font-medium text-text-muted md:hidden">تاريخ الاستحقاق</span>
-                      <span className="text-small text-text-secondary">
+                      <span className="mb-0.5 block text-[11px] font-medium text-text-muted xl:hidden">تاريخ الاستحقاق</span>
+                      <span className="text-small font-semibold text-text-primary">
                         <FinancialValue value={maturity.maturityDate} kind="date" />
                       </span>
                     </span>
 
-                    <span>
-                      <span className="mb-1 block text-[11px] font-medium text-text-muted md:hidden">المتبقي</span>
+                    <span className="hidden xl:block">
                       <Badge variant={maturity.daysUntilMaturity <= 7 ? 'warning' : 'neutral'}>
                         {maturity.daysUntilMaturity === 0 ? 'يستحق اليوم' : `${maturity.daysUntilMaturity} يوم`}
                       </Badge>
                     </span>
 
-                    <span className="flex items-end justify-end md:items-center md:justify-center">
-                      <span className="flex size-8 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
+                    <span className="flex items-end justify-end xl:items-center xl:justify-center">
+                      <span className="flex size-9 items-center justify-center rounded-full bg-canvas text-text-secondary group-hover:bg-surface-brand-soft group-hover:text-action-primary">
                         <Icon icon={ArrowLeft} size="sm" />
                       </span>
                     </span>
