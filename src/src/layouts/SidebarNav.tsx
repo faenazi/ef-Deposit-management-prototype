@@ -30,13 +30,13 @@ export function SidebarNav({
     <div
       className={cn(
         'relative flex h-full flex-col overflow-hidden bg-sidebar-surface text-white',
-        !mobile && 'xl:rounded-bl-[32px] xl:rounded-tl-[32px]',
+        !mobile && 'xl:rounded-bl-[28px] xl:rounded-tl-[28px]',
       )}
     >
       <div
         className={cn(
-          'flex shrink-0 items-center justify-center px-4',
-          mobile ? 'h-20' : 'h-24',
+          'flex shrink-0 items-center justify-center border-b border-sidebar-border bg-white/5 px-4',
+          mobile ? 'h-20' : 'h-[5.75rem]',
           collapsed && 'px-2',
         )}
       >
@@ -55,7 +55,7 @@ export function SidebarNav({
           title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
           className={cn(
             'absolute -left-3.5 top-20 z-10 flex size-9 items-center justify-center rounded-full',
-            'border-[5px] border-canvas bg-surface-subtle text-action-primary shadow-xs',
+            'border-[5px] border-canvas bg-surface text-action-primary shadow-xs',
             'transition-transform hover:scale-105 focus-visible:outline-action-primary',
           )}
         >
@@ -64,9 +64,9 @@ export function SidebarNav({
       )}
 
       {!collapsed && (
-        <div className={cn('px-4 pb-3', mobile && 'pb-4')}>
-          <p className="text-small font-semibold text-white">منصة إدارة الودائع الاستثمارية</p>
-          <p className="mt-1 text-[11px] leading-5 text-sidebar-text">الإدارة العامة للخزينة</p>
+        <div className={cn('border-b border-sidebar-border px-4 py-4', mobile && 'pb-4')}>
+          <p className="text-[13px] font-semibold leading-5 text-white">إدارة الودائع الاستثمارية</p>
+          <p className="mt-0.5 text-[11px] leading-5 text-sidebar-text">الإدارة العامة للخزينة</p>
         </div>
       )}
 
@@ -91,7 +91,7 @@ export function SidebarNav({
                     'transition-colors duration-[var(--motion-fast)] focus-visible:outline-white',
                     collapsed && 'justify-center px-2',
                     isActive
-                      ? 'bg-sidebar-active text-white'
+                      ? 'bg-sidebar-active text-sidebar-active-text shadow-sm'
                       : 'text-sidebar-text hover:bg-sidebar-hover hover:text-white',
                   )
                 }
@@ -101,13 +101,13 @@ export function SidebarNav({
                     {isActive && (
                       <span
                         aria-hidden="true"
-                        className="absolute inset-y-2 right-0 w-1 rounded-l-full bg-white"
+                        className="absolute inset-y-2 right-0 w-1 rounded-l-full bg-sidebar-accent"
                       />
                     )}
                     <span
                       className={cn(
                         'flex size-9 shrink-0 items-center justify-center',
-                        isActive ? 'text-white' : 'text-sidebar-text group-hover:text-white',
+                        isActive ? 'text-sidebar-active-text' : 'text-sidebar-text group-hover:text-white',
                       )}
                     >
                       <Icon icon={item.icon} size="lg" />
@@ -126,7 +126,7 @@ export function SidebarNav({
           <BrandPattern
             asset="pattern-secondary"
             placement="bottom-start"
-            opacity={mobile ? 'subtle' : 'soft'}
+            opacity="subtle"
             scale={mobile ? 'corner' : 'hero'}
             className={cn('max-h-[210px] max-w-[220px]', mobile && '!block max-h-32 max-w-36')}
           />
@@ -135,7 +135,7 @@ export function SidebarNav({
 
       {!collapsed && (
         <div className="relative z-[2] px-4 pb-4">
-          <div className="border-t border-sidebar-border px-1 pt-3">
+          <div className="rounded-lg border border-sidebar-border bg-white/5 px-3 py-3">
             <div className="flex items-center gap-2 text-sidebar-text-strong">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/8">
                 <Icon icon={FlaskConical} size="sm" />

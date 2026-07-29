@@ -16,15 +16,16 @@
   --ef-green-400: #c0cb6c;
   --ef-brown-400: #a18e77;
   --ef-warm-grey-100: #f1eee8;
+  --ef-warm-neutral-100: #f2eee7;
 
-  /* Application surfaces — official warm institutional palette. */
-  --color-canvas: #f5f3f0;
+  /* Application surfaces — warm institutional base with clean white content. */
+  --color-canvas: var(--ef-warm-grey-100);
   --color-surface: var(--ef-white);
-  --color-surface-subtle: #fcfdf8;
+  --color-surface-subtle: var(--ef-warm-neutral-100);
   --color-surface-brand-soft: #eaecf8;
   --color-surface-brand-muted: #f4f5fb;
   --color-surface-raised: var(--ef-white);
-  --color-surface-navy-soft: #172331;
+  --color-surface-navy-soft: var(--ef-navy-900);
   --color-surface-disabled: #e2e3e5;
 
   --color-text-primary: var(--ef-navy-900);
@@ -56,16 +57,18 @@
   --color-info-bg: #eef0fb;
   --color-info-border: #8f9bd7;
 
-  /* Sidebar — DEC-024 dark institutional navy with blue active state. */
-  --color-sidebar-surface: var(--ef-navy-900);
-  --color-sidebar-text: rgba(255, 255, 255, 0.62);
+  /* Sidebar — official EF blue with a high-clarity white active state. */
+  --color-sidebar-surface: var(--ef-primary-700);
+  --color-sidebar-text: rgba(255, 255, 255, 0.72);
   --color-sidebar-text-strong: rgba(255, 255, 255, 0.94);
-  --color-sidebar-hover: rgba(234, 236, 248, 0.08);
-  --color-sidebar-active: var(--ef-primary-700);
-  --color-sidebar-border: rgba(255, 255, 255, 0.12);
+  --color-sidebar-hover: rgba(255, 255, 255, 0.1);
+  --color-sidebar-active: var(--ef-white);
+  --color-sidebar-active-text: var(--ef-primary-700);
+  --color-sidebar-accent: var(--ef-green-400);
+  --color-sidebar-border: rgba(255, 255, 255, 0.16);
 
   /* Layout */
-  --layout-sidebar-expanded: 216px;
+  --layout-sidebar-expanded: 228px;
   --layout-sidebar-collapsed: 72px;
   --layout-header-height: 68px;
   --layout-content-max-wide: 1600px;
@@ -138,6 +141,8 @@
   --color-sidebar-text-strong: var(--color-sidebar-text-strong);
   --color-sidebar-hover: var(--color-sidebar-hover);
   --color-sidebar-active: var(--color-sidebar-active);
+  --color-sidebar-active-text: var(--color-sidebar-active-text);
+  --color-sidebar-accent: var(--color-sidebar-accent);
   --color-sidebar-border: var(--color-sidebar-border);
 
   --color-border-default: var(--color-border-default);

@@ -41,7 +41,7 @@ export function AppShell() {
         تخطي إلى المحتوى الرئيسي
       </a>
 
-      <div className="flex min-h-dvh bg-canvas xl:gap-6">
+      <div className="flex min-h-dvh bg-canvas">
         <aside
           className={cn(
             'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 xl:block',

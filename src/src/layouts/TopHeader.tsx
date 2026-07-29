@@ -17,7 +17,7 @@ export function TopHeader({
   menuButtonRef,
 }: TopHeaderProps) {
   return (
-    <header className="sticky top-0 z-[var(--z-shell)] h-[var(--layout-header-height)] shrink-0 border-b border-divider-soft bg-canvas/95 backdrop-blur-md">
+    <header className="sticky top-0 z-[var(--z-shell)] h-[var(--layout-header-height)] shrink-0 border-b border-divider-soft bg-surface/95 shadow-xs backdrop-blur-md">
       <div className="mx-auto flex h-full w-full max-w-[var(--layout-content-max-wide)] items-center gap-2.5 px-4 md:px-6 lg:px-8 xl:px-6">
         <button
           ref={menuButtonRef}
@@ -56,7 +56,7 @@ export function TopHeader({
             <Icon icon={Bell} size="md" />
             <span
               aria-hidden="true"
-              className="absolute end-2 top-2 size-2 rounded-full bg-danger-border ring-2 ring-canvas"
+              className="absolute end-2 top-2 size-2 rounded-full bg-danger-border ring-2 ring-surface"
             />
           </button>
 

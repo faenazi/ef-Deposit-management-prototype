@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CalendarDays, CircleAlert, FilePlus2 } from 'lucide-react'
+import { CalendarDays, FilePlus2 } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { useUser } from '@/app/user-context'
@@ -9,7 +9,6 @@ import { ErrorState } from '@/components/ui/ErrorState'
 import { Icon } from '@/components/ui/Icon'
 import { Skeleton } from '@/components/ui/Skeleton'
 import type { RoleCode } from '@/domain/roles'
-import { cn } from '@/lib/cn'
 import { formatDate } from '@/lib/format'
 import { PageContainer } from '@/layouts/PageContainer'
 import { fetchDashboardSummary, type DashboardSummary } from '@/services/dashboard-service'
@@ -83,7 +82,7 @@ function DashboardSkeleton() {
 }
 
 export function DashboardPage() {
-  const { user, role, can, canAccessPath } = useUser()
+  const { user, role, can } = useUser()
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -121,8 +120,6 @@ export function DashboardPage() {
         roleName={role.nameAr}
         firstName={user.nameAr.split(' ')[0]}
         canCreate={can('requests.create')}
-        canViewTasks={canAccessPath('/tasks')}
-        summary={summary?.roleId === role.code ? summary : null}
       />
 
       {dashboardPending && <DashboardSkeleton />}
@@ -146,72 +143,62 @@ function DashboardContext({
   roleName,
   firstName,
   canCreate,
-  canViewTasks,
-  summary,
 }: {
   role: RoleCode
   roleName: string
   firstName: string
   canCreate: boolean
-  canViewTasks: boolean
-  summary: DashboardSummary | null
 }) {
   const context = roleContext[role]
   const today = new Date()
-  const attentionCount = summary ? summary.overdueTasks + summary.returnedRequests : 0
 
   return (
-    <section className="relative mb-5 overflow-hidden rounded-xl border border-divider-soft border-s-4 border-s-action-primary bg-surface px-4 py-3.5 shadow-sm md:mb-7 md:px-7 md:py-6">
+    <section className="relative mb-5 overflow-hidden rounded-xl bg-surface-brand-muted px-4 py-4 md:mb-7 md:px-7 md:py-5">
       <BrandPattern
-        asset="pattern-primary"
+        asset="pattern-secondary"
         placement="bottom-end"
         opacity="subtle"
         scale="corner"
-        className="max-w-[11rem]"
+        className="max-w-[10rem]"
       />
-      <div className="relative z-[1] grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:gap-8">
+      <div className="relative z-[1] grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:gap-8">
         <div className="min-w-0">
-          <p className="text-small font-semibold text-action-primary">مرحبًا، {firstName} · مساحة عمل اليوم</p>
-          <h1 className="mt-1 text-[22px] font-bold leading-8 tracking-[-0.02em] text-text-primary md:text-[30px] md:leading-10">
-            {context.title}
+          <p className="text-small font-semibold text-action-primary">{roleName} · مساحة العمل اليومية</p>
+          <h1 className="mt-0.5 text-[24px] font-bold leading-9 tracking-[-0.02em] text-text-primary md:text-[30px] md:leading-10">
+            مرحبًا، {firstName}
           </h1>
-          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-text-secondary">
-            <span className="font-semibold text-text-primary">{roleName}</span>
-            <span aria-hidden="true" className="hidden size-1 rounded-full bg-border-strong sm:block" />
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-text-secondary">
+            <span className="font-semibold text-text-primary">{context.title}</span>
+            <span aria-hidden="true" className="size-1 rounded-full bg-border-strong" />
             <span className="inline-flex items-center gap-1.5 text-small font-medium text-text-secondary">
               <Icon icon={CalendarDays} size="xs" />
               {formatDate(today)}
             </span>
           </div>
-          <p className="mt-2 hidden max-w-4xl text-body leading-6 text-text-secondary md:block">
+          <p className="mt-2 max-w-4xl text-small leading-5 text-text-secondary md:text-body md:leading-6">
             {context.description}
           </p>
         </div>
 
-        {(canCreate || (summary && attentionCount > 0 && canViewTasks)) && (
-          <div className="flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:min-w-44">
-            {canCreate && (
-              <Link to="/investment-requests/new" className="relative z-[1] w-full shrink-0">
-                <Button leadingIcon={FilePlus2} className="w-full">
-                  طلب استثمار جديد
-                </Button>
-              </Link>
-            )}
-            {summary && attentionCount > 0 && canViewTasks && (
-              <Link
-                to="/tasks"
-                className="hidden min-h-9 items-center justify-center gap-2 rounded-md border border-danger-border/25 bg-danger-bg px-3 text-small font-semibold text-danger-text transition-colors hover:border-danger-border/50 sm:inline-flex"
-              >
-                <Icon icon={CircleAlert} size="xs" />
-                {attentionCount} حالات تحتاج متابعة
-              </Link>
-            )}
-          </div>
+        {canCreate && (
+          <Link to="/investment-requests/new" className="relative z-[1] w-full shrink-0 sm:w-auto">
+            <Button leadingIcon={FilePlus2} className="w-full sm:min-w-48">
+              إنشاء طلب استثمار
+            </Button>
+          </Link>
         )}
       </div>
     </section>
   )
 }
+
+const operationalFirstRoles = new Set<RoleCode>([
+  'deposit-specialist',
+  'investment-support',
+  'finance-reviewer',
+  'accounting-executor',
+  'system-admin',
+])
 
 function DashboardContent({ summary }: { summary: DashboardSummary }) {
   const showTasks = summary.roleId !== 'read-only-user'
@@ -219,24 +206,17 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
   const showPortfolio = portfolioRoles.has(summary.roleId)
   const showRecentActivity = summary.roleId !== 'investment-treasury-executive'
   const hasExceptions = summary.exceptions.length > 0
+  const operationalFirst = operationalFirstRoles.has(summary.roleId)
 
   return (
     <div className="space-y-5 md:space-y-7">
+      {operationalFirst && showTasks && <WorkFocus summary={summary} />}
+
       <ExecutiveSummary summary={summary} />
 
-      {showTasks ? (
-        <div
-          className={cn(
-            'grid items-start gap-4 md:gap-6',
-            hasExceptions && 'xl:grid-cols-[minmax(0,1.75fr)_minmax(19rem,0.72fr)]',
-          )}
-        >
-          <PriorityTasks summary={summary} className={hasExceptions ? 'order-2 lg:order-none' : undefined} />
-          {hasExceptions && <Exceptions exceptions={summary.exceptions} className="order-1 lg:order-none" />}
-        </div>
-      ) : (
-        hasExceptions && <Exceptions exceptions={summary.exceptions} />
-      )}
+      {!operationalFirst && showTasks && <WorkFocus summary={summary} />}
+
+      {!showTasks && hasExceptions && <Exceptions summary={summary} />}
 
       {showMaturities && <UpcomingMaturities summary={summary} />}
 
@@ -255,5 +235,14 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
         </div>
       )}
     </div>
+  )
+}
+
+function WorkFocus({ summary }: { summary: DashboardSummary }) {
+  return (
+    <section aria-label="أولويات العمل" className="grid items-start gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.75fr)_minmax(19rem,0.72fr)]">
+      <PriorityTasks summary={summary} className="order-2 xl:order-none" />
+      <Exceptions summary={summary} className="order-1 xl:order-none" />
+    </section>
   )
 }

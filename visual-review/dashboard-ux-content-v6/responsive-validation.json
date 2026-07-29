@@ -1,0 +1,35 @@
+{
+  "date": "2026-07-29",
+  "branch": "codex/dashboard-ux-content-v6",
+  "horizontalOverflow": false,
+  "viewports": [
+    { "name": "wide", "width": 2048, "height": 960, "documentWidth": 2048 },
+    { "name": "desktop", "width": 1440, "height": 900, "documentWidth": 1440 },
+    { "name": "compactDesktop", "width": 1280, "height": 800, "documentWidth": 1280 },
+    { "name": "tabletLandscape", "width": 1024, "height": 768, "documentWidth": 1024 },
+    { "name": "tabletPortrait", "width": 768, "height": 1024, "documentWidth": 768 },
+    { "name": "mobileLarge", "width": 430, "height": 932, "documentWidth": 430 },
+    { "name": "mobile", "width": 390, "height": 844, "documentWidth": 390 },
+    { "name": "mobileSmall", "width": 360, "height": 800, "documentWidth": 360 }
+  ],
+  "roleChecks": [
+    { "role": "deposit-specialist", "h1": "مرحبًا، رغد", "firstSection": "أولويات العمل" },
+    { "role": "treasury-general-manager", "h1": "مرحبًا، خالد", "firstSection": "المحفظة في نظرة واحدة" },
+    { "role": "investment-treasury-executive", "h1": "مرحبًا، تغريد", "firstSection": "المحفظة في نظرة واحدة" },
+    { "role": "read-only-user", "h1": "مرحبًا، هند", "firstSection": "المحفظة في نظرة واحدة" }
+  ],
+  "browserValidation": {
+    "mainResponse": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0
+  },
+  "drawer": {
+    "width": 390,
+    "side": "right",
+    "focusOnOpen": "إغلاق",
+    "bodyOverflowWhileOpen": "hidden",
+    "escapeCloses": true,
+    "bodyOverflowAfterClose": "",
+    "focusAfterClose": "فتح قائمة التنقل"
+  }
+}
