@@ -916,7 +916,7 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 ### Git Delivery Record
 
 - Branch: `codex/dashboard-visual-cohesion-v5`.
-- Pull request: pending publication.
+- Pull request: `https://github.com/faenazi/ef-Deposit-management-prototype/pull/18`.
 - Merge status: not merged at the time of this status update.
 
 ### Recommended Next Step
