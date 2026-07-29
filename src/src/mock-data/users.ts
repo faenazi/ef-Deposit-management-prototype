@@ -33,9 +33,9 @@ const userSeeds: readonly UserSeed[] = [
   {
     id: 'USR-DS-001',
     employeeNumber: 'EF-1101',
-    nameAr: 'نورة العتيبي',
-    nameEn: 'Noura Alotaibi',
-    email: 'noura.alotaibi@example.test',
+    nameAr: 'رغد العريني',
+    nameEn: 'Raghad Alaraini',
+    email: 'raghad.alaraini@example.test',
     jobTitleAr: 'أخصائي ودائع استثمارية',
     departmentAr: TREASURY,
     roleId: 'deposit-specialist',

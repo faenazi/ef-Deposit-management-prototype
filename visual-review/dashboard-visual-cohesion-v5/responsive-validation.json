@@ -1,0 +1,30 @@
+{
+  "date": "2026-07-29",
+  "branch": "codex/dashboard-visual-cohesion-v5",
+  "horizontalOverflow": false,
+  "viewports": [
+    { "name": "wide", "width": 2048, "height": 960, "documentWidth": 2048 },
+    { "name": "desktop", "width": 1440, "height": 900, "documentWidth": 1440 },
+    { "name": "compactDesktop", "width": 1280, "height": 800, "documentWidth": 1280 },
+    { "name": "tabletLandscape", "width": 1024, "height": 768, "documentWidth": 1024 },
+    { "name": "tabletPortrait", "width": 768, "height": 1024, "documentWidth": 768 },
+    { "name": "mobileLarge", "width": 430, "height": 932, "documentWidth": 430 },
+    { "name": "mobile", "width": 390, "height": 844, "documentWidth": 390 },
+    { "name": "mobileSmall", "width": 360, "height": 800, "documentWidth": 360 }
+  ],
+  "roleChecks": [
+    { "role": "deposit-specialist", "hero": "ابدأ بالمهام ذات الأولوية" },
+    { "role": "treasury-general-manager", "hero": "راجع القرارات ذات الأثر المالي" },
+    { "role": "investment-treasury-executive", "hero": "موجز تنفيذي للقرارات الرئيسية" },
+    { "role": "read-only-user", "hero": "نظرة موحدة على المحفظة" }
+  ],
+  "drawer": {
+    "width": 390,
+    "side": "right",
+    "focusOnOpen": "إغلاق",
+    "bodyOverflowWhileOpen": "hidden",
+    "escapeCloses": true,
+    "bodyOverflowAfterClose": "",
+    "focusAfterClose": "فتح قائمة التنقل"
+  }
+}

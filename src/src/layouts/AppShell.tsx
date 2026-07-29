@@ -15,8 +15,9 @@ const contextLabels: Record<string, string> = {
 
 /**
  * Arabic-first application shell aligned with the Environment Fund internal
- * portal composition: a 240px right rail, 32px desktop separation, a calm
- * 64px utility header, and a restrained gray application canvas.
+ * portal composition: a compact right rail, a calm utility header, and a
+ * warm institutional application canvas. Tablet keeps the full workspace by
+ * using the navigation drawer until the 1280px desktop breakpoint.
  */
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false)
@@ -40,10 +41,10 @@ export function AppShell() {
         تخطي إلى المحتوى الرئيسي
       </a>
 
-      <div className="flex min-h-dvh bg-canvas lg:gap-8">
+      <div className="flex min-h-dvh bg-canvas xl:gap-6">
         <aside
           className={cn(
-            'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 lg:block',
+            'sticky top-0 z-[var(--z-shell)] hidden h-dvh shrink-0 xl:block',
             'transition-[width] duration-[var(--motion-standard)]',
           )}
           style={{

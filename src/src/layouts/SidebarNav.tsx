@@ -30,13 +30,13 @@ export function SidebarNav({
     <div
       className={cn(
         'relative flex h-full flex-col overflow-hidden bg-sidebar-surface text-white',
-        !mobile && 'lg:rounded-bl-[40px] lg:rounded-tl-[40px]',
+        !mobile && 'xl:rounded-bl-[32px] xl:rounded-tl-[32px]',
       )}
     >
       <div
         className={cn(
           'flex shrink-0 items-center justify-center px-4',
-          mobile ? 'h-20' : 'h-28',
+          mobile ? 'h-20' : 'h-24',
           collapsed && 'px-2',
         )}
       >
@@ -54,7 +54,7 @@ export function SidebarNav({
           aria-label={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
           title={collapsed ? 'توسيع القائمة الجانبية' : 'طي القائمة الجانبية'}
           className={cn(
-            'absolute -left-3.5 top-24 z-10 flex size-9 items-center justify-center rounded-full',
+            'absolute -left-3.5 top-20 z-10 flex size-9 items-center justify-center rounded-full',
             'border-[5px] border-canvas bg-surface-subtle text-action-primary shadow-xs',
             'transition-transform hover:scale-105 focus-visible:outline-action-primary',
           )}
@@ -64,7 +64,7 @@ export function SidebarNav({
       )}
 
       {!collapsed && (
-        <div className={cn('px-5 pb-3', mobile && 'pb-4')}>
+        <div className={cn('px-4 pb-3', mobile && 'pb-4')}>
           <p className="text-small font-semibold text-white">منصة إدارة الودائع الاستثمارية</p>
           <p className="mt-1 text-[11px] leading-5 text-sidebar-text">الإدارة العامة للخزينة</p>
         </div>
@@ -76,7 +76,7 @@ export function SidebarNav({
         </div>
       )}
 
-      <nav aria-label="التنقل الرئيسي" className="relative z-[2] min-h-0 overflow-y-auto py-2">
+      <nav aria-label="التنقل الرئيسي" className="relative z-[2] min-h-0 overflow-y-auto py-1.5">
         <ul className="space-y-1 px-2">
           {visibleItems.map((item) => (
             <li key={item.path}>
@@ -128,16 +128,16 @@ export function SidebarNav({
             placement="bottom-start"
             opacity={mobile ? 'subtle' : 'soft'}
             scale={mobile ? 'corner' : 'hero'}
-            className={cn('max-h-[240px] max-w-[260px]', mobile && '!block max-h-32 max-w-36')}
+            className={cn('max-h-[210px] max-w-[220px]', mobile && '!block max-h-32 max-w-36')}
           />
         )}
       </div>
 
       {!collapsed && (
         <div className="relative z-[2] px-4 pb-4">
-          <div className="rounded-lg border border-white/10 bg-white/8 px-4 py-3 backdrop-blur-sm">
+          <div className="border-t border-sidebar-border px-1 pt-3">
             <div className="flex items-center gap-2 text-sidebar-text-strong">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/8">
                 <Icon icon={FlaskConical} size="sm" />
               </span>
               <p className="text-small font-semibold">بيئة عرض تجريبية</p>

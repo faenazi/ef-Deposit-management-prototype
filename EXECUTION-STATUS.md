@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** GLOBAL VISUAL REDESIGN — REVIEW REQUIRED. Step 07 and Step 08 remain completed and approved. The platform shell, shared visual foundation, Dashboard composition, and route placeholders were redesigned on 2026-07-28 without advancing the business roadmap.
+**Overall status:** DASHBOARD VISUAL COHESION V5 — REVIEW REQUIRED. Step 07 and Step 08 remain completed and approved. The product-owner wide-screen feedback was addressed on 2026-07-29 without advancing the business roadmap.
 
-**Current phase:** Global visual redesign review
+**Current phase:** Dashboard visual-cohesion review
 
-**Current active step:** Platform Visual Redesign — implementation complete; awaiting product-owner review.
+**Current active step:** Dashboard Visual Cohesion v5 — implementation complete; awaiting product-owner review.
 
 **Next prompt to execute:**
 
-After visual-redesign approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
+After Dashboard Visual Cohesion v5 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
 **Last approved step:** Step 08 — Dashboard (APPROVED AND MERGED 2026-07-27)
 
@@ -849,6 +849,79 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 ### Recommended Next Step
 
 - Review the refreshed Dashboard at the five target viewport sizes and across Deposit Specialist, GM Treasury, and Executive Director roles; after approval, resume Step 09 without changing the approved visual foundation.
+
+## 8.7 Dashboard Visual Cohesion v5 — 2026-07-29
+
+### Step Summary
+
+- Step title: Dashboard Visual Cohesion v5 — wide-screen balance, KPI hierarchy, and responsive shell correction.
+- Status: REVIEW REQUIRED.
+- Date: 2026-07-29.
+- Working branch: `codex/dashboard-visual-cohesion-v5`, created from `origin/main` at `af618ebcfaab96ee86f9ebc65b0bc1086733dc29`.
+- Business roadmap: unchanged; Step 09 and later pages remain NOT STARTED.
+
+### Visual Audit Findings
+
+1. The 1136px content frame left excessive unused space on wide displays.
+2. The primary sidebar used a bright blue surface instead of the approved DEC-024 deep navy.
+3. The 240px rail and 32px shell gap overpowered the main content.
+4. The desktop rail compressed the workspace at 1024px tablet width.
+5. Six near-identical KPI cards formed a repeated card wall.
+6. Nested section and KPI containers weakened hierarchy.
+7. The primary portfolio value did not carry enough financial emphasis.
+8. Neutral gray surfaces and softened text reduced EF identity and contrast.
+9. Section headings, borders, radii, and spacing competed at equal visual weight.
+10. Mobile KPI height delayed urgent work below the first viewport.
+11. The mobile drawer did not explicitly lock document scrolling.
+12. The default Deposit Specialist identity did not match the requested `رغد العريني` persona.
+
+### Completed Scope
+
+- Expanded the wide workspace to a fluid, bounded 1600px frame with consistent gutters.
+- Restored DEC-024: deep navy sidebar, EF-blue active state, restrained pattern, and compact 216px rail.
+- Kept tablet and smaller layouts on the right-side navigation drawer through 1279px.
+- Rebuilt the portfolio summary around one dominant EF-blue financial card combining active principal and weighted return, supported by four compact metrics.
+- Removed the nested summary-card shell and reduced repeated equal-weight card styling.
+- Applied the official warm-neutral canvas, deep navy primary text, official borders, and clearer surface hierarchy.
+- Reduced shared operational-card radius and changed section titles from repeated blue to deep navy.
+- Compressed tablet and mobile KPI behavior while preserving all important financial values.
+- Added explicit body/root scroll locking to the native dialog drawer.
+- Updated the default specialist identity and related demo documentation to `رغد العريني` / `Raghad Alaraini`.
+- Preserved business logic, roles, permissions, routes, services, calculations, workflow states, and seeded entity relationships.
+
+### Files Changed
+
+- Tokens and shell: `src/src/styles/tokens.css`, `AppShell.tsx`, `PageContainer.tsx`, `TopHeader.tsx`, `SidebarNav.tsx`.
+- Shared UI: `Card.tsx`, `Drawer.tsx`.
+- Dashboard: `DashboardPage.tsx`, `ExecutiveSummary.tsx`.
+- Demo identity: `mock-data/users.ts`, `DesignSystemPreviewPage.tsx`, `docs/05-data/demo-users.md`, `docs/05-data/demo-scenarios.md`.
+- Visual evidence: `visual-review/dashboard-visual-cohesion-v5/`.
+
+### Validation Results
+
+- TypeScript: `npm run typecheck` — passed.
+- Lint: `npm run lint` — passed.
+- Production build: `npm run build` — passed; 489.66 kB JS / 142.25 kB gzip and 57.38 kB CSS / 10.73 kB gzip.
+- Tests: no test script is configured in `src/package.json`.
+- Responsive browser validation: passed at 2048×960, 1440×900, 1280×800, 1024×768, 768×1024, 430×932, 390×844, and 360×800 with no horizontal overflow.
+- Role validation: Deposit Specialist, General Manager of Treasury, Executive Director, and Read-only User all rendered distinct role-aware hero and content states.
+- Drawer validation: right-side opening, focus moved to Close, body/root scroll locked, Escape closed the dialog, scroll restored, and focus returned to the menu trigger.
+
+### Known Limitations
+
+- Aktiv Grotesk remains unavailable in the repository; Tahoma is used as the documented fallback.
+- Later route placeholders remain intentionally non-functional because Step 09 and subsequent roadmap steps have not started.
+- This visual refinement is awaiting product-owner approval before Step 09.
+
+### Git Delivery Record
+
+- Branch: `codex/dashboard-visual-cohesion-v5`.
+- Pull request: pending publication.
+- Merge status: not merged at the time of this status update.
+
+### Recommended Next Step
+
+- Product-owner review of the v5 screenshots. After approval, execute only Step 09 — My Tasks.
 
 ## 9. Review Ownership
 

@@ -18,14 +18,14 @@ export function TopHeader({
 }: TopHeaderProps) {
   return (
     <header className="sticky top-0 z-[var(--z-shell)] h-[var(--layout-header-height)] shrink-0 border-b border-divider-soft bg-canvas/95 backdrop-blur-md">
-      <div className="mx-auto flex h-full w-full max-w-[var(--layout-content-max-standard)] items-center gap-2.5 px-4 md:px-5 lg:px-0">
+      <div className="mx-auto flex h-full w-full max-w-[var(--layout-content-max-wide)] items-center gap-2.5 px-4 md:px-6 lg:px-8 xl:px-6">
         <button
           ref={menuButtonRef}
           type="button"
           aria-label="فتح قائمة التنقل"
           aria-haspopup="dialog"
           onClick={onOpenMobileNav}
-          className="flex size-11 shrink-0 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-surface hover:text-text-primary lg:hidden"
+          className="flex size-11 shrink-0 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-surface hover:text-text-primary xl:hidden"
         >
           <Icon icon={Menu} size="md" />
         </button>
@@ -34,7 +34,7 @@ export function TopHeader({
           <p className="truncate text-[17px] font-bold leading-7 tracking-[-0.015em] text-text-primary md:text-h3">
             {currentPageLabel}
           </p>
-          <p className="hidden text-small text-text-muted lg:block">منصة إدارة الودائع الاستثمارية</p>
+          <p className="hidden text-small text-text-muted xl:block">منصة إدارة الودائع الاستثمارية</p>
         </div>
 
         <div className="ms-auto flex items-center gap-0.5 sm:gap-1.5">
@@ -42,7 +42,7 @@ export function TopHeader({
             type="button"
             aria-label="تغيير اللغة"
             title="تغيير اللغة"
-            className="hidden size-11 items-center justify-center rounded-md border border-transparent text-text-secondary hover:border-border-default hover:bg-surface lg:flex"
+            className="hidden size-11 items-center justify-center rounded-md border border-transparent text-text-secondary hover:border-border-default hover:bg-surface xl:flex"
           >
             <Icon icon={Languages} size="md" />
           </button>

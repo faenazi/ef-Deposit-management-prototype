@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CalendarDays, FilePlus2 } from 'lucide-react'
+import { CalendarDays, CircleAlert, FilePlus2 } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { useUser } from '@/app/user-context'
@@ -83,7 +83,7 @@ function DashboardSkeleton() {
 }
 
 export function DashboardPage() {
-  const { user, role, can } = useUser()
+  const { user, role, can, canAccessPath } = useUser()
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -115,12 +115,14 @@ export function DashboardPage() {
   const dashboardPending = !error && (loading || summary?.roleId !== role.code)
 
   return (
-    <PageContainer>
+    <PageContainer width="wide">
       <DashboardContext
         role={role.code}
         roleName={role.nameAr}
         firstName={user.nameAr.split(' ')[0]}
         canCreate={can('requests.create')}
+        canViewTasks={canAccessPath('/tasks')}
+        summary={summary?.roleId === role.code ? summary : null}
       />
 
       {dashboardPending && <DashboardSkeleton />}
@@ -144,28 +146,33 @@ function DashboardContext({
   roleName,
   firstName,
   canCreate,
+  canViewTasks,
+  summary,
 }: {
   role: RoleCode
   roleName: string
   firstName: string
   canCreate: boolean
+  canViewTasks: boolean
+  summary: DashboardSummary | null
 }) {
   const context = roleContext[role]
   const today = new Date()
+  const attentionCount = summary ? summary.overdueTasks + summary.returnedRequests : 0
 
   return (
-    <section className="relative mb-4 overflow-hidden rounded-xl border border-divider-soft bg-surface px-4 py-4 shadow-xs md:mb-6 md:px-7 md:py-6">
+    <section className="relative mb-5 overflow-hidden rounded-xl border border-divider-soft border-s-4 border-s-action-primary bg-surface px-4 py-3.5 shadow-sm md:mb-7 md:px-7 md:py-6">
       <BrandPattern
         asset="pattern-primary"
         placement="bottom-end"
         opacity="subtle"
         scale="corner"
-        className="max-w-[13rem]"
+        className="max-w-[11rem]"
       />
-      <div className="relative z-[1] flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between md:gap-6">
+      <div className="relative z-[1] grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:gap-8">
         <div className="min-w-0">
-          <p className="text-small font-semibold text-action-primary">مرحبًا، {firstName}</p>
-          <h1 className="mt-1 text-[22px] font-bold leading-8 tracking-[-0.02em] text-text-primary md:text-[28px] md:leading-10">
+          <p className="text-small font-semibold text-action-primary">مرحبًا، {firstName} · مساحة عمل اليوم</p>
+          <h1 className="mt-1 text-[22px] font-bold leading-8 tracking-[-0.02em] text-text-primary md:text-[30px] md:leading-10">
             {context.title}
           </h1>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-text-secondary">
@@ -176,17 +183,30 @@ function DashboardContext({
               {formatDate(today)}
             </span>
           </div>
-          <p className="mt-2 hidden max-w-3xl text-body leading-6 text-text-secondary sm:block">
+          <p className="mt-2 hidden max-w-4xl text-body leading-6 text-text-secondary md:block">
             {context.description}
           </p>
         </div>
 
-        {canCreate && (
-          <Link to="/investment-requests/new" className="relative z-[1] w-full shrink-0 sm:w-auto">
-            <Button leadingIcon={FilePlus2} className="w-full sm:w-auto">
-              طلب استثمار جديد
-            </Button>
-          </Link>
+        {(canCreate || (summary && attentionCount > 0 && canViewTasks)) && (
+          <div className="flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:min-w-44">
+            {canCreate && (
+              <Link to="/investment-requests/new" className="relative z-[1] w-full shrink-0">
+                <Button leadingIcon={FilePlus2} className="w-full">
+                  طلب استثمار جديد
+                </Button>
+              </Link>
+            )}
+            {summary && attentionCount > 0 && canViewTasks && (
+              <Link
+                to="/tasks"
+                className="hidden min-h-9 items-center justify-center gap-2 rounded-md border border-danger-border/25 bg-danger-bg px-3 text-small font-semibold text-danger-text transition-colors hover:border-danger-border/50 sm:inline-flex"
+              >
+                <Icon icon={CircleAlert} size="xs" />
+                {attentionCount} حالات تحتاج متابعة
+              </Link>
+            )}
+          </div>
         )}
       </div>
     </section>
@@ -201,14 +221,14 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
   const hasExceptions = summary.exceptions.length > 0
 
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-5 md:space-y-7">
       <ExecutiveSummary summary={summary} />
 
       {showTasks ? (
         <div
           className={cn(
             'grid items-start gap-4 md:gap-6',
-            hasExceptions && 'lg:grid-cols-[minmax(0,1.55fr)_minmax(19rem,0.75fr)]',
+            hasExceptions && 'xl:grid-cols-[minmax(0,1.75fr)_minmax(19rem,0.72fr)]',
           )}
         >
           <PriorityTasks summary={summary} className={hasExceptions ? 'order-2 lg:order-none' : undefined} />
@@ -222,14 +242,14 @@ function DashboardContent({ summary }: { summary: DashboardSummary }) {
 
       {showPortfolio ? (
         <>
-          <div className="grid items-start gap-4 md:gap-6 lg:grid-cols-2">
+          <div className="grid items-start gap-4 md:gap-6 xl:grid-cols-2">
             <PortfolioDistribution summary={summary} />
             <RequestPipeline summary={summary} />
           </div>
           {showRecentActivity && <RecentActivity summary={summary} />}
         </>
       ) : (
-        <div className="grid items-start gap-4 md:gap-6 lg:grid-cols-2">
+        <div className="grid items-start gap-4 md:gap-6 xl:grid-cols-2">
           <RequestPipeline summary={summary} />
           {showRecentActivity && <RecentActivity summary={summary} />}
         </div>

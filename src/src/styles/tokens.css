@@ -17,25 +17,25 @@
   --ef-brown-400: #a18e77;
   --ef-warm-grey-100: #f1eee8;
 
-  /* Application surfaces — aligned with the EF internal-portal Figma file. */
-  --color-canvas: #f3f4f6;
+  /* Application surfaces — official warm institutional palette. */
+  --color-canvas: #f5f3f0;
   --color-surface: var(--ef-white);
-  --color-surface-subtle: #fcfcfd;
+  --color-surface-subtle: #fcfdf8;
   --color-surface-brand-soft: #eaecf8;
   --color-surface-brand-muted: #f4f5fb;
-  --color-surface-raised: #fcfcfd;
+  --color-surface-raised: var(--ef-white);
   --color-surface-navy-soft: #172331;
-  --color-surface-disabled: #f1f1f0;
+  --color-surface-disabled: #e2e3e5;
 
-  --color-text-primary: #383f48;
+  --color-text-primary: var(--ef-navy-900);
   --color-text-secondary: #646a71;
-  --color-text-muted: #9da4ae;
+  --color-text-muted: #95999e;
   --color-text-inverse: var(--ef-white);
   --color-text-disabled: var(--color-text-muted);
 
-  --color-border-default: #e5e7eb;
-  --color-border-strong: #d2d6db;
-  --color-divider-soft: #eff1f4;
+  --color-border-default: #e2e3e5;
+  --color-border-strong: #c8cacd;
+  --color-divider-soft: rgba(200, 202, 205, 0.5);
 
   --color-action-primary: var(--ef-primary-700);
   --color-action-primary-hover: #232f70;
@@ -56,24 +56,24 @@
   --color-info-bg: #eef0fb;
   --color-info-border: #8f9bd7;
 
-  /* Sidebar — the Figma composition uses a 240px EF-blue rail. */
-  --color-sidebar-surface: var(--ef-interface-blue);
-  --color-sidebar-text: #aeb5dc;
+  /* Sidebar — DEC-024 dark institutional navy with blue active state. */
+  --color-sidebar-surface: var(--ef-navy-900);
+  --color-sidebar-text: rgba(255, 255, 255, 0.62);
   --color-sidebar-text-strong: rgba(255, 255, 255, 0.94);
   --color-sidebar-hover: rgba(234, 236, 248, 0.08);
-  --color-sidebar-active: rgba(234, 236, 248, 0.12);
+  --color-sidebar-active: var(--ef-primary-700);
   --color-sidebar-border: rgba(255, 255, 255, 0.12);
 
   /* Layout */
-  --layout-sidebar-expanded: 240px;
+  --layout-sidebar-expanded: 216px;
   --layout-sidebar-collapsed: 72px;
-  --layout-header-height: 64px;
-  --layout-content-max-wide: 1360px;
-  --layout-content-max-standard: 1136px;
-  --layout-page-gutter: 32px;
+  --layout-header-height: 68px;
+  --layout-content-max-wide: 1600px;
+  --layout-content-max-standard: 1320px;
+  --layout-page-gutter: 28px;
 
   /* Operational surfaces */
-  --surface-section-radius: 20px;
+  --surface-section-radius: 18px;
   --surface-card-radius: 14px;
   --table-row-height: 58px;
   --control-height-sm: 36px;

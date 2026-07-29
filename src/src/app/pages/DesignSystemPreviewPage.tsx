@@ -217,7 +217,7 @@ export function DesignSystemPreviewPage() {
               <TimelineItem
                 icon={Send}
                 title="تقديم طلب الاستثمار"
-                meta="نورة العتيبي — 21 يوليو 2026"
+                meta="رغد العريني — 21 يوليو 2026"
               />
               <TimelineItem
                 icon={ScanSearch}
