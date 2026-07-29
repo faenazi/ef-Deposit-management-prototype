@@ -11,28 +11,28 @@ import type { DashboardSummary } from '@/services/dashboard-service'
 
 const roleCopy: Record<DashboardSummary['roleId'], { title: string; description: string }> = {
   'deposit-specialist': {
-    title: 'مهام تتطلب إجراءك',
-    description: 'المسودات والطلبات المعادة والاستحقاقات التشغيلية مرتبة حسب الأولوية.',
+    title: 'أولويات العمل',
+    description: 'ابدأ بالأقرب للاستحقاق؛ رُتبت المهام حسب التأخير والأولوية.',
   },
   'treasury-general-manager': {
-    title: 'طلبات بانتظار مراجعتك',
-    description: 'قرارات الخزينة التي تنتظر المراجعة أو الاعتماد ضمن المدة المحددة.',
+    title: 'قرارات تنتظر اعتمادك',
+    description: 'طلبات الخزينة التي تحتاج قرارك ضمن المدة المحددة.',
   },
   'investment-treasury-executive': {
-    title: 'قرارات بانتظار اعتمادك',
-    description: 'الطلبات مرتفعة القيمة والقرارات التنفيذية ذات الأثر المالي الأعلى.',
+    title: 'قرارات مرتفعة القيمة',
+    description: 'طلبات تجاوزت حد الاعتماد وتحتاج توجيهًا تنفيذيًا.',
   },
   'investment-support': {
-    title: 'مراجعات دعم الاستثمار',
-    description: 'المعاملات التي تحتاج مراجعة التوصية والمستندات قبل انتقالها للمالية.',
+    title: 'طلبات جاهزة للمراجعة',
+    description: 'راجع التوصية والمرفقات قبل إحالة الطلب للمالية.',
   },
   'finance-reviewer': {
-    title: 'مراجعات مالية معلقة',
-    description: 'الطلبات الجاهزة للتحقق المالي قبل تنفيذ التحويل.',
+    title: 'طلبات تنتظر تحققك المالي',
+    description: 'تحقق من القيم وبيانات التحويل قبل التنفيذ.',
   },
   'accounting-executor': {
-    title: 'عمليات تنفيذ معلقة',
-    description: 'المعاملات التي تحتاج تسجيل التحويل واستكمال الإثباتات المحاسبية.',
+    title: 'تحويلات بانتظار التنفيذ',
+    description: 'سجّل التحويل وأرفق إثبات التنفيذ لإكمال التفعيل.',
   },
   'system-admin': {
     title: 'مهام إدارة المنصة',
@@ -55,7 +55,7 @@ export function PriorityTasks({
   const copy = roleCopy[summary.roleId]
 
   return (
-    <Card padding="none" className={cn('overflow-hidden', className)}>
+    <Card padding="none" className={cn('overflow-hidden border-t-4 border-t-action-primary', className)}>
       <div className="px-4 py-4 md:px-6 md:py-5">
         <SectionHeading
           className="mb-0"
@@ -67,7 +67,7 @@ export function PriorityTasks({
                 to="/tasks"
                 className="inline-flex items-center gap-1 text-small font-semibold text-action-primary hover:underline"
               >
-                عرض الكل
+                عرض كل المهام
                 <Icon icon={ArrowUpLeft} size="xs" mirrorInRtl />
               </Link>
             ) : undefined

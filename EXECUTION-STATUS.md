@@ -25,15 +25,15 @@ Do not mark any step as completed unless:
 
 ## 3. Current Project State
 
-**Overall status:** DASHBOARD VISUAL COHESION V5 — REVIEW REQUIRED. Step 07 and Step 08 remain completed and approved. The product-owner wide-screen feedback was addressed on 2026-07-29 without advancing the business roadmap.
+**Overall status:** DASHBOARD UX AND CONTENT REFINEMENT V6 — REVIEW REQUIRED. Step 07 and Step 08 remain completed and approved. The product-owner feedback on role priority, content logic, and color cohesion was addressed on 2026-07-29 without advancing the business roadmap.
 
-**Current phase:** Dashboard visual-cohesion review
+**Current phase:** Dashboard UX, content, and brand-cohesion review
 
-**Current active step:** Dashboard Visual Cohesion v5 — implementation complete; awaiting product-owner review.
+**Current active step:** Dashboard UX and Content Refinement v6 — implementation complete; awaiting product-owner review.
 
 **Next prompt to execute:**
 
-After Dashboard Visual Cohesion v5 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
+After Dashboard UX and Content Refinement v6 approval: `prompts/03-page-design/02-my-tasks.md` (Step 09 — My Tasks).
 
 **Last approved step:** Step 08 — Dashboard (APPROVED AND MERGED 2026-07-27)
 
@@ -922,6 +922,78 @@ All ten curated scenarios (SCN-01…SCN-10) resolve to existing records in the e
 ### Recommended Next Step
 
 - Product-owner review of the v5 screenshots. After approval, execute only Step 09 — My Tasks.
+
+## 8.8 Dashboard UX and Content Refinement v6 — 2026-07-29
+
+### Step Summary
+
+- Step title: Dashboard UX and Content Refinement v6 — role priority, content logic, and brand color cohesion.
+- Status: REVIEW REQUIRED.
+- Date: 2026-07-29.
+- Working branch: `codex/dashboard-ux-content-v6`, created from `origin/main` at `51b4a37a19b61847ef9f1b698dd3f0a696398009`.
+- Business roadmap: unchanged; Step 09 and later pages remain NOT STARTED.
+
+### UX Audit Findings
+
+1. Deposit Specialist work appeared after portfolio metrics instead of before them.
+2. Urgent counts repeated in the hero, KPI summary, and alert module.
+3. The page still behaved like a report gallery rather than a daily operational workspace.
+4. The deep-navy sidebar felt disconnected from the dominant EF-blue application identity.
+5. The navigation active state did not create enough contrast from the sidebar surface.
+6. Warm grey, cool grey, and green-tinted whites weakened color cohesion.
+7. The KPI area still read as several separate cards of similar visual importance.
+8. Alert copy did not consistently explain the next action.
+9. Pipeline headings were generic and did not explain role relevance.
+10. Mobile displayed financial cards before urgent operational work.
+11. The hero used a command as its main heading instead of establishing user and role context.
+12. Leadership and operational roles needed a more visibly different section order.
+
+### Completed Scope
+
+- Reordered operational roles so urgent issues and the work queue appear before portfolio context.
+- Kept GM Treasury, Executive Director, and Read-only roles financial-summary-first.
+- Replaced the hero command heading with a concise role-aware greeting and daily context.
+- Removed the duplicated attention count from the hero and financial summary.
+- Consolidated portfolio values into one deep-navy financial surface with four supporting measures.
+- Rewrote task, alert, financial-summary, and pipeline copy for role relevance and action clarity.
+- Rebuilt the alerts module as a compact decision aid with two visible priorities and explicit actions.
+- Changed the sidebar and mobile drawer to official EF primary blue with a white active state and controlled EF-green accent.
+- Applied the exact EF warm-grey canvas and removed the green-tinted subtle surface.
+- Preserved roles, permissions, routes, mock services, calculations, workflow rules, and domain data.
+
+### Responsive and Role Results
+
+- Deposit Specialist mobile first viewport now contains greeting, primary action, urgent issues, and the start of the priority work queue.
+- Tablet uses the mobile navigation shell and full-width operational sections.
+- Desktop uses a wide work queue with a secondary attention panel.
+- GM Treasury and Executive Director show financial position before approvals and risks.
+- Read-only shows financial position first and no empty action area.
+- No horizontal overflow at 2048×960, 1440×900, 1280×800, 1024×768, 768×1024, 430×932, 390×844, or 360×800.
+
+### Validation Results
+
+- TypeScript: `npm run typecheck` — passed.
+- Lint: `npm run lint` — passed.
+- Production build: `npm run build` — passed; 491.24 kB JS / 142.49 kB gzip and 56.57 kB CSS / 10.64 kB gzip.
+- Tests: no test script is configured in `src/package.json`.
+- Drawer: opens from the right, locks body/root scrolling, receives focus, closes with Escape, restores scrolling, and returns focus to the trigger.
+- Visual evidence: `visual-review/dashboard-ux-content-v6/`.
+
+### Known Limitations
+
+- Aktiv Grotesk remains unavailable in the repository; Tahoma is the documented fallback.
+- Later route placeholders remain intentionally non-functional because Step 09 and subsequent roadmap steps have not started.
+- This refinement is awaiting product-owner visual approval.
+
+### Git Delivery Record
+
+- Branch: `codex/dashboard-ux-content-v6`.
+- Pull request: https://github.com/faenazi/ef-Deposit-management-prototype/pull/19
+- Merge status: not merged at the time of this status update.
+
+### Recommended Next Step
+
+- Review the v6 Desktop, Tablet, Mobile, and role-specific screenshots. After approval, execute only Step 09 — My Tasks.
 
 ## 9. Review Ownership
 

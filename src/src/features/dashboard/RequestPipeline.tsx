@@ -70,6 +70,41 @@ const ROLE_STAGES: Record<RoleCode, string[]> = {
   'read-only-user': WORKFLOW_ORDER,
 }
 
+const ROLE_COPY: Record<RoleCode, { title: string; description: string }> = {
+  'deposit-specialist': {
+    title: 'طلباتك النشطة',
+    description: 'مسوداتك والطلبات المعادة ومراحل الاستكمال المسندة لدورك.',
+  },
+  'treasury-general-manager': {
+    title: 'مسار اعتمادات الخزينة',
+    description: 'الطلبات المفتوحة قبل القرار وبعده ضمن نطاق الخزينة.',
+  },
+  'investment-treasury-executive': {
+    title: 'القرارات ضمن المسار',
+    description: 'الطلبات المرتبطة بالاعتماد التنفيذي والمراجعة اللاحقة.',
+  },
+  'investment-support': {
+    title: 'طلبات دعم الاستثمار',
+    description: 'المعاملات المفتوحة قبل المراجعة المالية وبعدها.',
+  },
+  'finance-reviewer': {
+    title: 'المعاملات المالية الجارية',
+    description: 'طلبات المراجعة والتنفيذ المرتبطة بالدور المالي.',
+  },
+  'accounting-executor': {
+    title: 'مسار التنفيذ والتفعيل',
+    description: 'المعاملات المنتظرة للتنفيذ أو تفعيل الوديعة.',
+  },
+  'system-admin': {
+    title: 'توزيع الطلبات الجارية',
+    description: 'الطلبات المفتوحة في بيئة العرض حسب مرحلة سير العمل.',
+  },
+  'read-only-user': {
+    title: 'حالة الطلبات الجارية',
+    description: 'توزيع الطلبات المفتوحة على مراحل سير العمل.',
+  },
+}
+
 export function RequestPipeline({ summary }: { summary: DashboardSummary }) {
   const order = new Map(WORKFLOW_ORDER.map((stage, index) => [stage, index]))
   const visibleStages = new Set(ROLE_STAGES[summary.roleId])
@@ -78,19 +113,20 @@ export function RequestPipeline({ summary }: { summary: DashboardSummary }) {
     .sort(([stageA], [stageB]) => (order.get(stageA) ?? 999) - (order.get(stageB) ?? 999))
     .slice(0, 5)
   const total = items.reduce((sum, [, count]) => sum + count, 0)
+  const copy = ROLE_COPY[summary.roleId]
 
   return (
     <Card>
       <SectionHeading
-        title="الطلبات الجارية حسب المرحلة"
-        description={`${formatNumber(total)} طلبًا في المراحل المرتبطة بدورك.`}
+        title={copy.title}
+        description={`${copy.description} الإجمالي: ${formatNumber(total)}.`}
         action={
           items.length > 0 ? (
             <Link
               to="/investment-requests"
               className="inline-flex items-center gap-1 text-small font-semibold text-action-primary hover:underline"
             >
-              عرض الطلبات
+              فتح قائمة الطلبات
               <Icon icon={ArrowUpLeft} size="xs" mirrorInRtl />
             </Link>
           ) : undefined
@@ -106,15 +142,13 @@ export function RequestPipeline({ summary }: { summary: DashboardSummary }) {
         />
       ) : (
         <ol className="overflow-hidden rounded-lg border border-divider-soft">
-          {items.map(([stage, count], index) => (
+          {items.map(([stage, count]) => (
             <li key={stage} className="border-b border-divider-soft last:border-b-0">
               <Link
                 to={`/investment-requests?stage=${stage}`}
                 className="group flex min-h-12 items-center gap-3 px-3 py-2.5 transition-colors hover:bg-surface-subtle"
               >
-                <span className="ef-financial flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-brand-muted text-small font-bold text-action-primary">
-                  {index + 1}
-                </span>
+                <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-action-primary" />
                 <span className="min-w-0 grow truncate text-small font-semibold text-text-primary group-hover:text-action-primary">
                   {STAGE_LABELS[stage] ?? stage}
                 </span>
