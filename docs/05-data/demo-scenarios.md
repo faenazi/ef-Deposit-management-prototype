@@ -22,7 +22,7 @@ Demonstrate the Deposit Specialist preparing a request of SAR 80,000,000 and sub
 
 ### Starting State
 
-- User: Noura Alotaibi.
+- User: Raghad Alaraini.
 - Request: `IR-2026-0018`.
 - Status: Draft.
 - Readiness: approximately 65%.
@@ -121,7 +121,7 @@ Demonstrate controlled return with a mandatory reason and corrective action.
 2. Choose Return for Completion.
 3. Enter a clear return reason.
 4. Confirm return.
-5. Switch to Noura Alotaibi.
+5. Switch to Raghad Alaraini.
 6. Open the returned task and inspect the highlighted reason.
 
 ### Expected Result
@@ -202,7 +202,7 @@ Demonstrate the conversion of an approved investment request into one active dep
 2. enter journal and payment references.
 3. upload transfer evidence.
 4. complete Accounting execution.
-5. switch to Noura Alotaibi.
+5. switch to Raghad Alaraini.
 6. confirm deposit reference and certificate.
 7. activate the deposit.
 

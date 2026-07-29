@@ -11,12 +11,12 @@ The user switcher is a prototype-only capability and must visibly state that it 
 ### Deposit Specialist
 
 - ID: `USR-DS-001`
-- Name: نورة العتيبي
-- English Name: Noura Alotaibi
+- Name: رغد العريني
+- English Name: Raghad Alaraini
 - Role: Deposit Specialist
 - Department: الإدارة العامة للخزينة
 - Job title: أخصائي ودائع استثمارية
-- Email: `noura.alotaibi@example.test`
+- Email: `raghad.alaraini@example.test`
 - Default landing page: My Tasks
 - Key capabilities:
   - Create and edit Draft requests.
